@@ -7,7 +7,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import edu.bluejack22_1.beestack.fragments.LoginFragment
 import edu.bluejack22_1.beestack.fragments.RegisterFragment
 
-class ViewPageAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle):FragmentStateAdapter(fragmentManager, lifecycle) {
+class ViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle):FragmentStateAdapter(fragmentManager, lifecycle) {
     override fun getItemCount(): Int {
 //     Must return how many item that you have for the pager
         return 2; // login & register.
