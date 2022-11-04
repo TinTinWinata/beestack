@@ -5,13 +5,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.firebase.auth.FirebaseAuth
 import edu.bluejack22_1.beestack.R
 
 class LoginFragment : Fragment() {
 
+    private lateinit var firebaseAuth:FirebaseAuth;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        
+
     }
 
     override fun onCreateView(
