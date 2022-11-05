@@ -48,22 +48,22 @@ class RegisterFragment : Fragment() {
 
 //          Validating Email, Password, Confirm Password
             if(email == "" || password == "" || confirmPassword == ""){
-                Toast.makeText(context, "Please input all fields", Toast.LENGTH_LONG);
+                Toast.makeText(context, "Please input all fields", Toast.LENGTH_LONG).show();
             }else if(password != confirmPassword) {
-                Toast.makeText(context, "Your password and confirm password is not same", Toast.LENGTH_LONG);
+                Toast.makeText(context, "Your password and confirm password is not same", Toast.LENGTH_LONG).show();
             }
 
 //          Validated
             else{
                 firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener{
                     if(it.isSuccessful){
-                        Toast.makeText(context, "Succesfully register!", Toast.LENGTH_LONG);
+                        Toast.makeText(context, "Succesfully register!", Toast.LENGTH_LONG).show();
 //                                             v Call Parent Activity (because we call it in fragment)
                         val intent = Intent(activity, HomeActivity::class.java);
                         startActivity(intent);
 
                     }else{
-                        Toast.makeText(context, it.exception.toString(), Toast.LENGTH_LONG)
+                        Toast.makeText(context, it.exception.toString(), Toast.LENGTH_LONG).show();
                     }
                 }
             }

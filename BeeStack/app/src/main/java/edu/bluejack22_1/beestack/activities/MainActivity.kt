@@ -18,10 +18,11 @@ class MainActivity : AppCompatActivity() {
 //      If there's any user in sign in, then go to login
 
         firebaseAuth = FirebaseAuth.getInstance();
-        if(firebaseAuth.currentUser != null){
-            val intent = Intent(this, HomeActivity::class.java);
-            startActivity(intent);
-        }
+
+//        if(firebaseAuth.currentUser != null){
+//            val intent = Intent(this, HomeActivity::class.java);
+//            startActivity(intent);
+//        }
 
 //      ------------------------------------
 
