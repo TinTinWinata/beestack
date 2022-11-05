@@ -1,16 +1,24 @@
 package edu.bluejack22_1.beestack.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import edu.bluejack22_1.beestack.R
+import edu.bluejack22_1.beestack.activities.HomeActivity
+import edu.bluejack22_1.beestack.databinding.FragmentLoginBinding
+import edu.bluejack22_1.beestack.databinding.FragmentRegisterBinding
 
 class LoginFragment : Fragment() {
 
     private lateinit var firebaseAuth:FirebaseAuth;
+
+    private var _binding: FragmentLoginBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,7 +32,43 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        firebaseAuth = FirebaseAuth.getInstance();
+
+//        Binding Element (so we don't need to R.findViewById)
+        _binding = FragmentLoginBinding.inflate(inflater, container, false);
+//        -------------------------
+
+        binding.loginBtn.setOnClickListener{
+
+            val email = binding.email.text.toString();
+            val password = binding.password.text.toString();
+
+//          Validating Email, Password, Confirm Password
+            if(email == "" || password == ""){
+                Toast.makeText(context, "Please input all fields", Toast.LENGTH_LONG);
+            }
+//          Validated
+            else{
+                firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener{
+                    if(it.isSuccessful){
+                        Toast.makeText(context, "Succesfully Login!", Toast.LENGTH_LONG);
+//                                             v Call Parent Activity (because we call it in fragment)
+                        val intent = Intent(activity, HomeActivity::class.java);
+                        startActivity(intent);
+
+                    }else{
+                        Toast.makeText(context, it.exception.toString(), Toast.LENGTH_LONG)
+                    }
+                }
+            }
+        }
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_login, container, false)
+        return binding.root;
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null;
     }
 }

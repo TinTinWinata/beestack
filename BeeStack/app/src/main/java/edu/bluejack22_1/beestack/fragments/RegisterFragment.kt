@@ -1,5 +1,7 @@
 package edu.bluejack22_1.beestack.fragments
 
+
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,6 +13,7 @@ import android.widget.EditText
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import edu.bluejack22_1.beestack.R
+import edu.bluejack22_1.beestack.activities.HomeActivity
 import edu.bluejack22_1.beestack.databinding.FragmentRegisterBinding
 
 
@@ -39,21 +42,29 @@ class RegisterFragment : Fragment() {
 
         binding.registerBtn.setOnClickListener{
 
+            val email = binding.email.text.toString();
+            val password = binding.password.text.toString();
+            val confirmPassword = binding.confirmPassword.text.toString();
 
+//          Validating Email, Password, Confirm Password
+            if(email == "" || password == "" || confirmPassword == ""){
+                Toast.makeText(context, "Please input all fields", Toast.LENGTH_LONG);
+            }else if(password != confirmPassword) {
+                Toast.makeText(context, "Your password and confirm password is not same", Toast.LENGTH_LONG);
+            }
 
-            val email = binding.email.toString();
-            val password = binding.password.toString();
-            val confirmPassword = binding.confirmPassword.toString();
+//          Validated
+            else{
+                firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener{
+                    if(it.isSuccessful){
+                        Toast.makeText(context, "Succesfully register!", Toast.LENGTH_LONG);
+//                                             v Call Parent Activity (because we call it in fragment)
+                        val intent = Intent(activity, HomeActivity::class.java);
+                        startActivity(intent);
 
-            Log.d("Credentials", password.toString() + " "  + email.toString())
-
-            firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener{
-                if(it.isSuccessful){
-                    Log.d("Firebase", "winner!");
-                    Toast.makeText(context, "Succesfully register!", Toast.LENGTH_LONG);
-                }else{
-                    Log.d("Firebase", "failed!" + email + password);
-                    Toast.makeText(context, "Didn't succesfully register!", Toast.LENGTH_LONG)
+                    }else{
+                        Toast.makeText(context, it.exception.toString(), Toast.LENGTH_LONG)
+                    }
                 }
             }
         }

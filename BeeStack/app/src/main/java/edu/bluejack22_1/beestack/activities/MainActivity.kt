@@ -1,17 +1,30 @@
 package edu.bluejack22_1.beestack.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.viewpager2.widget.ViewPager2
+import com.google.firebase.auth.FirebaseAuth
 import edu.bluejack22_1.beestack.R
 import edu.bluejack22_1.beestack.adapters.ViewPagerAdapter
 import me.relex.circleindicator.CircleIndicator3
 
 class MainActivity : AppCompatActivity() {
 
-    
+    private lateinit var firebaseAuth: FirebaseAuth;
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+//      If there's any user in sign in, then go to login
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        if(firebaseAuth.currentUser != null){
+            val intent = Intent(this, HomeActivity::class.java);
+            startActivity(intent);
+        }
+
+//      ------------------------------------
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
