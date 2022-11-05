@@ -5,6 +5,10 @@ import android.content.ContentValues.TAG
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.navigation.NavigationBarView
@@ -25,12 +29,29 @@ class HomeActivity : AppCompatActivity() {
 
         binding = ActivityHomeBinding.inflate(layoutInflater)
 
+        setToolbar()
+        setDrawingNavbar()
         setBottomNavbar()
+
         replaceFragment(HomeFragment()) // Initial Fragment
 
         setContentView(binding.getRoot());
     }
 
+    private fun setToolbar(){
+        setSupportActionBar(binding.toolbar)
+    }
+
+    private fun setDrawingNavbar(){
+        var drawer :DrawerLayout = binding.drawerLayout;
+        val toggle = ActionBarDrawerToggle(this, drawer, binding.toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        drawer.addDrawerListener(toggle)
+        toggle.syncState()
+
+        supportActionBar?.setHomeButtonEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_person_24)
+    }
 
 
     private fun setBottomNavbar(){
@@ -53,5 +74,14 @@ class HomeActivity : AppCompatActivity() {
         val fragmentTransaction :FragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.frameLayout, fragment);
         fragmentTransaction.commit()
+    }
+
+    override fun onBackPressed() {
+//      Close drawer if press back
+        if(binding.drawerLayout.isDrawerOpen(GravityCompat.START)){
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
+        }else{
+            super.onBackPressed()
+        }
     }
 }

@@ -39,8 +39,6 @@ class HomeFragment : Fragment() {
 
         binding = FragmentHomeBinding.inflate(layoutInflater)
 
-
-
         db.collection("threads")
             .addSnapshotListener { value, e ->
                 if (e != null) {
