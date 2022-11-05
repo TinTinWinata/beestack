@@ -3,62 +3,72 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.RegisterFragment"
-    android:background="@android:color/transparent"
-    >
+    android:background="@android:color/transparent">
+
 
     <LinearLayout
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_marginBottom="50dp"
         android:layout_gravity="center"
         >
 
-        <!--        Login Text -->
-        <!--        <TextView-->
-        <!--        android:layout_width="wrap_content"-->
-        <!--        android:layout_height="wrap_content"-->
-        <!--        android:text="Login!"-->
-        <!--            android:layout_gravity="center"-->
-        <!--            android:textSize="30sp"-->
-        <!--        />-->
-
-        <EditText
-            android:layout_marginBottom="10dp"
-            android:id="@+id/email"
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_gravity="center"
+            android:layout_height="200dp"
+            android:src="@drawable/logo_zoom_in"
+            />
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Email"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            android:background="@android:color/transparent"
-            />
-        <EditText
-            android:layout_marginBottom="10dp"
-            android:textColorHint="@color/white"
-            android:id="@+id/password"
+            app:endIconMode="clear_text"
+            app:startIconDrawable="@drawable/ic_baseline_person_24"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            app:startIconDrawable="@drawable/ic_baseline_lock_24"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:endIconMode="password_toggle"
             android:hint="Password"
-            android:textColor="@color/white"
-            android:background="@android:color/transparent"
-            />
-        <EditText
-            android:layout_marginBottom="10dp"
-            android:id="@+id/confirmPassword"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            app:startIconDrawable="@drawable/ic_baseline_lock_24"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:endIconMode="password_toggle"
             android:hint="Confirm Password"
-            android:textColorHint="@color/white"
-            android:textColor="@color/white"
-            android:background="@android:color/transparent"
-            />
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/confirmPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
         <Button
             android:id="@+id/registerBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Register"
-            android:backgroundTint="@color/orange_500"
+            android:backgroundTint="@color/orange_200"
             />
     </LinearLayout>
 

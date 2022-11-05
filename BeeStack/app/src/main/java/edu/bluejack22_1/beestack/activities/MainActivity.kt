@@ -22,10 +22,10 @@ class MainActivity : AppCompatActivity() {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-//        if(firebaseAuth.currentUser != null){
-//            val intent = Intent(this, HomeActivity::class.java);
-//            startActivity(intent);
-//        }
+        if(firebaseAuth.currentUser != null){
+            val intent = Intent(this, HomeActivity::class.java);
+            startActivity(intent);
+        }
 
 //      ------------------------------------
 
