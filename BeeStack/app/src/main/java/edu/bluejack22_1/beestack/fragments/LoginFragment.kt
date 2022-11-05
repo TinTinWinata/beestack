@@ -12,9 +12,11 @@ import androidx.activity.result.contract.ActivityResultContracts
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import edu.bluejack22_1.beestack.R
 import edu.bluejack22_1.beestack.activities.ForgotPasswordActivity
 import edu.bluejack22_1.beestack.activities.HomeActivity
 import edu.bluejack22_1.beestack.databinding.FragmentLoginBinding
@@ -31,10 +33,11 @@ class LoginFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         firebaseAuth = FirebaseAuth.getInstance();
-//        val options = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id))
-//            .requestEmail()
-//            .build();
-//        googleClient =  GoogleSignIn.getClient(requireActivity(), options);
+        val options = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(
+            R.string.default_web_client_id))
+            .requestEmail()
+            .build();
+        googleClient =  GoogleSignIn.getClient(requireActivity(), options);
     }
 
     override fun onCreateView(
