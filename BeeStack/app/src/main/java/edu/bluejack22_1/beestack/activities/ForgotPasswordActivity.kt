@@ -28,10 +28,12 @@ class ForgotPasswordActivity : AppCompatActivity() {
     }
 
     private fun backListener(){
-        binding.backBtn.setOnClickListener{
-            val mainIntent = Intent(this, MainActivity::class.java);
-            startActivity(mainIntent)
-        }
+//        Removed Back Button
+
+//        binding.backBtn.setOnClickListener{
+//            val mainIntent = Intent(this, MainActivity::class.java);
+//            startActivity(mainIntent)
+//        }
     }
 
     private fun sendForgetListener(){
@@ -39,7 +41,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
 //        Listener
         binding.forgetPasswordBtn.setOnClickListener{
             // Get Email
-            val email = binding.forgetEmailET.text.toString();
+            val email = binding.forgotEmailET.text.toString();
 
             if(email.isEmpty()){
                 Toast.makeText(this, "Email cannot be empty", Toast.LENGTH_LONG).show()

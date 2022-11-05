@@ -9,12 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BeeStack">
-        <activity android:name=".activities.ForgotPasswordActivity"></activity>
         <activity
-            android:name=".ui.login.ForgotPasswordActivity"
-            android:label="@string/title_activity_forgot_password" />
+            android:name=".activities.ForgotPasswordActivity">
+        </activity>
         <activity android:name=".activities.HomeActivity" />
         <activity
+            android:windowSoftInputMode="adjustPan"
             android:name=".activities.MainActivity"
             android:exported="true">
             <intent-filter>
