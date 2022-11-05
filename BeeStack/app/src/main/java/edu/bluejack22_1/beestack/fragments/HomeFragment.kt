@@ -35,17 +35,11 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
 
         val db = Firebase.firestore;
-        dummyData();
+//        dummyData();
 
         binding = FragmentHomeBinding.inflate(layoutInflater)
 
-        threadAdapter = ThreadAdapter(threadList)
-        binding.apply {
-            rvHome.apply {
-                layoutManager = LinearLayoutManager(context)
-                adapter = threadAdapter
-            }
-        }
+
 
         db.collection("threads")
             .addSnapshotListener { value, e ->
@@ -56,11 +50,24 @@ class HomeFragment : Fragment() {
 
                 val cities = ArrayList<String>()
                 for (doc in value!!) {
+                    var title="";
+                    var description = "";
                     doc.getString("title")?.let {
-                        cities.add(it)
+                       title = it
+                    }
+                    doc.getString("description")?.let {
+                        description = it
+                    }
+                    threadList.add(Thread(title,description));
+                }
+//                Log.d(ContentValues.TAG, "Current cites in CA: $cities")
+                threadAdapter = ThreadAdapter(threadList)
+                binding.apply {
+                    rvHome.apply {
+                        layoutManager = LinearLayoutManager(context)
+                        adapter = threadAdapter
                     }
                 }
-                Log.d(ContentValues.TAG, "Current cites in CA: $cities")
             }
 
 
