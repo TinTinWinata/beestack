@@ -3,7 +3,6 @@ package edu.bluejack22_1.beestack.fragments
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,15 +12,12 @@ import androidx.activity.result.contract.ActivityResultContracts
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
-import edu.bluejack22_1.beestack.R
+import edu.bluejack22_1.beestack.activities.ForgotPasswordActivity
 import edu.bluejack22_1.beestack.activities.HomeActivity
-import edu.bluejack22_1.beestack.activities.MainActivity
 import edu.bluejack22_1.beestack.databinding.FragmentLoginBinding
-import edu.bluejack22_1.beestack.databinding.FragmentRegisterBinding
 
 class LoginFragment : Fragment() {
 
@@ -35,10 +31,10 @@ class LoginFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         firebaseAuth = FirebaseAuth.getInstance();
-        val options = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id))
-            .requestEmail()
-            .build();
-        googleClient =  GoogleSignIn.getClient(requireActivity(), options);
+//        val options = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id))
+//            .requestEmail()
+//            .build();
+//        googleClient =  GoogleSignIn.getClient(requireActivity(), options);
     }
 
     override fun onCreateView(
@@ -58,10 +54,9 @@ class LoginFragment : Fragment() {
             val password = binding.password.text.toString();
 
 //          Validating Email, Password, Confirm Password
-            if(email == "" || password == ""){
+            if(email == "" || password == "") {
                 Toast.makeText(context, "Please input all fields", Toast.LENGTH_LONG).show();
             }
-//          Validated
             else{
                 firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener{
                     if(it.isSuccessful){
@@ -80,6 +75,11 @@ class LoginFragment : Fragment() {
 //        Login With Google
         binding.googleBtn.setOnClickListener{
             googleSignIn();
+        }
+
+        binding.forgotPasswordTV.setOnClickListener{
+            val i = Intent(context, ForgotPasswordActivity::class.java);
+            startActivity(i);
         }
 
         // Inflate the layout for this fragment
