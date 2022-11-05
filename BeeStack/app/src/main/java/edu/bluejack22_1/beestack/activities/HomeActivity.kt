@@ -1,21 +1,22 @@
 package edu.bluejack22_1.beestack.activities
 
+
 import android.content.ContentValues.TAG
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import com.google.android.material.bottomnavigation.LabelVisibilityMode
 import com.google.android.material.navigation.NavigationBarView
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import edu.bluejack22_1.beestack.R
 import edu.bluejack22_1.beestack.databinding.ActivityHomeBinding
 import edu.bluejack22_1.beestack.fragments.*
 
+
 class HomeActivity : AppCompatActivity() {
-    val db = Firebase.firestore;
 
     private lateinit var binding : ActivityHomeBinding
 
@@ -27,24 +28,11 @@ class HomeActivity : AppCompatActivity() {
         setBottomNavbar()
         replaceFragment(HomeFragment()) // Initial Fragment
 
-
         setContentView(binding.getRoot());
-
-
-        val thread = hashMapOf(
-            "title" to "Test Title Okay"    ,
-            "description" to "Testing Pertama kali yo",
-        )
-
-        db.collection("threads")
-            .add(thread)
-            .addOnSuccessListener { documentReference ->
-                Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
-            }
-            .addOnFailureListener { e ->
-                Log.w(TAG, "Error adding document", e)
-            }
     }
+
+
+
     private fun setBottomNavbar(){
         binding.btmNav.labelVisibilityMode = NavigationBarView.LABEL_VISIBILITY_LABELED;
         binding.btmNav.setOnItemSelectedListener {
