@@ -15,6 +15,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
+//      Hide Action Bar if exists in this Activity
+        supportActionBar!!.hide();
+
 //      If there's any user in sign in, then go to login
 
         firebaseAuth = FirebaseAuth.getInstance();

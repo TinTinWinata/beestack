@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.LoginFragment">
+    tools:context=".fragments.LoginFragment"
+    android:background="@android:color/transparent"
+    >
 
     <LinearLayout
         android:layout_width="300dp"
@@ -21,13 +23,32 @@
         <!--            android:textSize="30sp"-->
         <!--        />-->
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:backgroundTint="@color/white"
+                />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
         <EditText
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
             android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Email"
             />
         <EditText
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -35,12 +56,14 @@
 
             />
         <Button
+            android:backgroundTint="@color/orange_500"
             android:id="@+id/loginBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Submit"
             />
         <Button
+            android:backgroundTint="@color/orange_500"
             android:id="@+id/googleBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -51,7 +74,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Forgot Password"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             />
 
     </LinearLayout>

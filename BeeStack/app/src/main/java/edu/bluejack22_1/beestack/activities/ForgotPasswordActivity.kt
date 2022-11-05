@@ -23,7 +23,6 @@ class ForgotPasswordActivity : AppCompatActivity() {
         binding = ActivityForgotPasswordBinding.inflate(layoutInflater)
 
         setContentView(binding.root);
-
         backListener()
         sendForgetListener()
     }
@@ -37,15 +36,10 @@ class ForgotPasswordActivity : AppCompatActivity() {
 
     private fun sendForgetListener(){
 
-
 //        Listener
         binding.forgetPasswordBtn.setOnClickListener{
-
-
-            //        Get Email
+            // Get Email
             val email = binding.forgetEmailET.text.toString();
-
-
 
             if(email.isEmpty()){
                 Toast.makeText(this, "Email cannot be empty", Toast.LENGTH_LONG).show()

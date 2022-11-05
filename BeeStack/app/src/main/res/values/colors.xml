@@ -7,4 +7,15 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+<!--    Blue_200 Primary Color Binus Maya -->
+    <color name="blue_200">#028ed5</color>
+    <color name="blue_500">#009ff0</color>
+    <color name="blue_700">#006ca3</color>
+
+<!--    Orange_200 Secondary Color Binus Maya -->
+    <color name="orange_200">#f7b032</color>
+    <color name="orange_500">#dd9d2a</color>
+    <color name="orange_700">#bc882c</color>
+
 </resources>
