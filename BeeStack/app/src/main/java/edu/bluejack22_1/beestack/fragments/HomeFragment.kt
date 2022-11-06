@@ -46,7 +46,6 @@ class HomeFragment : Fragment() {
                     return@addSnapshotListener
                 }
 
-                val cities = ArrayList<String>()
                 for (doc in value!!) {
                     var title="";
                     var description = "";
@@ -58,7 +57,7 @@ class HomeFragment : Fragment() {
                     }
                     threadList.add(Thread(title,description));
                 }
-//                Log.d(ContentValues.TAG, "Current cites in CA: $cities")
+
                 threadAdapter = ThreadAdapter(threadList)
                 binding.apply {
                     rvHome.apply {
