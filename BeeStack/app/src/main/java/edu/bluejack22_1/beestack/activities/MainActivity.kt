@@ -27,6 +27,8 @@ class MainActivity : AppCompatActivity() {
         if(firebaseAuth.currentUser != null){
             User.login(firebaseAuth.currentUser!!.uid)
 
+            Log.d("main-activity", "waiting for 5 seconds");
+
             val intent = Intent(this, HomeActivity::class.java);
             startActivity(intent);
         }

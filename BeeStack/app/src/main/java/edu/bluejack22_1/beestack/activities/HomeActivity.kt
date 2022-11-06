@@ -3,10 +3,12 @@ package edu.bluejack22_1.beestack.activities
 
 import android.content.ContentValues.TAG
 import android.content.Intent
+import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
@@ -15,12 +17,17 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.navigation.NavigationBarView
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.StorageReference
 import edu.bluejack22_1.beestack.R
 import edu.bluejack22_1.beestack.databinding.ActivityHomeBinding
 import edu.bluejack22_1.beestack.fragments.*
 import edu.bluejack22_1.beestack.model.User
+import java.io.File
+import kotlin.math.log
 
 
 class HomeActivity : AppCompatActivity() {
@@ -37,7 +44,6 @@ class HomeActivity : AppCompatActivity() {
         setBottomNavbar()
 
         replaceFragment(HomeFragment()) // Initial Fragment
-
         setContentView(binding.getRoot());
     }
 
@@ -53,21 +59,32 @@ class HomeActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_person_24)
 
+
 //      Change Toolbar name based on user name
         binding.toolbarName.text = User.username
 
     }
 
     private fun setDrawingNavbar(){
+        binding.navView.bringToFront()
         var drawer :DrawerLayout = binding.drawerLayout;
         val toggle = ActionBarDrawerToggle(this, drawer, binding.toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer.addDrawerListener(toggle)
         toggle.syncState()
 
         setupToolbar()
-        setViewProfileListener()
+        setHeaderListener()
+        setNavigationViewListener()
     }
 
+    private fun setNavigationViewListener(){
+        binding.navView.setNavigationItemSelectedListener {
+            when(it.itemId){
+                R.id.drawing_nav_setting-> navigateProfilePage()
+            }
+            true
+        }
+    }
 
     private fun setBottomNavbar(){
         binding.btmNav.labelVisibilityMode = NavigationBarView.LABEL_VISIBILITY_LABELED;
@@ -85,14 +102,40 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    private fun setViewProfileListener(){
+    private fun setHeaderListener(){
         val headerView = binding.navView.getHeaderView(0)
         val viewProfile:TextView = headerView.findViewById(R.id.drawingViewProfile) as TextView
+        val imageProfile:ImageView = headerView.findViewById(R.id.drawingImage) as ImageView
 
         viewProfile.setOnClickListener{
-            val i = Intent(this, ProfileActivity::class.java);
-            startActivity(i)
+            navigateProfilePage()
         }
+        Log.d("home-activity", User.photoProfileBitmap.toString())
+
+        User.photoProfileListListener.add {
+            if(User.photoProfileBitmap != null) {
+                imageProfile.setImageBitmap(User.photoProfileBitmap)
+            }
+        }
+    }
+
+    override fun onResume() {
+        if(User.photoProfileBitmap != null){
+            setHeaderListener()
+        }
+        super.onResume()
+    }
+
+    private fun navigateSettingPage(){
+        val i = Intent(this, ProfileActivity::class.java);
+        startActivity(i)
+
+    }
+
+    private fun navigateProfilePage(){
+        val i = Intent(this, ProfileActivity::class.java);
+        startActivity(i)
+
     }
 
     private fun replaceFragment(fragment : Fragment){

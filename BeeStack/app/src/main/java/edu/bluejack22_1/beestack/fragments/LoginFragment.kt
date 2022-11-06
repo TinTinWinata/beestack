@@ -66,13 +66,10 @@ class LoginFragment : Fragment() {
                     if(it.isSuccessful){
                         Toast.makeText(context, "Succesfully Login!", Toast.LENGTH_LONG).show();
 //                                             v Call Parent Activity (because we call it in fragment)
-
 //                        Login to user class
                         User.login(firebaseAuth.currentUser!!.uid)
-
                         val intent = Intent(activity, HomeActivity::class.java);
                         startActivity(intent);
-
                     }else{
                         Toast.makeText(context, it.exception.toString(), Toast.LENGTH_LONG).show()
                     }
