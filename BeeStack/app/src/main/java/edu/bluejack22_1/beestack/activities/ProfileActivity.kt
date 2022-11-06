@@ -36,9 +36,6 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun selectImage(){
-        val intent = Intent()
-        intent.type = "images/*"
-        intent.action= Intent.ACTION_GET_CONTENT
         resultLauncher.launch(arrayOf("image/*"))
     }
 
@@ -53,7 +50,6 @@ class ProfileActivity : AppCompatActivity() {
         progressDialog.show()
 
         val ref:String = "images/${User.uid}"
-        Log.d("uploaded-image",ref);
         val storageRef = FirebaseStorage.getInstance().getReference(ref);
         storageRef.putFile(image).addOnSuccessListener {
 
@@ -71,10 +67,8 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun setData(){
         if(User.photoProfileBitmap != null){
-
             binding.image.setImageBitmap(User.photoProfileBitmap)
         }
-
         binding.name.text = User.username;
     }
 }
