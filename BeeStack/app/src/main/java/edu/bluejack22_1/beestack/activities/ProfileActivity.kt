@@ -36,14 +36,30 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun selectImage(){
-        resultLauncher.launch(arrayOf("image/*"))
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*";
+        startActivityForResult(intent, 100)
+
+//        resultLauncher.launch(arrayOf("image/*")) // Old Function
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (resultCode == Activity.RESULT_OK && requestCode == 100){
+            val uri: Uri? = data?.data
+            if (uri != null) {
+                uploadImage(uri)
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
+//    Old Way
     private var resultLauncher = registerForActivityResult(ActivityResultContracts.OpenDocument()){
             uploadImage(it)
     }
 
     private fun uploadImage(image:Uri){
+        Log.d("test-debug", image.toString())
         val progressDialog = ProgressDialog(this)
         progressDialog.setMessage("Uploading File ... ");
         progressDialog.setCancelable(false)
