@@ -31,7 +31,9 @@
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:background="@null"
-                android:hint="Title"/>
+                android:hint="Title"
+                android:importantForAutofill="no"
+                android:inputType="text" />
 
             <ImageView
                 android:layout_margin="10dp"
@@ -52,7 +54,6 @@
             android:background="@null"
             android:gravity="left|top"
             android:hint="Input thread description ..."
-            android:imeOptions="actionDone"
             android:importantForAutofill="no"
             android:inputType="textMultiLine"
             android:paddingVertical="12dp"

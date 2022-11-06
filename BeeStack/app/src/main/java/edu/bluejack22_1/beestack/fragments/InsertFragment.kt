@@ -30,9 +30,9 @@ class InsertFragment : Fragment() {
 
         _binding = FragmentInsertBinding.inflate(inflater,container,false);
 
-        Log.d(ContentValues.TAG, "Check ${binding.createBtn}");
+        Log.d(ContentValues.TAG, "Check ${binding.description}");
 
-        binding.createBtn?.setOnClickListener {
+        binding.createBtn.setOnClickListener {
             val title = binding.title?.text.toString();
             val description = binding.description.text.toString();
             val user_id = FirebaseAuth.getInstance().currentUser.toString();
@@ -42,8 +42,6 @@ class InsertFragment : Fragment() {
 
         return binding.root;
     }
-
-
 
     override fun onDestroy() {
         super.onDestroy()
