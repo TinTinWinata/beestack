@@ -24,9 +24,18 @@ class ProfileActivity : AppCompatActivity() {
 
         setData()
         changePhotoProfileListener()
+        logoutListener()
 
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+    }
+
+    private fun logoutListener(){
+        binding.logoutBtn.setOnClickListener{
+            User.logout()
+            val i = Intent(this, MainActivity::class.java)
+            startActivity(i)
+        }
     }
 
     private fun changePhotoProfileListener(){
@@ -86,5 +95,7 @@ class ProfileActivity : AppCompatActivity() {
             binding.image.setImageBitmap(User.photoProfileBitmap)
         }
         binding.name.text = User.username;
+        binding.location.text = User.location;
+        binding.email.text = User.email;
     }
 }

@@ -104,13 +104,16 @@ class HomeActivity : AppCompatActivity() {
 
     private fun setHeaderListener(){
         val headerView = binding.navView.getHeaderView(0)
+
         val viewProfile:TextView = headerView.findViewById(R.id.drawingViewProfile) as TextView
         val imageProfile:ImageView = headerView.findViewById(R.id.drawingImage) as ImageView
+        val userProfile:TextView = headerView.findViewById(R.id.drawingUsername) as TextView
+
+        userProfile.text = User.username
 
         viewProfile.setOnClickListener{
             navigateProfilePage()
         }
-        Log.d("home-activity", User.photoProfileBitmap.toString())
 
         User.photoProfileListListener.add {
             if(User.photoProfileBitmap != null) {
