@@ -15,6 +15,7 @@ import com.google.firebase.auth.FirebaseAuth
 import edu.bluejack22_1.beestack.R
 import edu.bluejack22_1.beestack.activities.HomeActivity
 import edu.bluejack22_1.beestack.databinding.FragmentRegisterBinding
+import edu.bluejack22_1.beestack.model.User
 
 
 class RegisterFragment : Fragment() {
@@ -58,6 +59,10 @@ class RegisterFragment : Fragment() {
                 firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener{
                     if(it.isSuccessful){
                         Toast.makeText(context, "Succesfully register!", Toast.LENGTH_LONG).show();
+
+                        //                        Login to user class
+                        User.login(firebaseAuth.currentUser!!.uid)
+
 //                                             v Call Parent Activity (because we call it in fragment)
                         val intent = Intent(activity, HomeActivity::class.java);
                         startActivity(intent);

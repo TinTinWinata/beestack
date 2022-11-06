@@ -2,10 +2,12 @@ package edu.bluejack22_1.beestack.activities
 
 
 import android.content.ContentValues.TAG
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
+import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -18,6 +20,7 @@ import com.google.firebase.ktx.Firebase
 import edu.bluejack22_1.beestack.R
 import edu.bluejack22_1.beestack.databinding.ActivityHomeBinding
 import edu.bluejack22_1.beestack.fragments.*
+import edu.bluejack22_1.beestack.model.User
 
 
 class HomeActivity : AppCompatActivity() {
@@ -42,15 +45,27 @@ class HomeActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
     }
 
+//    Setup toolbar after drawing maked!
+    private fun setupToolbar(){
+
+//      Change Action Toolbar
+        supportActionBar?.setHomeButtonEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_person_24)
+
+//      Change Toolbar name based on user name
+        binding.toolbarName.text = User.username
+
+    }
+
     private fun setDrawingNavbar(){
         var drawer :DrawerLayout = binding.drawerLayout;
         val toggle = ActionBarDrawerToggle(this, drawer, binding.toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer.addDrawerListener(toggle)
         toggle.syncState()
 
-        supportActionBar?.setHomeButtonEnabled(true)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_person_24)
+        setupToolbar()
+        setViewProfileListener()
     }
 
 
@@ -67,6 +82,16 @@ class HomeActivity : AppCompatActivity() {
 
 //          Listener needs to Return True
             true
+        }
+    }
+
+    private fun setViewProfileListener(){
+        val headerView = binding.navView.getHeaderView(0)
+        val viewProfile:TextView = headerView.findViewById(R.id.drawingViewProfile) as TextView
+
+        viewProfile.setOnClickListener{
+            val i = Intent(this, ProfileActivity::class.java);
+            startActivity(i)
         }
     }
 

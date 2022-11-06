@@ -3,10 +3,12 @@ package edu.bluejack22_1.beestack.activities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.viewpager2.widget.ViewPager2
 import com.google.firebase.auth.FirebaseAuth
 import edu.bluejack22_1.beestack.R
 import edu.bluejack22_1.beestack.adapters.ViewPagerAdapter
+import edu.bluejack22_1.beestack.model.User
 import me.relex.circleindicator.CircleIndicator3
 
 class MainActivity : AppCompatActivity() {
@@ -23,6 +25,8 @@ class MainActivity : AppCompatActivity() {
         firebaseAuth = FirebaseAuth.getInstance();
 
         if(firebaseAuth.currentUser != null){
+            User.login(firebaseAuth.currentUser!!.uid)
+
             val intent = Intent(this, HomeActivity::class.java);
             startActivity(intent);
         }

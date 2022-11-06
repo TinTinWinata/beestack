@@ -20,6 +20,7 @@ import edu.bluejack22_1.beestack.R
 import edu.bluejack22_1.beestack.activities.ForgotPasswordActivity
 import edu.bluejack22_1.beestack.activities.HomeActivity
 import edu.bluejack22_1.beestack.databinding.FragmentLoginBinding
+import edu.bluejack22_1.beestack.model.User
 
 class LoginFragment : Fragment() {
 
@@ -65,6 +66,10 @@ class LoginFragment : Fragment() {
                     if(it.isSuccessful){
                         Toast.makeText(context, "Succesfully Login!", Toast.LENGTH_LONG).show();
 //                                             v Call Parent Activity (because we call it in fragment)
+
+//                        Login to user class
+                        User.login(firebaseAuth.currentUser!!.uid)
+
                         val intent = Intent(activity, HomeActivity::class.java);
                         startActivity(intent);
 
