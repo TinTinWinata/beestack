@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.InsertFragment"
-    android:paddingBottom="100dp"
+    android:paddingBottom="60dp"
     android:paddingLeft="20dp"
     android:paddingRight="20dp">
 
@@ -14,7 +14,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:paddingTop="20dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
 
         <LinearLayout
             android:id="@+id/layout_1"
@@ -36,6 +37,7 @@
                 android:inputType="text" />
 
             <ImageView
+                android:id="@+id/image_icon"
                 android:layout_margin="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -44,23 +46,42 @@
 
         </LinearLayout>
 
-
-
-        <EditText
-            android:layout_marginTop="10dp"
-            android:id="@+id/description"
+        <ScrollView
+            android:id="@+id/scroll_1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:gravity="left|top"
-            android:hint="Input thread description ..."
-            android:importantForAutofill="no"
-            android:inputType="textMultiLine"
-            android:paddingVertical="12dp"
+            android:layout_height="275dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/layout_1" />
+            app:layout_constraintTop_toBottomOf="@id/layout_1">
 
+            <EditText
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@null"
+                android:gravity="left|top"
+                android:hint="Input thread description ..."
+                android:importantForAutofill="no"
+                android:inputType="textMultiLine"
+                android:paddingVertical="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/layout_1" />
+
+
+
+        </ScrollView>
+
+        <ImageView
+            android:layout_marginTop="15dp"
+            android:adjustViewBounds="true"
+            android:id="@+id/new_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxHeight="125dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/scroll_1" />
 
         <Button
             android:id="@+id/createBtn"
