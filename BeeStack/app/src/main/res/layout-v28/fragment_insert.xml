@@ -16,33 +16,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/layout_1"
+        <EditText
+            android:textFontWeight="700"
+            android:id="@+id/editText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="Title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
-
-            <EditText
-                android:id="@+id/title"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:hint="Title"/>
-
-            <ImageView
-                android:layout_margin="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ic_baseline_image_24"
-                android:contentDescription="TODO" />
-
-        </LinearLayout>
-
-
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:layout_marginTop="10dp"
@@ -58,11 +41,10 @@
             android:paddingVertical="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/layout_1" />
-
+            app:layout_constraintTop_toBottomOf="@+id/editText" />
 
         <Button
-            android:id="@+id/createBtn"
+            android:id="@+id/loginBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/blue_200"
