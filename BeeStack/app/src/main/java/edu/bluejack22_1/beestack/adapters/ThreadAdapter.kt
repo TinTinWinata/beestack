@@ -37,6 +37,7 @@ class ThreadAdapter (val items : MutableList<Thread>)
             binding.apply {
                 title.text= item.title
                 description.text= item.description
+                credential.text = item.owner
             }
         }
     }

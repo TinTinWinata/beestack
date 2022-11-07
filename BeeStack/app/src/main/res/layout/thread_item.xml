@@ -10,8 +10,38 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="20dp"
+        android:padding="10dp"
         >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_votes"
+                android:text="0 Votes"
+                android:textSize="11dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:text="0 Answers"
+                android:id="@+id/tv_answers"
+                android:textSize="11dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:text="0 Views"
+                android:id="@+id/tv_views"
+                android:textSize="11dp"/>
+        </LinearLayout>
+
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
@@ -26,6 +56,16 @@
             android:layout_height="match_parent"
             android:text="description description description description description description description description"
             android:textSize="16sp"
+            />
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:id="@+id/credential"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="User - Teams"
+            android:gravity="right"
+            android:textSize="11dp"
             />
 
     </LinearLayout>

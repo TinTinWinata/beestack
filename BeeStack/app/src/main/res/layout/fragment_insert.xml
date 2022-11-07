@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.InsertFragment"
-    android:paddingBottom="60dp"
+    android:paddingBottom="20dp"
     android:paddingLeft="20dp"
     android:paddingRight="20dp">
 
