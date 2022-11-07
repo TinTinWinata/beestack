@@ -42,13 +42,11 @@ class HomeFragment : Fragment() {
                     Log.w(ContentValues.TAG, "Listen failed.", e)
                     return@addSnapshotListener
                 }
-
                 for (doc in value!!) {
-
-                    val title= doc.data["title"].toString()
+                    val title = doc.data["title"].toString()
                     val description = doc.data["description"].toString()
                     val user_id = doc.data["user_id"].toString()
-                    val thread:Thread = Thread(title,description, user_id);
+                    val thread: Thread = Thread(title, description, user_id);
                     thread.uid = doc.id;
                     threadList.add(thread);
                     // Get User Data
@@ -56,16 +54,13 @@ class HomeFragment : Fragment() {
                     docRef.addSnapshotListener { doc, error ->
                         if (doc != null) {
                             val owner = doc.data!!["username"].toString()
-                            threadList.add(Thread(title,description,user_id,owner));
+                            threadList.add(Thread(title, description, user_id, owner));
                             applyAdapter();
                         }
                     }
                 }
+            }
 
-
-
-
-                }
 
 
         return binding.root;
