@@ -28,7 +28,6 @@ class ThreadDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityThreadDetailBinding.inflate(layoutInflater)
         val passingThread : Thread= intent.getSerializableExtra("thread") as Thread
 

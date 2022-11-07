@@ -9,16 +9,14 @@ import java.io.File
 import java.io.Serializable
 
 
-class Thread(var title: String, var description: String, var user_id: String): Serializable{
-    var uid:String= ""
-    var photoProfileBitmap: Bitmap? = null
-    var viewed: Int = 0
-    var owner: String? = null
+class Thread(user:User? = null, desc:String = "", title:String = "", uid:String = "", user_id:String = ""): Serializable{
 
+    var title:String = title;
+    var uid:String= uid;
+    var user:User? =user;
+    var description:String = desc;
+    var user_id: String = user_id;
 
-    constructor(title: String, description: String, user_id: String,owner: String): this(title, description, user_id){
-        this.owner = owner
-    }
 
     public fun getHashMap() : HashMap<String, String>{
 //        Get object map

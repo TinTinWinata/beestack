@@ -54,7 +54,7 @@ class InsertFragment : Fragment() {
             Log.d(ContentValues.TAG, "Check $title, $description, $user_id");
 
             db.collection("threads")
-                .add(Thread(title,description,user_id).getHashMap())
+                .add(Thread(title=title, desc = description, user_id = user_id).getHashMap())
                 .addOnSuccessListener { doc ->
                     if (imageUri != null){
                         uploadImage(imageUri!!, doc.id);

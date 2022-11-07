@@ -45,7 +45,7 @@ class HomeActivity : AppCompatActivity() {
 //      Change Action Toolbar
         supportActionBar?.setHomeButtonEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_person_24)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_person_24_white)
 
 
 //      Change Toolbar name based on user name

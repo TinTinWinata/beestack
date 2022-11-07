@@ -21,25 +21,27 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            >
 
             <androidx.appcompat.widget.Toolbar
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 app:layout_constraintTop_toTopOf="parent"
                 android:id="@+id/toolbar"
+                android:backgroundTint="@color/blue_500"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:background="@color/white"
                 android:elevation="4dp"
-                app:navigationIcon="@drawable/ic_baseline_person_24"
                 >
                     <TextView
                         android:id="@+id/toolbar_name"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:text="Name"
+                        android:textStyle="bold"
                         android:gravity=""
                         />
 

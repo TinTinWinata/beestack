@@ -1,6 +1,8 @@
 package edu.bluejack22_1.beestack.model
 
-class User(uid:String, username: String, email: String, location:String) {
+import java.io.Serializable
+
+class User(uid:String, username: String, email: String, location:String): Serializable {
 
     var uid:String= uid;
     var email:String = email;

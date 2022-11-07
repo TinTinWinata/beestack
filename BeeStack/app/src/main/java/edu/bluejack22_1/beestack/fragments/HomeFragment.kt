@@ -15,6 +15,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import edu.bluejack22_1.beestack.databinding.FragmentHomeBinding
 import edu.bluejack22_1.beestack.model.Thread
+import edu.bluejack22_1.beestack.model.User
 
 class HomeFragment : Fragment() {
 
@@ -32,10 +33,15 @@ class HomeFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
 
-        val db = Firebase.firestore;
-
+        fetchThread();
         binding = FragmentHomeBinding.inflate(layoutInflater)
 
+        return binding.root;
+    }
+
+
+    private fun fetchThread(){
+        val db = Firebase.firestore;
         db.collection("threads")
             .addSnapshotListener { value, e ->
                 if (e != null) {
@@ -43,30 +49,32 @@ class HomeFragment : Fragment() {
                     return@addSnapshotListener
                 }
                 for (doc in value!!) {
+
+//                  Get Thread Data
                     val title = doc.data["title"].toString()
                     val description = doc.data["description"].toString()
                     val user_id = doc.data["user_id"].toString()
-                    val thread: Thread = Thread(title, description, user_id);
-                    thread.uid = doc.id;
-                    threadList.add(thread);
-                    // Get User Data
+                    val uid = doc.id
+
+//                  Then Get User Data
                     val docRef = db.collection("users").document(user_id);
                     docRef.addSnapshotListener { doc, error ->
                         if (doc != null) {
-                            val owner = doc.data!!["username"].toString()
-                            threadList.add(Thread(title, description, user_id, owner));
+                            val username = doc.data!!["username"].toString()
+                            val email = doc.data!!["email"].toString()
+                            val location = doc.data!!["location"].toString()
+                            val user:User =User(doc.id, username, email, location)
+
+//                           Add add getted data to the thread list (Vector)
+                            threadList.add(Thread(uid=uid, title = title, desc = description, user_id = user_id, user = user));
                             applyAdapter();
                         }
                     }
                 }
             }
-
-
-
-        return binding.root;
     }
 
-    fun applyAdapter(){
+    private fun applyAdapter(){
         threadAdapter = ThreadAdapter(threadList)
         binding.apply {
             rvHome.apply {
