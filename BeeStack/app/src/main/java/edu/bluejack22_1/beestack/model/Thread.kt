@@ -9,14 +9,15 @@ import java.io.File
 import java.io.Serializable
 
 
-class Thread(var title: String, var description: String): Serializable{
-    var user_id: String = ""
+class Thread(var title: String, var description: String, var user_id: String): Serializable{
     var uid:String= ""
     var photoProfileBitmap: Bitmap? = null
+    var viewed: Int = 0
+    var owner: String? = null
 
 
-    constructor(title: String, description: String, user_id: String): this(title, description){
-        this.user_id = user_id;
+    constructor(title: String, description: String, user_id: String,owner: String): this(title, description, user_id){
+        this.owner = owner
     }
 
     public fun getHashMap() : HashMap<String, String>{

@@ -34,7 +34,7 @@ class InsertFragment : Fragment() {
     private var _binding: FragmentInsertBinding? = null
     private val binding get() = _binding!!
     var imageUri: Uri? = null
-
+    val db = Firebase.firestore;
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,10 +43,13 @@ class InsertFragment : Fragment() {
 
         _binding = FragmentInsertBinding.inflate(inflater,container,false);
 
-        Log.d(ContentValues.TAG, "Check ${binding.description}");
+        createBtnOnClick();
+        imageIconOnClick();
 
-        val db = Firebase.firestore;
+        return binding.root;
+    }
 
+    private fun createBtnOnClick(){
         binding.createBtn.setOnClickListener {
             val title = binding.title.text.toString();
             val description = binding.description.text.toString();
@@ -57,24 +60,19 @@ class InsertFragment : Fragment() {
             db.collection("threads")
                 .add(Thread(title,description,user_id).getHashMap())
                 .addOnSuccessListener { doc ->
-//                    Log.d(TAG, "DocumentSnapshot written with ID: ${doc.id}")
                     if (imageUri != null){
                         uploadImage(imageUri!!, doc.id);
                     }
                 }
         }
+    }
 
-
-
+    private fun imageIconOnClick(){
         binding.imageIcon.setOnClickListener {
             val galleryIntent = Intent(Intent.ACTION_PICK)
             galleryIntent.type = "image/*"
             imagePickerActivityResult.launch(galleryIntent)
-
-
         }
-
-        return binding.root;
     }
 
     private fun uploadImage(image:Uri, id:String){
@@ -87,7 +85,7 @@ class InsertFragment : Fragment() {
         val storageRef = FirebaseStorage.getInstance().getReference(ref);
         storageRef.putFile(image).addOnSuccessListener {
             if(progressDialog.isShowing) progressDialog.dismiss()
-            Toast.makeText(context, "Succesfully Upload Image", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Succesfully Created Thread", Toast.LENGTH_SHORT).show()
         }
     }
 

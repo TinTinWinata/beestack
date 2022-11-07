@@ -33,7 +33,6 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
 
         val db = Firebase.firestore;
-//        dummyData();
 
         binding = FragmentHomeBinding.inflate(layoutInflater)
 
@@ -45,42 +44,33 @@ class HomeFragment : Fragment() {
                 }
 
                 for (doc in value!!) {
-                    var title="";
-                    var description = "";
-                    doc.getString("title")?.let {
-                       title = it
-                    }
-                    doc.getString("description")?.let {
-                        description = it
-                    }
-                    threadList.add(Thread(title,description));
-                }
+                    val title= doc.data["title"].toString()
+                    val description = doc.data["description"].toString()
+                    val user_id = doc.data["user_id"].toString()
 
-                threadAdapter = ThreadAdapter(threadList)
-                binding.apply {
-                    rvHome.apply {
-                        layoutManager = LinearLayoutManager(context)
-                        adapter = threadAdapter
+
+                    // Get User Data
+                    val docRef = db.collection("users").document(user_id);
+                    docRef.addSnapshotListener { doc, error ->
+                        if (doc != null) {
+                            val owner = doc.data!!["username"].toString()
+                            threadList.add(Thread(title,description,user_id,owner));
+                            applyAdapter();
+                        }
                     }
                 }
             }
 
-
-        val thread = hashMapOf(
-            "title" to "T2",
-            "description" to "Testing Pertama kali yo",
-        )
-
         return binding.root;
     }
 
-    fun dummyData(){
-        threadList.add(Thread("Title 1","Sample 1"))
-        threadList.add(Thread("Title 2","Sample 1"))
-        threadList.add(Thread("Title 3","Sample 1"))
-        threadList.add(Thread("Title 4","Sample 1"))
+    fun applyAdapter(){
+        threadAdapter = ThreadAdapter(threadList)
+        binding.apply {
+            rvHome.apply {
+                layoutManager = LinearLayoutManager(context)
+                adapter = threadAdapter
+            }
+        }
     }
-
-
-
 }
