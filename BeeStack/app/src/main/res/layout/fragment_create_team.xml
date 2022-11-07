@@ -54,6 +54,7 @@
         android:textSize="10sp"/>
 
     <Button
+        android:background="@color/blue_500"
         android:layout_marginTop="20dp"
         android:layout_gravity="center_horizontal"
         android:id="@+id/createTeamBtn"

@@ -27,6 +27,7 @@
             android:layout_gravity="center"/>
 
         <Button
+            android:background="@color/blue_500"
             android:id="@+id/createTeamBtn"
             android:layout_margin="10dp"
             android:layout_width="200dp"
