@@ -31,9 +31,7 @@ class ThreadAdapter (val items : MutableList<Thread>)
         fun bind(item : Thread){
             itemView.setOnClickListener {
                 val i = Intent(itemView.context, ThreadDetailActivity::class.java);
-                i.putExtra("description", item.description)
-                i.putExtra("title", item.title)
-                i.putExtra("object", item);
+                i.putExtra("thread", item);
                 itemView.context.startActivity(i);
             }
             binding.apply {
