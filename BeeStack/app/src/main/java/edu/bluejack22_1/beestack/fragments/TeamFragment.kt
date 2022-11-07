@@ -1,13 +1,25 @@
 package edu.bluejack22_1.beestack.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentTransaction
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import edu.bluejack22_1.beestack.R
+import edu.bluejack22_1.beestack.activities.HomeActivity
+import edu.bluejack22_1.beestack.databinding.FragmentCreateTeamBinding
+import edu.bluejack22_1.beestack.databinding.FragmentTeamBinding
 
 class TeamFragment : Fragment() {
+
+    private lateinit var binding: FragmentTeamBinding;
+    // Firestore
+    private val db = Firebase.firestore;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,8 +29,36 @@ class TeamFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_team, container, false)
+        // View Binding
+        binding = FragmentTeamBinding.inflate(inflater, container, false);
+
+        // Query For Team , From Users
+        val userId = FirebaseAuth.getInstance().currentUser?.uid.toString();
+        db.collection("users").document(userId)
+            .addSnapshotListener { value, error ->
+                if (value != null) {
+                    val teamId = value.data?.get("team_id")?.toString();
+
+                    Log.d("TEAM", " + $teamId");
+                    if(teamId != null)
+                        replaceFragment(TeamDetailFragment());
+
+                    createTeamBtnOnClick();
+                };
+            }
+
+        return binding.root;
     }
+
+    fun createTeamBtnOnClick(){
+        binding.createTeamBtn.setOnClickListener {
+            replaceFragment(CreateTeamFragment());
+        }
+    }
+
+    fun replaceFragment(fragment: Fragment){
+        (activity as HomeActivity).replaceFragment(fragment);
+    }
+
 
 }

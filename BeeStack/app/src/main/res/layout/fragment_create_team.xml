@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.CreateTeamFragment"
+    android:padding="40dp"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/black"
+        android:layout_width="300sp"
+        android:layout_height="wrap_content"
+        android:text="Create Team"
+        android:textStyle="bold"
+        android:textSize="18dp"/>
+
+    <EditText
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/etName"
+        android:layout_width="300sp"
+        android:layout_height="wrap_content"
+        android:hint="Team Name"
+        android:autofillHints=""
+        android:inputType="text" />
+    <TextView
+        android:layout_marginStart="5dp"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/gray_400"
+        android:layout_width="300sp"
+        android:layout_height="wrap_content"
+        android:text="Tell us about your team name"
+        android:textSize="10sp"/>
+
+    <EditText
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/etDesc"
+        android:layout_width="300sp"
+        android:layout_height="wrap_content"
+        android:hint="Team Description"
+        android:autofillHints=""
+        android:inputType="text" />
+    <TextView
+        android:layout_marginStart="5dp"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/gray_400"
+        android:layout_width="300sp"
+        android:layout_height="wrap_content"
+        android:text="Tell us about your team description"
+        android:textSize="10sp"/>
+
+    <Button
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/createTeamBtn"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Create Team"
+        android:backgroundTint="#979797"/>
+</LinearLayout>

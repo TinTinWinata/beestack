@@ -129,9 +129,10 @@ class HomeActivity : AppCompatActivity() {
 
     }
 
-    private fun replaceFragment(fragment : Fragment){
+    //Function to replace fragments
+    fun replaceFragment(fragment : Fragment){
         val fragmentTransaction :FragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.frameLayout, fragment);
+        fragmentTransaction.addToBackStack(null).replace(R.id.frameLayout, fragment);
         fragmentTransaction.commit()
     }
 
