@@ -3,12 +3,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.TeamFragment">
+    tools:context=".fragments.TeamFragment"
+    android:padding="20dp"
+    android:clipToPadding="false"
+    >
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <LinearLayout
+        android:layout_gravity="center"
+        android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Team Fragment" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
+        <TextView
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="You don't have a team ..."
+            android:textStyle="bold"
+            android:layout_margin="20dp"
+            android:textSize="20sp"
+            android:layout_gravity="center"/>
+
+        <Button
+            android:id="@+id/createTeamBtn"
+            android:layout_margin="10dp"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="Create Team"
+            android:backgroundTint="#D9D9D9"/>
+
+        <Button
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            android:backgroundTint="@color/white"
+            android:textColor="#4F4F4F"
+            android:elevation="200dp"/>
+
+    </LinearLayout>
+
+
+
+
+
 
 </FrameLayout>

@@ -43,31 +43,32 @@ class HomeFragment : Fragment() {
                     return@addSnapshotListener
                 }
 
-                for (doc in value!!) {
+                for (doc_thread in value!!) {
 
-                    val title= doc.data["title"].toString()
-                    val description = doc.data["description"].toString()
-                    val user_id = doc.data["user_id"].toString()
-                    val thread:Thread = Thread(title,description, user_id);
-                    thread.uid = doc.id;
-                    threadList.add(thread);
+                    // Get Thread Details
+                    val title= doc_thread.data["title"].toString()
+                    val description = doc_thread.data["description"].toString()
+                    val user_id = doc_thread.data["user_id"].toString()
+
                     // Get User Data
                     val docRef = db.collection("users").document(user_id);
                     docRef.addSnapshotListener { doc, error ->
                         if (doc != null) {
                             val owner = doc.data!!["username"].toString()
-                            threadList.add(Thread(title,description,user_id,owner));
+
+                            // Create a new Thread Object
+                            val thread:Thread = Thread(title,description,user_id,owner)
+
+                            // Add thread id
+                            thread.uid = doc_thread.id;
+
+                            // Add thread to list
+                            threadList.add(thread);
                             applyAdapter();
                         }
                     }
                 }
-
-
-
-
-                }
-
-
+            }
         return binding.root;
     }
 
