@@ -9,8 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BeeStack">
-        <activity android:name=".activities.ProfileActivity"></activity>
-        <activity android:name=".activities.ForgotPasswordActivity"></activity>
+        <activity android:name=".activities.ThreadDetailActivity"></activity>
+        <activity android:name=".activities.ThreadActivity" />
+        <activity android:name=".activities.ProfileActivity" />
+        <activity android:name=".activities.ForgotPasswordActivity" />
         <activity android:name=".activities.HomeActivity" />
         <activity
             android:name=".activities.MainActivity"

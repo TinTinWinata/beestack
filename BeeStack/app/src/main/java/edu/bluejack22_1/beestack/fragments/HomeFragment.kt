@@ -22,8 +22,6 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding;
     private lateinit var threadAdapter: ThreadAdapter
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -82,5 +80,7 @@ class HomeFragment : Fragment() {
         threadList.add(Thread("Title 3","Sample 1"))
         threadList.add(Thread("Title 4","Sample 1"))
     }
+
+
 
 }

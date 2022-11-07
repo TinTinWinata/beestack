@@ -6,9 +6,10 @@ import android.util.Log
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import java.io.File
+import java.io.Serializable
 
 
-class Thread(var title: String, var description: String) {
+class Thread(var title: String, var description: String): Serializable{
     var user_id: String = ""
     var uid:String= ""
     var photoProfileBitmap: Bitmap? = null
