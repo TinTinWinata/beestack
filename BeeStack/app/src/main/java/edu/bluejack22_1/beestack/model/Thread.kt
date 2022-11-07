@@ -36,6 +36,4 @@ class Thread(var title: String, var description: String): Serializable{
     private fun photoRef() : StorageReference {
         return FirebaseStorage.getInstance().reference.child(photoRefString())
     }
-
-
 }

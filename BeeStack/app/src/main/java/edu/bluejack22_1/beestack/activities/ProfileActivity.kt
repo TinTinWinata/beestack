@@ -11,8 +11,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import com.google.firebase.storage.FirebaseStorage
 import edu.bluejack22_1.beestack.databinding.ActivityProfileBinding
-import edu.bluejack22_1.beestack.model.User
-import java.net.URI
+import edu.bluejack22_1.beestack.model.CurrentUser
 
 
 class ProfileActivity : AppCompatActivity() {
@@ -32,7 +31,7 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun logoutListener(){
         binding.logoutBtn.setOnClickListener{
-            User.logout()
+            CurrentUser.logout()
             val i = Intent(this, MainActivity::class.java)
             startActivity(i)
         }
@@ -74,12 +73,12 @@ class ProfileActivity : AppCompatActivity() {
         progressDialog.setCancelable(false)
         progressDialog.show()
 
-        val ref:String = "images/${User.uid}"
+        val ref:String = "images/${CurrentUser.uid}"
         val storageRef = FirebaseStorage.getInstance().getReference(ref);
         storageRef.putFile(image).addOnSuccessListener {
 
             binding.image.setImageURI(image)
-            User.setBitmap()
+            CurrentUser.setBitmap()
 
             if(progressDialog.isShowing) progressDialog.dismiss()
             Toast.makeText(this, "Succesfully Change Photoprofile", Toast.LENGTH_SHORT).show()
@@ -91,11 +90,11 @@ class ProfileActivity : AppCompatActivity() {
 
 
     private fun setData(){
-        if(User.photoProfileBitmap != null){
-            binding.image.setImageBitmap(User.photoProfileBitmap)
+        if(CurrentUser.photoProfileBitmap != null){
+            binding.image.setImageBitmap(CurrentUser.photoProfileBitmap)
         }
-        binding.name.text = User.username;
-        binding.location.text = User.location;
-        binding.email.text = User.email;
+        binding.name.text = CurrentUser.username;
+        binding.location.text = CurrentUser.location;
+        binding.email.text = CurrentUser.email;
     }
 }

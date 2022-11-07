@@ -1,13 +1,9 @@
 package edu.bluejack22_1.beestack.activities
 
 
-import android.content.ContentValues.TAG
 import android.content.Intent
-import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.Gravity
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -16,18 +12,10 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.navigation.NavigationBarView
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.firebase.firestore.DocumentSnapshot
-import com.google.firebase.firestore.FirebaseFirestoreException
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.StorageReference
 import edu.bluejack22_1.beestack.R
 import edu.bluejack22_1.beestack.databinding.ActivityHomeBinding
 import edu.bluejack22_1.beestack.fragments.*
-import edu.bluejack22_1.beestack.model.User
-import java.io.File
-import kotlin.math.log
+import edu.bluejack22_1.beestack.model.CurrentUser
 
 
 class HomeActivity : AppCompatActivity() {
@@ -61,7 +49,7 @@ class HomeActivity : AppCompatActivity() {
 
 
 //      Change Toolbar name based on user name
-        binding.toolbarName.text = User.username
+        binding.toolbarName.text = CurrentUser.username
 
     }
 
@@ -109,21 +97,21 @@ class HomeActivity : AppCompatActivity() {
         val imageProfile:ImageView = headerView.findViewById(R.id.drawingImage) as ImageView
         val userProfile:TextView = headerView.findViewById(R.id.drawingUsername) as TextView
 
-        userProfile.text = User.username
+        userProfile.text = CurrentUser.username
 
         viewProfile.setOnClickListener{
             navigateProfilePage()
         }
 
-        User.photoProfileListListener.add {
-            if(User.photoProfileBitmap != null) {
-                imageProfile.setImageBitmap(User.photoProfileBitmap)
+        CurrentUser.photoProfileListListener.add {
+            if(CurrentUser.photoProfileBitmap != null) {
+                imageProfile.setImageBitmap(CurrentUser.photoProfileBitmap)
             }
         }
     }
 
     override fun onResume() {
-        if(User.photoProfileBitmap != null){
+        if(CurrentUser.photoProfileBitmap != null){
             setHeaderListener()
         }
         super.onResume()

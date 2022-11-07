@@ -8,7 +8,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.firebase.auth.FirebaseAuth
 import edu.bluejack22_1.beestack.R
 import edu.bluejack22_1.beestack.adapters.ViewPagerAdapter
-import edu.bluejack22_1.beestack.model.User
+import edu.bluejack22_1.beestack.model.CurrentUser
 import me.relex.circleindicator.CircleIndicator3
 
 class MainActivity : AppCompatActivity() {
@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         firebaseAuth = FirebaseAuth.getInstance();
 
         if(firebaseAuth.currentUser != null){
-            User.login(firebaseAuth.currentUser!!.uid)
+            CurrentUser.login(firebaseAuth.currentUser!!.uid)
 
             Log.d("main-activity", "waiting for 5 seconds");
 

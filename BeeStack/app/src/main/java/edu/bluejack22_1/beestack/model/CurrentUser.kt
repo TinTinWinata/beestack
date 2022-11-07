@@ -12,7 +12,7 @@ import com.google.firebase.storage.StorageReference
 import java.io.File
 import kotlin.properties.Delegates
 
-object User {
+object CurrentUser {
 
     var uid:String= ""
     var email:String = "";

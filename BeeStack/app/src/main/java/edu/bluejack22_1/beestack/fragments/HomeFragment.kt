@@ -53,7 +53,9 @@ class HomeFragment : Fragment() {
                     doc.getString("description")?.let {
                         description = it
                     }
-                    threadList.add(Thread(title,description));
+                    val thread:Thread = Thread(title,description)
+                    thread.uid = doc.id;
+                    threadList.add(thread);
                 }
 
                 threadAdapter = ThreadAdapter(threadList)

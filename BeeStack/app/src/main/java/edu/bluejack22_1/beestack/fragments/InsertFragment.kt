@@ -1,10 +1,7 @@
 package edu.bluejack22_1.beestack.fragments
 
-import android.R.attr.data
 import android.app.ProgressDialog
 import android.content.ContentValues
-import android.content.ContentValues.TAG
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -22,7 +19,6 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import edu.bluejack22_1.beestack.databinding.FragmentInsertBinding
 import edu.bluejack22_1.beestack.model.Thread
-import edu.bluejack22_1.beestack.model.User
 
 
 class InsertFragment : Fragment() {
