@@ -11,6 +11,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import edu.bluejack22_1.beestack.activities.HomeActivity
 import edu.bluejack22_1.beestack.databinding.FragmentTeamBinding
+import edu.bluejack22_1.beestack.model.CurrentUser
 
 class TeamFragment : Fragment() {
 
@@ -30,8 +31,7 @@ class TeamFragment : Fragment() {
         binding = FragmentTeamBinding.inflate(inflater, container, false);
 
         // Query For Team , From Users
-        val userId = FirebaseAuth.getInstance().currentUser?.uid.toString();
-        db.collection("users").document(userId)
+        db.collection("users").document(CurrentUser.uid)
             .addSnapshotListener { value, error ->
                 if (value != null) {
                     val teamId = value.data?.get("team_id")?.toString();
