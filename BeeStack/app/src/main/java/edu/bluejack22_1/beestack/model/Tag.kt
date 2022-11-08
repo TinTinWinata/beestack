@@ -2,8 +2,8 @@ package edu.bluejack22_1.beestack.model;
 
 import edu.bluejack22_1.beestack.`interface`.GetHashMap
 
-class Tag(name:String,description:String) : GetHashMap{
-
+class Tag(uid:String?=null, name:String,description:String) : GetHashMap{
+    var uid:String? = uid;
     var name :String = name;
     var description :String = description;
 
