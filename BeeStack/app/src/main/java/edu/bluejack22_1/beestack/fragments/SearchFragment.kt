@@ -40,38 +40,60 @@ class SearchFragment : Fragment() {
 
         _binding = FragmentSearchBinding.inflate(inflater, container, false);
 
-        setSearchListener()
+
         fetchDefaultThread();
+        setSearchListener()
 
         return binding.root;
     }
 
-    private fun setSearchListener(){
-        binding.searchET.addTextChangedListener {
-            fetchThread(it.toString())
-        }
+
+    private fun hideProgressBar(){
+        binding.loadingLayout.visibility = View.GONE
     }
 
+    private fun playProgressBar(){
+        binding.loadingLayout.visibility = View.VISIBLE
+    }
+
+    private fun setSearchListener(){
+
+//        Search Text Listener Bug
+//        binding.searchET.addTextChangedListener {
+//            Log.d("text", "searching ... " + it.toString())
+//            fetchThread(it.toString())
+//        }
+
+        binding.searchBtn.setOnClickListener {
+            fetchThread(binding.searchET.text.toString())
+        }
+
+    }
 
     private fun fetchThread(str: String){
-                threadList.clear();
+            playProgressBar()
+            threadList.clear();
             if(str == "" || str.isEmpty()){
                 fetchDefaultThread()
                 return;
             }
             val db = Firebase.firestore;
-
+            Log.d("test", "Fetching ...")
             db.collection("threads")
                 .orderBy("title")
                 .startAt(str)
                 .endAt(str+"\uf8ff")
-                .addSnapshotListener { value, e ->
-                    if (e != null) {
-                        Log.w(ContentValues.TAG, "Listen failed.", e)
-                        return@addSnapshotListener
+                .get()
+                .addOnSuccessListener{ value ->
+                    if(value.isEmpty){
+                        applyAdapter()
+                        Log.d("test", "Done with no value")
+                    }else{
+                        Log.d("test", "Done with value")
                     }
-                    for (doc in value!!) {
 
+
+                    for (doc in value!!) {
 //                  Get Thread Data
                         val title = doc.data["title"].toString()
                         val description = doc.data["description"].toString()
@@ -80,7 +102,8 @@ class SearchFragment : Fragment() {
 
 //                  Then Get User Data
                         val docRef = db.collection("users").document(user_id);
-                        docRef.addSnapshotListener { doc, error ->
+                        docRef.get()
+                            .addOnSuccessListener { doc ->
                             if (doc != null) {
                                 val username = doc.data!!["username"].toString()
                                 val email = doc.data!!["email"].toString()
@@ -89,22 +112,29 @@ class SearchFragment : Fragment() {
 
 //                           Add add getted data to the thread list (Vector)
                                 threadList.add(Thread(uid=uid, title = title, desc = description, user_id = user_id, user = user));
-                                applyAdapter();
+                                applyAdapter()
                             }
                         }
                     }
+
+                }.addOnFailureListener {
+                    Log.d("test", "Fail!")
                 }
 
     }
 
     private fun fetchDefaultThread(){
+        playProgressBar()
+
         val db = Firebase.firestore;
         db.collection("threads")
-            .addSnapshotListener { value, e ->
-                if (e != null) {
-                    Log.w(ContentValues.TAG, "Listen failed.", e)
-                    return@addSnapshotListener
+            .get().addOnSuccessListener { value ->
+
+                if(value.isEmpty)
+                {
+                    applyAdapter()
                 }
+
                 for (doc in value!!) {
 
 //                  Get Thread Data
@@ -115,7 +145,7 @@ class SearchFragment : Fragment() {
 
 //                  Then Get User Data
                     val docRef = db.collection("users").document(user_id);
-                    docRef.addSnapshotListener { doc, error ->
+                    docRef.get().addOnSuccessListener { doc ->
                         if (doc != null) {
                             val username = doc.data!!["username"].toString()
                             val email = doc.data!!["email"].toString()
@@ -128,11 +158,13 @@ class SearchFragment : Fragment() {
                         }
                     }
                 }
+
             }
     }
 
 
     private fun applyAdapter(){
+        hideProgressBar()
         threadAdapter = ThreadAdapter(threadList)
         binding.apply {
             threadRV.apply {

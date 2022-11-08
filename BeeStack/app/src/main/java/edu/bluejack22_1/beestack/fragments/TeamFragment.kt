@@ -46,6 +46,8 @@ class TeamFragment : Fragment() {
                         });
                     }
 
+
+
                     createTeamBtnOnClick();
                 };
             }
