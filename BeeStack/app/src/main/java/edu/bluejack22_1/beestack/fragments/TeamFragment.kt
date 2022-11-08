@@ -6,13 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentTransaction
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import edu.bluejack22_1.beestack.R
 import edu.bluejack22_1.beestack.activities.HomeActivity
-import edu.bluejack22_1.beestack.databinding.FragmentCreateTeamBinding
 import edu.bluejack22_1.beestack.databinding.FragmentTeamBinding
 
 class TeamFragment : Fragment() {
@@ -40,8 +37,16 @@ class TeamFragment : Fragment() {
                     val teamId = value.data?.get("team_id")?.toString();
 
                     Log.d("TEAM", " + $teamId");
-                    if(teamId != null)
-                        replaceFragment(TeamDetailFragment());
+                    if(teamId != null){
+
+                        replaceFragment(TeamDetailFragment().apply {
+                            arguments = Bundle().apply {
+                                putString("teamId", teamId)
+                            }
+                        });
+                    }
+
+
 
                     createTeamBtnOnClick();
                 };
