@@ -50,7 +50,6 @@ class HomeActivity : AppCompatActivity() {
 
 //      Change Toolbar name based on user name
         binding.toolbarName.text = CurrentUser.username
-
     }
 
     private fun setDrawingNavbar(){

@@ -5,24 +5,64 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.CreateTagActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:elevation="4dp"
+        >
+    <include
+        layout="@layout/toolbar_layout"
+        />
+    </androidx.appcompat.widget.Toolbar>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="20dp"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
         android:orientation="vertical"
         >
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:text="Create Tag"
-        android:textSize="20sp"
-        />
-        <EditText
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tag Name"
+                android:textStyle="bold"
+                android:layout_marginRight="20dp"
+                />
+            <EditText
+                android:id="@+id/nameET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/descriptionET"
+            android:background="@drawable/edit_text_background"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:gravity="left|top"
+            android:padding="10dp"
             android:hint="Describe this tag"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/createBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/blue_200"
+            android:textColor="@color/white"
+            android:text="Create Tag"
             />
     </LinearLayout>
 
