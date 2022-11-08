@@ -9,19 +9,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BeeStack">
-        <activity android:name=".activities.ThreadDetailActivity"></activity>
+        <activity
+            android:name=".activities.CreateTagActivity"
+            android:exported="true">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity android:name=".activities.ThreadDetailActivity" />
         <activity android:name=".activities.ThreadActivity" />
         <activity android:name=".activities.ProfileActivity" />
         <activity android:name=".activities.ForgotPasswordActivity" />
-        <activity android:name=".activities.HomeActivity"
-            android:windowSoftInputMode="adjustPan"
-            />
+        <activity
+            android:name=".activities.HomeActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".activities.MainActivity"
             android:exported="true"
             android:noHistory="true"
-            android:windowSoftInputMode="adjustPan"
-            >
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
