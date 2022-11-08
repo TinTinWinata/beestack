@@ -87,7 +87,6 @@ class HomeActivity : AppCompatActivity() {
                 R.id.tag ->replaceFragment(TagFragment())
                 R.id.notification->replaceFragment(NotificationFragment())
             }
-
 //          Listener needs to Return True
             true
         }
@@ -123,14 +122,13 @@ class HomeActivity : AppCompatActivity() {
     private fun navigateSettingPage(){
         val i = Intent(this, ProfileActivity::class.java);
         startActivity(i)
-
     }
 
     private fun navigateProfilePage(){
         val i = Intent(this, ProfileActivity::class.java);
         startActivity(i)
 
-    }   
+    }
     private fun navigateTeamPage(){
         replaceFragment(TeamFragment())
         closeDrawer()

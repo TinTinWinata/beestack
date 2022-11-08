@@ -3,12 +3,58 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".activities.TagFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
-
+    >
+    <LinearLayout
+        android:id="@+id/headerLayout"
+        app:layout_constraintTop_toTopOf="parent"
+        android:padding="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:orientation="vertical"
+        android:background="@drawable/blue_background"
+        >
+        <TextView
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tags"
+            android:textStyle="bold"
+            android:textSize="30sp"
+            />
+        <TextView
+            android:layout_marginTop="6dp"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tag is a categorizing your thread with other, similar question. Create your own tag"
+            android:textStyle="normal"
+            android:textSize="15sp"
+            />
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:textColor="@color/white"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:background="@drawable/orange_background"
+            android:text="Create Tag"
+            />
+    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/tagRV"
+        app:layout_constraintTop_toBottomOf="@id/headerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
