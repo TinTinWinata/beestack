@@ -69,10 +69,13 @@ class HomeActivity : AppCompatActivity() {
         binding.navView.setNavigationItemSelectedListener {
             when(it.itemId){
                 R.id.drawing_nav_setting-> navigateProfilePage()
+                R.id.drawing_nav_team -> navigateTeamPage()
             }
+
             true
         }
     }
+
 
     private fun setBottomNavbar(){
         binding.btmNav.labelVisibilityMode = NavigationBarView.LABEL_VISIBILITY_LABELED;
@@ -81,7 +84,7 @@ class HomeActivity : AppCompatActivity() {
                 R.id.home -> replaceFragment(HomeFragment())
                 R.id.search -> replaceFragment(SearchFragment())
                 R.id.insert ->  replaceFragment(InsertFragment())
-                R.id.team ->replaceFragment(TeamFragment())
+                R.id.tag ->replaceFragment(TagFragment())
                 R.id.notification->replaceFragment(NotificationFragment())
             }
 
@@ -127,6 +130,10 @@ class HomeActivity : AppCompatActivity() {
         val i = Intent(this, ProfileActivity::class.java);
         startActivity(i)
 
+    }   
+    private fun navigateTeamPage(){
+        replaceFragment(TeamFragment())
+        closeDrawer()
     }
 
     //Function to replace fragments
@@ -136,12 +143,15 @@ class HomeActivity : AppCompatActivity() {
         fragmentTransaction.commit()
     }
 
-    override fun onBackPressed() {
-//      Close drawer if press back
+    private fun closeDrawer(){
         if(binding.drawerLayout.isDrawerOpen(GravityCompat.START)){
             binding.drawerLayout.closeDrawer(GravityCompat.START)
-        }else{
-            super.onBackPressed()
         }
+    }
+
+    override fun onBackPressed() {
+//      Close drawer if press back
+        closeDrawer();
+        super.onBackPressed()
     }
 }

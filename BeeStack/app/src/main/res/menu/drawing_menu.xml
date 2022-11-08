@@ -7,6 +7,11 @@
             android:id="@+id/drawing_nav_setting"
             android:title="Setting"
             />
+        <item
+            android:icon="@drawable/ic_baseline_group_24"
+            android:id="@+id/drawing_nav_team"
+            android:title="Team"
+            />
 
     </group>
 

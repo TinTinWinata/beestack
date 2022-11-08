@@ -38,8 +38,6 @@ class HomeFragment : Fragment() {
 
         return binding.root;
     }
-
-
     private fun fetchThread(){
         val db = Firebase.firestore;
         db.collection("threads")

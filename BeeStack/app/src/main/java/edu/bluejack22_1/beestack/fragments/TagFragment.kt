@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import edu.bluejack22_1.beestack.R
+import edu.bluejack22_1.beestack.databinding.FragmentLoginBinding
+import edu.bluejack22_1.beestack.databinding.FragmentTagBinding
 
 class TagFragment : Fragment() {
 
@@ -13,12 +15,15 @@ class TagFragment : Fragment() {
         super.onCreate(savedInstanceState)
     }
 
+    private var _binding: FragmentTagBinding? = null
+    private val binding get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tag, container, false)
+        _binding = FragmentTagBinding.inflate(inflater, container, false);
+        return binding.root;
     }
 
 }

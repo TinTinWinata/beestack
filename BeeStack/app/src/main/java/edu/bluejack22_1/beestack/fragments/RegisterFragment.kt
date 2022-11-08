@@ -49,7 +49,6 @@ class RegisterFragment : Fragment() {
             }else if(password != confirmPassword) {
                 Toast.makeText(context, "Your password and confirm password is not same", Toast.LENGTH_LONG).show();
             }
-
 //          Validated
             else{
                 firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener{

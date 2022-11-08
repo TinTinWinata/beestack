@@ -13,9 +13,9 @@
         android:id="@+id/insert"
         android:icon="@drawable/ic_baseline_add_circle_24"
         />
-    <item android:title="Team"
-        android:id="@+id/team"
-        android:icon="@drawable/ic_baseline_group_24"
+    <item android:title="Tag"
+        android:id="@+id/tag"
+        android:icon="@drawable/ic_baseline_alternate_email_24"
         />
     <item android:title="Notifications"
         android:id="@+id/notification"
