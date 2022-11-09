@@ -19,11 +19,19 @@ class CreateTagActivity : AppCompatActivity() {
 
         binding = ActivityCreateTagBinding.inflate(layoutInflater)
         setToolbar()
+        validateAndSetName()
         createListener();
         setContentView(binding.root);
     }
 
-    fun createListener(){
+    private fun validateAndSetName(){
+        val name :String?= intent.getStringExtra("name")
+        if(name != null){
+            binding.nameET.setText(name);
+        }
+    }
+
+    private fun createListener(){
         binding.createBtn.setOnClickListener {
             val name:String = binding.nameET.text.toString()
             val description:String = binding.descriptionET.text.toString()

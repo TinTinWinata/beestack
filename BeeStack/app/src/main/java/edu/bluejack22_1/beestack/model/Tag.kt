@@ -1,5 +1,7 @@
 package edu.bluejack22_1.beestack.model;
 
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import edu.bluejack22_1.beestack.`interface`.GetHashMap
 
 class Tag(uid:String?=null, name:String,description:String) : GetHashMap{
@@ -10,6 +12,8 @@ class Tag(uid:String?=null, name:String,description:String) : GetHashMap{
 //    Static Variable
 //    Companion -> create new instance automatic without using keyword new
     companion object{
+        val db = Firebase.firestore
+        val REF = db.collection("tags");
         val TAG_FROM_DETAIL = 1
         val TAG_FROM_HOME = 0;
     }
