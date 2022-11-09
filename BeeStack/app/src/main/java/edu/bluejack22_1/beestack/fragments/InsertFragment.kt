@@ -93,6 +93,7 @@ class InsertFragment : Fragment() {
                 binding.newImage.setImageURI(imageUri);
             }
         }
+    
     override fun onDestroy() {
         super.onDestroy()
         _binding = null;

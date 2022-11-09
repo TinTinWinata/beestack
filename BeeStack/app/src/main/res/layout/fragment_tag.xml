@@ -51,12 +51,12 @@
             android:text="Create Tag"
             />
     </LinearLayout>
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_marginTop="20dp"
-        android:id="@+id/tagRV"
-        app:layout_constraintTop_toBottomOf="@id/headerLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/tagRV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="200dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/headerLayout" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
