@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -59,7 +60,6 @@ class TagFragment : Fragment() {
                     return@addSnapshotListener
                 }
                 for (doc in value!!) {
-                    Log.d("test", "muncul");
 //                  Get Thread Data
                     val name = doc.data["name"].toString()
                     val description = doc.data["description"].toString()
@@ -75,8 +75,9 @@ class TagFragment : Fragment() {
         tagAdapter = TagAdapter(tagList)
         binding.apply {
             tagRV.apply {
-                layoutManager = LinearLayoutManager(context)
+                layoutManager = GridLayoutManager(context, 2);
                 adapter = tagAdapter
+                setHasFixedSize(true)
             }
         }
     }
