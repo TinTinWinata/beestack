@@ -12,6 +12,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.navigation.NavigationBarView
+import com.google.firebase.auth.FirebaseAuth
 import edu.bluejack22_1.beestack.R
 import edu.bluejack22_1.beestack.databinding.ActivityHomeBinding
 import edu.bluejack22_1.beestack.fragments.*
@@ -24,8 +25,9 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityHomeBinding.inflate(layoutInflater)
+
+        validateUserExists()
 
         setToolbar()
         setDrawingNavbar()
@@ -150,5 +152,14 @@ class HomeActivity : AppCompatActivity() {
 //      Close drawer if press back
         closeDrawer();
         super.onBackPressed()
+    }
+
+    private fun validateUserExists(){
+        val firebase = FirebaseAuth.getInstance()
+        if(firebase.currentUser == null){
+            val i = Intent(this, MainActivity::class.java);
+            finish();
+            startActivity(i)
+        }
     }
 }

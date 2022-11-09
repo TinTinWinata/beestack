@@ -32,6 +32,7 @@ object CurrentUser {
         return uid.isEmpty()
     }
     private fun photoProfileRefString():String {
+        Log.d("user-activity", "images/${this.uid}")
         return "images/${this.uid}"
     }
 
@@ -44,9 +45,10 @@ object CurrentUser {
         val localFile = File.createTempFile(uid, "jpg");
         Log.d("user-activity", "setting bitmap...")
         ref.getFile(localFile).addOnSuccessListener {
-
             this.photoProfileBitmap = BitmapFactory.decodeFile(localFile.absolutePath)
             Log.d("user-activity", this.photoProfileBitmap.toString())
+        }.addOnFailureListener{
+            Log.d("user-activity", it.message.toString())
         }
     }
 
@@ -63,7 +65,7 @@ object CurrentUser {
             }
             if(snapshot != null && snapshot.exists()){
 //              Succesfully snapshot
-                this.uid = snapshot.data!!.get("uid").toString()
+                this.uid = uid;
                 this.username = snapshot.data!!.get("username").toString()
                 this.email = snapshot.data!!.get("email").toString()
                 this.location = snapshot.data!!.get("location").toString()
@@ -71,7 +73,7 @@ object CurrentUser {
 //              Set bitmap for photo profile always when login
                 this.setBitmap()
             }else if(snapshot != null && !snapshot.exists()){
-//                Create new default user
+//                If no exists Create new default user
                 createDocBasedOnFirebase(uid)
             }
         }
@@ -89,7 +91,14 @@ object CurrentUser {
 
     private fun createDocBasedOnFirebase(uid: String){
         val firebaseAuth = FirebaseAuth.getInstance()
-        createNewDoc(firebaseAuth.currentUser!!.displayName.toString(), "", uid, firebaseAuth.currentUser!!.email.toString())
+
+        if(firebaseAuth.currentUser!!.displayName != null){
+//            First time user login with google will create with their own display name
+            createNewDoc(firebaseAuth.currentUser!!.displayName.toString(), location, uid, firebaseAuth.currentUser!!.email.toString())
+        }else{
+//            Register with register_fragment will input username to this current user
+            createNewDoc(this.username, location, uid, firebaseAuth.currentUser!!.email.toString())
+        }
     }
 
     private fun makeUserDoc(){

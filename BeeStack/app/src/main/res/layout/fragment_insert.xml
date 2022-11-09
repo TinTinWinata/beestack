@@ -9,8 +9,6 @@
     android:paddingLeft="20dp"
     android:paddingRight="20dp">
 
-    <!-- TODO: Update blank fragment layout -->
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:paddingTop="20dp"
         android:layout_width="match_parent"
@@ -68,9 +66,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/layout_1" />
-
-
-
         </ScrollView>
 
         <ImageView
@@ -96,6 +91,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:layout_marginBottom="5dp"
                 >
                 <ImageView
                     android:layout_width="wrap_content"
@@ -103,6 +99,7 @@
                     android:src="@drawable/ic_baseline_fmd_good_24"
                     />
                 <EditText
+                    android:id="@+id/tag"
                     android:layout_marginLeft="3dp"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -120,7 +117,5 @@
                 android:text="Create Thread"
                 />
         </LinearLayout>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </FrameLayout>

@@ -33,6 +33,7 @@ class HomeFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
 
+
         fetchThread();
         binding = FragmentHomeBinding.inflate(layoutInflater)
 
@@ -56,12 +57,14 @@ class HomeFragment : Fragment() {
 
 //                  Then Get User Data
                     val docRef = db.collection("users").document(user_id);
-                    docRef.addSnapshotListener { doc, error ->
-                        if (doc != null) {
-                            val username = doc.data!!["username"].toString()
-                            val email = doc.data!!["email"].toString()
-                            val location = doc.data!!["location"].toString()
-                            val user:User =User(doc.id, username, email, location)
+                    docRef.get()
+                            .addOnSuccessListener { userDoc ->
+
+                        if (userDoc != null) {
+                            val username = userDoc.data!!["username"].toString()
+                            val email = userDoc.data!!["email"].toString()
+                            val location = userDoc.data!!["location"].toString()
+                            val user:User =User(userDoc.id, username, email, location)
 
 //                           Add add getted data to the thread list (Vector)
                             threadList.add(Thread(uid=uid, title = title, desc = description, user_id = user_id, user = user));
