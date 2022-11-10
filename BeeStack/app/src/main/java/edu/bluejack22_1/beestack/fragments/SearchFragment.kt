@@ -1,6 +1,5 @@
 package edu.bluejack22_1.beestack.fragments
 
-import android.content.ContentValues
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -8,14 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import edu.bluejack22_1.beestack.R
 
 import ThreadAdapter
-import androidx.core.widget.addTextChangedListener
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import edu.bluejack22_1.beestack.databinding.FragmentHomeBinding
-import edu.bluejack22_1.beestack.databinding.FragmentLoginBinding
 import edu.bluejack22_1.beestack.databinding.FragmentSearchBinding
 import edu.bluejack22_1.beestack.model.Thread
 import edu.bluejack22_1.beestack.model.User
@@ -111,7 +106,7 @@ class SearchFragment : Fragment() {
                                 val user:User =User(doc.id, username, email, location)
 
 //                           Add add getted data to the thread list (Vector)
-                                threadList.add(Thread(uid=uid, title = title, desc = description, user_id = user_id, user = user));
+                                threadList.add(Thread(uid =uid, title = title, desc = description, user_id = user_id, user = user));
                                 applyAdapter()
                             }
                         }
@@ -153,7 +148,7 @@ class SearchFragment : Fragment() {
                             val user:User =User(doc.id, username, email, location)
 
 //                           Add add getted data to the thread list (Vector)
-                            threadList.add(Thread(uid=uid, title = title, desc = description, user_id = user_id, user = user));
+                            threadList.add(Thread(uid =uid, title = title, desc = description, user_id = user_id, user = user));
                             applyAdapter();
                         }
                     }

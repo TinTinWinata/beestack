@@ -2,12 +2,10 @@ package edu.bluejack22_1.beestack.fragments
 
 import android.app.AlertDialog
 import android.app.ProgressDialog
-import android.content.ContentValues
 import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +17,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.ktx.R
 import com.google.firebase.storage.FirebaseStorage
 import edu.bluejack22_1.beestack.activities.CreateTagActivity
 import edu.bluejack22_1.beestack.activities.HomeActivity
@@ -115,7 +112,7 @@ class InsertFragment : Fragment() {
 
     private fun createThread(title: String, description: String, user_id:String, tag :Tag?){
         db.collection("threads")
-            .add(Thread(title=title, desc = description, user_id = user_id, tag = tag).getHashMap())
+            .add(Thread(title =title, desc = description, user_id = user_id, tag = tag).getHashMap())
             .addOnSuccessListener { doc ->
                 if (imageUri != null){
                     uploadImage(imageUri!!, doc.id);

@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import edu.bluejack22_1.beestack.R
 
 import ThreadAdapter
 import com.google.firebase.firestore.ktx.firestore
@@ -67,7 +66,7 @@ class HomeFragment : Fragment() {
                             val user:User =User(userDoc.id, username, email, location)
 
 //                           Add add getted data to the thread list (Vector)
-                            threadList.add(Thread(uid=uid, title = title, desc = description, user_id = user_id, user = user));
+                            threadList.add(Thread(uid =uid, title = title, desc = description, user_id = user_id, user = user));
                             applyAdapter();
                         }
                     }
