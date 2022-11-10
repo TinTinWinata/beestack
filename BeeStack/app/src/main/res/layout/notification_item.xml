@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:paddingVertical="10dp"
+        android:paddingHorizontal="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <View
+            android:layout_width="5dp"
+            android:layout_height="50dp"
+            android:background="@drawable/notification_color_type"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingVertical="5dp"
+            android:paddingHorizontal="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="TinTin has sent you a team invitation !"/>
+
+            <TextView
+                android:id="@+id/tv_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1 hours ago"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <View
+        android:id="@+id/v_type_color"
+        android:backgroundTint="@color/gray_400"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#F9F9F9"/>
+
+
+</LinearLayout>
+

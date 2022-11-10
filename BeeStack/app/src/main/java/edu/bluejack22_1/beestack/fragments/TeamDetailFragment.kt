@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import edu.bluejack22_1.beestack.R
+import edu.bluejack22_1.beestack.activities.HomeActivity
 import edu.bluejack22_1.beestack.databinding.FragmentTeamBinding
 import edu.bluejack22_1.beestack.databinding.FragmentTeamDetailBinding
 
@@ -46,8 +47,10 @@ class TeamDetailFragment() : Fragment() {
                     binding.apply {
                         tvName.text = team_name
                         tvDesc.text = team_description
+                        inviteBtn.setOnClickListener {
+                            (activity as HomeActivity).replaceFragment(InviteTeamFragment())
+                        }
                     }
-
                 };
             }
 

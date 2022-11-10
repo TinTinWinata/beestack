@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:paddingVertical="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_baseline_person_24"/>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/const_layout_1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingVertical="5dp"
+            android:paddingHorizontal="20dp"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:textSize="15sp"
+                android:id="@+id/tv_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TinTin "
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:textSize="12sp"
+                android:id="@+id/inviteBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="Invite"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+
+    <View
+        android:id="@+id/v_type_color"
+        android:backgroundTint="@color/gray_400"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#F9F9F9"/>
+
+
+</LinearLayout>
+

@@ -3,12 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.NotificationFragment">
+    tools:context=".fragments.NotificationFragment"
+    android:padding="20dp">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_notification"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Notification Fragment" />
+        android:layout_height="match_parent"/>
 
 </FrameLayout>
