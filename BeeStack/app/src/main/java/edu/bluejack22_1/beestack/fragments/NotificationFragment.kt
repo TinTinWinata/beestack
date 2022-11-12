@@ -2,6 +2,7 @@ package edu.bluejack22_1.beestack.fragments
 
 import NotificationAdapter
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -47,19 +48,20 @@ class NotificationFragment : Fragment() {
             .addSnapshotListener { value, error ->
                 if (value != null) {
                     for (doc in value) {
-
+                        Log.d("TEST", "Masuk")
                         //  Get Notification Data
                         val from = doc.data["from"]
                         val to = doc.data["to"]
                         val type = doc.data["type"].toString()
                         val message = doc.data["message"].toString()
+                        val photoProfile = doc.data["message"].toString()
 
                         notificationList.add(
                             Notification(
-                                User.fromHashMap(from as HashMap<String, String>),
+                                User.fromHashMapNoPhoto(from as HashMap<String, String>),
                                 type,
                                 message,
-                                User.fromHashMap(to as HashMap<String, String>)
+                                User.fromHashMapNoPhoto(to as HashMap<String, String>)
                             )
                         );
 
@@ -72,7 +74,7 @@ class NotificationFragment : Fragment() {
     }
 
     private fun applyAdapter(){
-        notifAdapter = NotificationAdapter(notificationList)
+        notifAdapter = NotificationAdapter(activity,notificationList)
         binding.apply {
             rvNotification.apply{
                 layoutManager = LinearLayoutManager(context)
