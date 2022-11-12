@@ -30,15 +30,16 @@ class TeamFragment : Fragment() {
         // View Binding
         binding = FragmentTeamBinding.inflate(inflater, container, false);
 
-                if (CurrentUser.teamId.isNotEmpty()) {
+        if (CurrentUser.teamId.isNotEmpty()) {
 //                  Navigate to detail team fragment
-                    replaceFragment(TeamDetailFragment().apply {
-                        arguments = Bundle().apply {
-                            putString("teamId", teamId)
-                        }
-                    });
-                    createTeamBtnOnClick();
-                };
+            replaceFragment(TeamDetailFragment().apply {
+                arguments = Bundle().apply {
+                    putString("teamId", CurrentUser.teamId)
+                }
+            });
+        }else{
+            createTeamBtnOnClick();
+        }
 
         return binding.root;
     }

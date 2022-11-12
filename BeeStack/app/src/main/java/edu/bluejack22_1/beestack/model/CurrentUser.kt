@@ -71,7 +71,7 @@ object CurrentUser {
                 this.username = snapshot.data!!.get("username").toString()
                 this.email = snapshot.data!!.get("email").toString()
                 this.location = snapshot.data!!.get("location").toString()
-                this.teamId = snapshot.data!!.get("teamId").toString();
+                this.teamId = snapshot.data!!.get("team_id").toString();
 
 //              Set bitmap for photo profile always when login
                 this.setBitmap()
@@ -89,7 +89,7 @@ object CurrentUser {
             "email" to this.email,
             "username" to this.username,
             "location" to this.location,
-            "teamId" to this.teamId,
+            "team_id" to this.teamId,
         )
     }
 
