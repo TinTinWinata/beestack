@@ -7,11 +7,11 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import java.io.Serializable
 
-class User(var uid:String, var username: String, var email: String, var location:String, var photoProfile: String): Serializable {
+class User(var uid:String, var username: String, var email: String, var location:String, var photoProfile: String? = null): Serializable {
 
     companion object{
-        fun fromHashMap(hashMap: HashMap<String, String>): User {
-            return User(hashMap["uid"]!!, hashMap["username"]!!, hashMap["email"]!!, hashMap["location"]!!, hashMap["photo_profile"]!!);
+        fun fromHashMapNoPhoto(hashMap: HashMap<String, String>): User {
+            return User(hashMap["uid"]!!, hashMap["username"]!!, hashMap["email"]!!, hashMap["location"]!!);
         }
     }
 

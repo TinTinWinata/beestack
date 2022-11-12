@@ -1,10 +1,12 @@
+import android.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import edu.bluejack22_1.beestack.databinding.NotificationItemBinding
 import edu.bluejack22_1.beestack.model.Notification
 
-class NotificationAdapter (val items : MutableList<Notification>)
+class NotificationAdapter (val act: FragmentActivity?, val items : MutableList<Notification>)
     : RecyclerView.Adapter<NotificationAdapter.ViewHolder>(){
     private lateinit var binding: NotificationItemBinding
 
@@ -27,7 +29,9 @@ class NotificationAdapter (val items : MutableList<Notification>)
         fun bind(item: Notification){
             binding.apply {
                 tvTitle.text = item.from.username + " has sent you a invitation"
-
+                root.setOnClickListener {
+                    val builder = AlertDialog.Builder(act)
+                }
             }
         }
     }
