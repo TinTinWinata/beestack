@@ -11,10 +11,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import edu.bluejack22_1.beestack.R
-import edu.bluejack22_1.beestack.databinding.FragmentHomeBinding
 import edu.bluejack22_1.beestack.databinding.FragmentInviteTeamBinding
-import edu.bluejack22_1.beestack.model.Thread
 import edu.bluejack22_1.beestack.model.User
 
 class InviteTeamFragment : Fragment() {
@@ -68,7 +65,7 @@ class InviteTeamFragment : Fragment() {
     }
 
     private fun applyAdapter(){
-        inviteAdapter = TeamInviteAdapter(userList)
+        inviteAdapter = TeamInviteAdapter(activity, userList)
         binding.apply {
             rvInvite.apply {
                 layoutManager = LinearLayoutManager(context)

@@ -1,7 +1,7 @@
 package edu.bluejack22_1.beestack.model
 import java.io.Serializable
 
-class Notification(val from : User, val type: String, val message: String, val to : User)  {
+class Notification(val from: User, val type: String, val message: String, val to: User)  {
 
     fun getHashMap(): HashMap<String, Serializable> {
         return hashMapOf(
