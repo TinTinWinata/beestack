@@ -52,6 +52,24 @@
         android:layout_height="wrap_content"
         android:text="Tell us about your team description"
         android:textSize="10sp"/>
+    <EditText
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/etMotto"
+        android:layout_width="300sp"
+        android:layout_height="wrap_content"
+        android:hint="Team Motto"
+        android:autofillHints=""
+        android:inputType="text" />
+    <TextView
+        android:layout_marginStart="5dp"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/gray_400"
+        android:layout_width="300sp"
+        android:layout_height="wrap_content"
+        android:text="Tell us about your team motto"
+        android:textSize="10sp"/>
+
 
     <Button
         android:background="@color/blue_500"

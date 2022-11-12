@@ -7,15 +7,15 @@
     tools:context=".fragments.TeamDetailFragment"
     android:padding="40dp"
     android:orientation="vertical">
-
     <TextView
         android:id="@+id/tv_name"
         android:layout_gravity="center_horizontal"
         android:textColor="@color/black"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Team Name"
         android:textStyle="bold"
+        android:layout_marginBottom="10dp"
         android:textSize="18dp"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -49,6 +49,15 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
+        android:id="@+id/tv_motto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        />
+
+
+    <TextView
 
         android:id="@+id/tv_participants"
         android:layout_width="200dp"
@@ -65,15 +74,18 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        android:layout_marginBottom="20dp"
+        android:layout_height="wrap_content"
+        >
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
+            android:layout_height="match_parent"/>
     </ScrollView>
-
-
-
-
+    <Button
+        android:id="@+id/leaveBtn"
+        android:background="@color/orange_200"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Leave Team"
+        />
 </LinearLayout>

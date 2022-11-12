@@ -1,12 +1,13 @@
 package edu.bluejack22_1.beestack.model
 
-class Team(var name: String, var description: String ) {
+class Team(var id: String = "", var name: String, var description: String, var motto: String ) {
 
     fun getHashMap() : HashMap<String, String>{
 //        Get object map
         return hashMapOf(
             "name" to this.name,
             "description" to this.description,
+            "motto" to this.motto,
         )
     }
 }

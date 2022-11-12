@@ -3,6 +3,7 @@ package edu.bluejack22_1.beestack.model
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.Log
+import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.ktx.firestore
@@ -18,6 +19,7 @@ object CurrentUser {
     var email:String = "";
     var username:String = "";
     var location:String = "";
+    var teamId:String = "";
 
     var photoProfileListListener = ArrayList<() -> Unit>()
 
@@ -32,7 +34,7 @@ object CurrentUser {
         return uid.isEmpty()
     }
     private fun photoProfileRefString():String {
-        Log.d("user-activity", "images/${this.uid}")
+//        Log.d("user-activity", "images/${this.uid}")
         return "images/${this.uid}"
     }
 
@@ -69,6 +71,7 @@ object CurrentUser {
                 this.username = snapshot.data!!.get("username").toString()
                 this.email = snapshot.data!!.get("email").toString()
                 this.location = snapshot.data!!.get("location").toString()
+                this.teamId = snapshot.data!!.get("teamId").toString();
 
 //              Set bitmap for photo profile always when login
                 this.setBitmap()
@@ -86,7 +89,12 @@ object CurrentUser {
             "email" to this.email,
             "username" to this.username,
             "location" to this.location,
+            "teamId" to this.teamId,
         )
+    }
+
+    public fun update() : Task<Void>{
+        return getUserRef().set(getHashMap());
     }
 
     private fun createDocBasedOnFirebase(uid: String){

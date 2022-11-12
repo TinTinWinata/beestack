@@ -12,6 +12,8 @@ import edu.bluejack22_1.beestack.R
 import edu.bluejack22_1.beestack.activities.HomeActivity
 import edu.bluejack22_1.beestack.databinding.FragmentTeamBinding
 import edu.bluejack22_1.beestack.databinding.FragmentTeamDetailBinding
+import edu.bluejack22_1.beestack.model.CurrentUser
+import edu.bluejack22_1.beestack.view.Home
 
 class TeamDetailFragment() : Fragment() {
 
@@ -41,14 +43,22 @@ class TeamDetailFragment() : Fragment() {
         db.collection("teams").document(teamId)
             .addSnapshotListener { value, error ->
                 if (value != null) {
+                    val team_motto = value.data?.get("motto")?.toString();
                     val team_name = value.data?.get("name")?.toString();
                     val team_description = value.data?.get("description")?.toString();
 
                     binding.apply {
                         tvName.text = team_name
                         tvDesc.text = team_description
+                        tvMotto.text = team_motto
                         inviteBtn.setOnClickListener {
                             (activity as HomeActivity).replaceFragment(InviteTeamFragment())
+                        }
+                        leaveBtn.setOnClickListener{
+                            CurrentUser.teamId = "";
+                            CurrentUser.update().addOnSuccessListener {
+                                Home.navigate(context);
+                            }
                         }
                     }
                 };

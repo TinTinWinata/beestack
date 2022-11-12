@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -38,10 +39,14 @@ class CreateTeamFragment : Fragment() {
         binding.createTeamBtn.setOnClickListener {
             val name = binding.etName.text.toString();
             val description = binding.etDesc.text.toString();
+            val motto = binding.etMotto.text.toString();
 
-            if(name != "" && description != "")
+            if(name != "" && description != "" && motto != "")
+            {
+
+
                 db.collection("teams")
-                    .add(Team(name, description).getHashMap())
+                    .add(Team(name = name, description = description, motto = motto).getHashMap())
                     .addOnSuccessListener { doc ->
                         val teamId = doc.id;
 
@@ -54,6 +59,9 @@ class CreateTeamFragment : Fragment() {
                                 });
                             }
                     }
+            }else{
+                Toast.makeText(context, "Please validate all inputs!", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 

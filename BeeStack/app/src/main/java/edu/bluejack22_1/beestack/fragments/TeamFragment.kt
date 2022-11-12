@@ -35,8 +35,6 @@ class TeamFragment : Fragment() {
             .addSnapshotListener { value, error ->
                 if (value != null) {
                     val teamId = value.data?.get("team_id")?.toString();
-
-                    Log.d("TEAM", " + $teamId");
                     if(teamId != null){
 
                         replaceFragment(TeamDetailFragment().apply {
