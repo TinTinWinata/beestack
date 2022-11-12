@@ -12,6 +12,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import com.google.firebase.storage.FirebaseStorage
 import edu.bluejack22_1.beestack.databinding.ActivityProfileBinding
 import edu.bluejack22_1.beestack.model.CurrentUser
+import edu.bluejack22_1.beestack.view.ChangePassword
 
 
 class ProfileActivity : AppCompatActivity() {
@@ -24,6 +25,7 @@ class ProfileActivity : AppCompatActivity() {
         setData()
         changePhotoProfileListener()
         logoutListener()
+        changePasswordListener();
 
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -77,7 +79,16 @@ class ProfileActivity : AppCompatActivity() {
         val storageRef = FirebaseStorage.getInstance().getReference(ref);
         storageRef.putFile(image).addOnSuccessListener {
 
+
+//          Updating the photo profile for globe
+            it.storage.downloadUrl.addOnSuccessListener {
+                CurrentUser.photoProfileURL = it.toString();
+                CurrentUser.update();
+            }
+
             binding.image.setImageURI(image)
+
+//          Set User bitmap for personal listener
             CurrentUser.setBitmap()
 
             if(progressDialog.isShowing) progressDialog.dismiss()
@@ -85,6 +96,12 @@ class ProfileActivity : AppCompatActivity() {
         }.addOnFailureListener{
             if(progressDialog.isShowing) progressDialog.dismiss()
             Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private fun changePasswordListener(){
+        binding.changePasswordBtn.setOnClickListener {
+            ChangePassword.navigate(this);
         }
     }
 

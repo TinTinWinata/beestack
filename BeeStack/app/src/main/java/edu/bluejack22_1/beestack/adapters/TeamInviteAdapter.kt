@@ -37,7 +37,7 @@ class TeamInviteAdapter(val ctx: FragmentActivity?, val items: MutableList<User>
                 inviteBtn.setOnClickListener {
                     addNotification(Notification(
                         from = User(
-                              CurrentUser.uid, CurrentUser.username, CurrentUser.email, CurrentUser.location),
+                              CurrentUser.uid, CurrentUser.username, CurrentUser.email, CurrentUser.location, CurrentUser.photoProfileURL),
                         to = item,
                         type = "team-invite",
                         message = CurrentUser.username.toString() + " has invited you to a team !"

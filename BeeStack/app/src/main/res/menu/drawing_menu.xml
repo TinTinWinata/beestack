@@ -4,8 +4,8 @@
     <group android:checkableBehavior="single">
         <item
             android:icon="@drawable/ic_baseline_settings_24"
-            android:id="@+id/drawing_nav_setting"
-            android:title="Setting"
+            android:id="@+id/drawing_nav_my_thread"
+            android:title="My Thread"
             />
         <item
             android:icon="@drawable/ic_baseline_group_24"

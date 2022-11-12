@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import edu.bluejack22_1.beestack.activities.ThreadDetailActivity
 import edu.bluejack22_1.beestack.databinding.ThreadItemBinding
 import edu.bluejack22_1.beestack.model.Thread
@@ -35,6 +36,9 @@ class ThreadAdapter (val items : MutableList<Thread>)
                 itemView.context.startActivity(i);
             }
             binding.apply {
+                if(item.user?.photoProfile!!.isNotEmpty()){
+                    Picasso.get().load(item.user!!.photoProfile).into(image);
+                }
                 title.text= item.title
                 description.text= item.description
                 credential.text = item.user?.username

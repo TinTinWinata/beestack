@@ -62,7 +62,8 @@ class ThreadDetailActivity : AppCompatActivity() {
                             val email:String = doc.data!!.get("email").toString();
                             val location:String = doc.data!!.get("location").toString();
                             val username = doc.data!!.get("username").toString();
-                            val user = User(doc.id, username, email, location);
+                            val url = doc.data!!.get("photo_profile_url").toString();
+                            val user = User(doc.id, username, email, location, url);
                             val answer = Answer(user, value)
                             answerList.add(answer);
                             applyAdapter()

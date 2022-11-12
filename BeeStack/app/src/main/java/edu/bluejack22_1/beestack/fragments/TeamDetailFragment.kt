@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.squareup.picasso.Picasso
 import edu.bluejack22_1.beestack.R
 import edu.bluejack22_1.beestack.activities.HomeActivity
 import edu.bluejack22_1.beestack.databinding.FragmentHomeBinding
@@ -42,6 +43,7 @@ class TeamDetailFragment() : Fragment() {
         binding = FragmentTeamDetailBinding.inflate(inflater, container, false);
 
         val teamId = arguments?.getString("teamId")
+
         if(teamId != null){
             findTeam(teamId);
             fetchUser(teamId);
@@ -50,8 +52,15 @@ class TeamDetailFragment() : Fragment() {
         return binding.root;
     }
 
+    private fun changeImage(url : String){
+        if(url.isNotEmpty()){
+              Picasso.get().load(url).into(binding.image);
+        }
+    }
+
     private fun fetchUser(teamId: String){
         val db = Firebase.firestore;
+        userList.clear();
         participant = 0;
         db.collection("users").whereEqualTo("team_id", teamId).get()
             .addOnSuccessListener {
@@ -61,7 +70,8 @@ class TeamDetailFragment() : Fragment() {
                         val username = doc.getString("username").toString();
                         val location = doc.getString("location").toString();
                         val email = doc.getString("email").toString();
-                        userList.add(User(uid = doc.id, username=username, location = location, email = email));
+                        val url = doc.getString("photo_profile_url").toString();
+                        userList.add(User(uid = doc.id, username=username, location = location, email = email, photoProfile = url));
                         applyAdapter()
                     }
             }
@@ -90,7 +100,9 @@ class TeamDetailFragment() : Fragment() {
                     val team_motto = value.data?.get("motto")?.toString();
                     val team_name = value.data?.get("name")?.toString();
                     val team_description = value.data?.get("description")?.toString();
-
+                    val team_photo_url = value.data?.get("photo_url").toString();
+                    Log.d("picasso", team_photo_url);
+                    changeImage(team_photo_url);
                     binding.apply {
                         tvName.text = team_name
                         tvDesc.text = team_description

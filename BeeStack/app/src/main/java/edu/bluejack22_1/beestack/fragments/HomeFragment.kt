@@ -63,7 +63,8 @@ class HomeFragment : Fragment() {
                             val username = userDoc.data!!["username"].toString()
                             val email = userDoc.data!!["email"].toString()
                             val location = userDoc.data!!["location"].toString()
-                            val user:User =User(userDoc.id, username, email, location)
+                            val photoProfile = userDoc.data!!["photo_profile_url"].toString();
+                            val user:User =User(userDoc.id, username, email, location, photoProfile)
 
 //                           Add add getted data to the thread list (Vector)
                             threadList.add(Thread(uid =uid, title = title, desc = description, user_id = user_id, user = user));

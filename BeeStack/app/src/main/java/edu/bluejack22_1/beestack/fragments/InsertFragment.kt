@@ -51,7 +51,7 @@ class InsertFragment : Fragment() {
 
     private fun createBtnOnClick(){
         binding.createBtn.setOnClickListener {
-            val title = binding.title.text.toString();
+            val title = binding.title.text.toString()
             val description = binding.description.text.toString();
             val tag = binding.tag.text.toString()
             val user_id = FirebaseAuth.getInstance().currentUser?.uid.toString();
@@ -72,8 +72,8 @@ class InsertFragment : Fragment() {
                         val desc = doc.get("description").toString()
                         val name = doc.get("name").toString()
                         val tag: Tag = Tag(uid=doc.id, name=name, description=desc)
-                        // desc = for tag || description = thread
 
+                        // desc = for tag || description = thread
                         createThread(title, description, user_id, tag);
                     }
 

@@ -44,6 +44,8 @@ class TeamFragment : Fragment() {
         return binding.root;
     }
 
+
+
     fun createTeamBtnOnClick(){
         binding.createTeamBtn.setOnClickListener {
             replaceFragment(CreateTeamFragment());

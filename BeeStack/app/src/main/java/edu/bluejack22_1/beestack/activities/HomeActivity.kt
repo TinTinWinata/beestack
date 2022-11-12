@@ -17,6 +17,7 @@ import edu.bluejack22_1.beestack.R
 import edu.bluejack22_1.beestack.databinding.ActivityHomeBinding
 import edu.bluejack22_1.beestack.fragments.*
 import edu.bluejack22_1.beestack.model.CurrentUser
+import edu.bluejack22_1.beestack.view.MyThread
 
 
 class HomeActivity : AppCompatActivity() {
@@ -69,7 +70,7 @@ class HomeActivity : AppCompatActivity() {
     private fun setNavigationViewListener(){
         binding.navView.setNavigationItemSelectedListener {
             when(it.itemId){
-                R.id.drawing_nav_setting-> navigateProfilePage()
+                R.id.drawing_nav_my_thread-> MyThread.navigate(this);
                 R.id.drawing_nav_team -> navigateTeamPage()
             }
 
