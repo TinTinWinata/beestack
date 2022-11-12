@@ -74,7 +74,7 @@ class NotificationFragment : Fragment() {
     }
 
     private fun applyAdapter(){
-        notifAdapter = NotificationAdapter(activity,notificationList)
+        notifAdapter = NotificationAdapter(requireActivity(),notificationList)
         binding.apply {
             rvNotification.apply{
                 layoutManager = LinearLayoutManager(context)
