@@ -1,7 +1,7 @@
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -11,7 +11,7 @@ import edu.bluejack22_1.beestack.model.Notification
 import edu.bluejack22_1.beestack.model.User
 
 
-class TeamInviteAdapter (val items : MutableList<User>)
+class TeamInviteAdapter(val ctx: FragmentActivity?, val items: MutableList<User>)
     : RecyclerView.Adapter<TeamInviteAdapter.ViewHolder>(){
     private lateinit var binding: TeamInviteItemBinding
 
@@ -30,13 +30,12 @@ class TeamInviteAdapter (val items : MutableList<User>)
     //View Holder
     inner class ViewHolder(itemView: TeamInviteItemBinding) : RecyclerView.ViewHolder(itemView.root){
 
-
         fun bind(item: User){
 
             binding.apply {
                 tvUsername.text = item.username
                 inviteBtn.setOnClickListener {
-                    addNotification(itemView, Notification(
+                    addNotification(Notification(
                         from = User(
                               CurrentUser.uid, CurrentUser.username, CurrentUser.email, CurrentUser.location),
                         to = item,
@@ -48,17 +47,16 @@ class TeamInviteAdapter (val items : MutableList<User>)
         }
     }
 
-    fun addNotification(itemView: View, notif: Notification){
+    fun addNotification(notif: Notification){
         var db = Firebase.firestore;
         db.collection("notifications")
             .add(notif.getHashMap())
             .addOnSuccessListener { doc ->
                 val toast = Toast.makeText(
-                    itemView.context,
+                    ctx,
                     "User Invited !",
                     Toast.LENGTH_SHORT
                 )
-                toast.setMargin(50f, 50f)
                 toast.show()
             }
     }

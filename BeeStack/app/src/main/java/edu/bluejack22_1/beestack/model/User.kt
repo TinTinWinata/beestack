@@ -2,12 +2,13 @@ package edu.bluejack22_1.beestack.model
 
 import java.io.Serializable
 
-class User(uid:String, username: String, email: String, location:String): Serializable {
+class User(var uid:String, var username: String, var email: String, var location:String): Serializable {
 
-    var uid:String= uid;
-    var email:String = email;
-    var username:String = username;
-    var location:String = location;
+    companion object{
+        fun fromHashMap(hashMap: HashMap<String, String>): User {
 
+            return User(hashMap["uid"]!!, hashMap["username"]!!, hashMap["email"]!!, hashMap["location"]!!);
+        }
+    }
 
 }
