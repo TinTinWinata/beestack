@@ -18,6 +18,7 @@ import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
+import com.jakewharton.threetenabp.AndroidThreeTen
 import edu.bluejack22_1.beestack.activities.CreateTagActivity
 import edu.bluejack22_1.beestack.activities.HomeActivity
 import edu.bluejack22_1.beestack.databinding.FragmentInsertBinding
@@ -111,8 +112,12 @@ class InsertFragment : Fragment() {
     }
 
     private fun createThread(title: String, description: String, user_id:String, tag :Tag?){
+//        Init local time
+        AndroidThreeTen.init(context)
+
         db.collection("threads")
-            .add(Thread(title =title, desc = description, user_id = user_id, tag = tag).getHashMap())
+            .add(Thread(title =title, desc = description, user_id = user_id, tag = tag)
+                .getNewHashMap())
             .addOnSuccessListener { doc ->
                 if (imageUri != null){
                     uploadImage(imageUri!!, doc.id);

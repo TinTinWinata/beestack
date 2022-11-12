@@ -2,11 +2,14 @@ package edu.bluejack22_1.beestack.activities
 
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.os.Build
 import android.os.Bundle
+import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
@@ -15,6 +18,7 @@ import com.google.android.material.navigation.NavigationBarView
 import com.google.firebase.auth.FirebaseAuth
 import edu.bluejack22_1.beestack.R
 import edu.bluejack22_1.beestack.databinding.ActivityHomeBinding
+import edu.bluejack22_1.beestack.facade.Helper
 import edu.bluejack22_1.beestack.fragments.*
 import edu.bluejack22_1.beestack.model.CurrentUser
 import edu.bluejack22_1.beestack.view.MyThread
@@ -46,13 +50,21 @@ class HomeActivity : AppCompatActivity() {
     private fun setupToolbar(){
 
 //      Change Action Toolbar
+        supportActionBar?.setTitle("");
         supportActionBar?.setHomeButtonEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_person_24_white)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_clear_all_24)
 
 
 //      Change Toolbar name based on user name
         binding.toolbarName.text = CurrentUser.username
+        binding.toolbarImage.setImageBitmap(CurrentUser.photoProfileBitmap)
+
+        CurrentUser.photoProfileListListener.add {
+            if(CurrentUser.photoProfileBitmap != null) {
+                binding.toolbarImage.setImageBitmap(CurrentUser.photoProfileBitmap)
+            }
+        }
     }
 
     private fun setDrawingNavbar(){
@@ -106,6 +118,8 @@ class HomeActivity : AppCompatActivity() {
         viewProfile.setOnClickListener{
             navigateProfilePage()
         }
+
+        imageProfile.setImageBitmap(CurrentUser.photoProfileBitmap)
 
         CurrentUser.photoProfileListListener.add {
             if(CurrentUser.photoProfileBitmap != null) {

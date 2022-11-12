@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import ThreadAdapter
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import edu.bluejack22_1.beestack.databinding.FragmentHomeBinding
@@ -41,6 +42,7 @@ class HomeFragment : Fragment() {
     private fun fetchThread(){
         val db = Firebase.firestore;
         db.collection("threads")
+            .orderBy("created_at", Query.Direction.DESCENDING)
             .addSnapshotListener { value, e ->
                 if (e != null) {
                     Log.w(ContentValues.TAG, "Listen failed.", e)
@@ -56,6 +58,7 @@ class HomeFragment : Fragment() {
 
 //                  Then Get User Data
                     val docRef = db.collection("users").document(user_id);
+
                     docRef.get()
                             .addOnSuccessListener { userDoc ->
 

@@ -56,6 +56,9 @@ dependencies {
 //    Firebase auth
     implementation 'com.google.firebase:firebase-auth:21.1.0'
 
+//    Local date time
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.2.1'
+
 //    Google Sign In
     implementation 'com.google.android.gms:play-services-auth:20.3.0'
     implementation 'androidx.annotation:annotation:1.1.0'

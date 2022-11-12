@@ -13,34 +13,7 @@
         android:padding="10dp"
         >
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tv_votes"
-                android:text="0 Votes"
-                android:textSize="11dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="3dp"
-                android:text="0 Answers"
-                android:id="@+id/tv_answers"
-                android:textSize="11dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="3dp"
-                android:text="0 Views"
-                android:id="@+id/tv_views"
-                android:textSize="11dp"/>
-        </LinearLayout>
 
         <LinearLayout
             android:layout_marginTop="10dp"
@@ -80,15 +53,66 @@
         </LinearLayout>
 
 
-        <TextView
+        <LinearLayout
             android:layout_marginTop="10dp"
-            android:id="@+id/credential"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="User - Teams"
-            android:gravity="right"
-            android:textSize="11dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/downVoteTV"
+                android:text="0"
+                android:textSize="11dp"/>
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@drawable/ic_baseline_keyboard_double_arrow_up_24"
+                />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:text="0"
+                android:id="@+id/upVoteTV"
+                android:textSize="11dp"/>
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@drawable/ic_baseline_keyboard_double_arrow_down_24"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:text="0"
+                android:id="@+id/answerTV"
+                android:textSize="11dp"/>
+
+            <ImageView
+                android:layout_marginLeft="3dp"
+                android:src="@drawable/ic_baseline_message_24"
+                android:layout_width="11dp"
+                android:layout_height="11dp"
+                android:layout_gravity="center"
             />
+            <TextView
+                android:id="@+id/credential"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="User - Teams"
+                android:gravity="right"
+                android:textSize="11dp"
+                />
+        </LinearLayout>
+
+
 
     </LinearLayout>
     

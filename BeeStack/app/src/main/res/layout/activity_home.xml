@@ -37,13 +37,21 @@
                 >
                     <TextView
                         android:id="@+id/toolbar_name"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:textColor="@color/white"
                         android:text="Name"
                         android:textStyle="bold"
                         android:gravity=""
                         />
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/toolbar_image"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="30dp"
+                    android:src="@drawable/ic_baseline_person_24"
+                    />
 
             </androidx.appcompat.widget.Toolbar>
 
