@@ -30,25 +30,15 @@ class TeamFragment : Fragment() {
         // View Binding
         binding = FragmentTeamBinding.inflate(inflater, container, false);
 
-        // Query For Team , From Users
-        db.collection("users").document(CurrentUser.uid)
-            .addSnapshotListener { value, error ->
-                if (value != null) {
-                    val teamId = value.data?.get("team_id")?.toString();
-                    if(teamId != null){
-
-                        replaceFragment(TeamDetailFragment().apply {
-                            arguments = Bundle().apply {
-                                putString("teamId", teamId)
-                            }
-                        });
-                    }
-
-
-
+                if (CurrentUser.teamId.isNotEmpty()) {
+//                  Navigate to detail team fragment
+                    replaceFragment(TeamDetailFragment().apply {
+                        arguments = Bundle().apply {
+                            putString("teamId", teamId)
+                        }
+                    });
                     createTeamBtnOnClick();
                 };
-            }
 
         return binding.root;
     }
