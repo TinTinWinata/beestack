@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".activities.TagFragment">
+    >
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -22,14 +22,33 @@
         android:orientation="vertical"
         android:background="@drawable/blue_background"
         >
-        <TextView
-            android:textColor="@color/white"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tags"
-            android:textStyle="bold"
-            android:textSize="30sp"
-            />
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tags"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:textSize="30sp"
+                />
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/createTagBtn"
+                android:layout_marginLeft="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:background="@drawable/orange_background"
+                android:text="Create New Tag"
+                />
+        </LinearLayout>
+
         <TextView
             android:layout_marginTop="6dp"
             android:textColor="@color/white"
@@ -39,24 +58,58 @@
             android:textStyle="normal"
             android:textSize="15sp"
             />
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/createTagBtn"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:textColor="@color/white"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:background="@drawable/orange_background"
-            android:text="Create Tag"
-            />
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            >
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/searchInputLayout"
+                android:layout_marginRight="10dp"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:hint="Search"
+                android:layout_marginLeft="10dp"
+                 app:layout_constraintTop_toTopOf="parent"
+                app:endIconMode="clear_text"
+                app:startIconDrawable="@drawable/ic_baseline_search_24"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/searchET"
+                    android:background="@drawable/white_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/searchBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/orange_background"
+                android:text="Search Tag"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
     </LinearLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/tagRV"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="200dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/headerLayout" />
+            app:layout_constraintTop_toBottomOf="@id/headerLayout"
+            app:layout_constraintVertical_bias="0.475"
+            tools:layout_editor_absoluteX="-165dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

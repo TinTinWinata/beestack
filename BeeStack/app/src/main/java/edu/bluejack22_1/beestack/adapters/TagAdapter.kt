@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import edu.bluejack22_1.beestack.activities.TagDetailActivity
 import edu.bluejack22_1.beestack.activities.ThreadDetailActivity
 import edu.bluejack22_1.beestack.databinding.TagCardBinding
 import edu.bluejack22_1.beestack.databinding.ThreadAnswerBinding
@@ -34,7 +35,14 @@ class TagAdapter (val items : MutableList<Tag>)
 
     //View Holder
     inner class ViewHolder(itemView : TagCardBinding) : RecyclerView.ViewHolder(itemView.root){
+
         fun bind(item : Tag){
+            itemView.setOnClickListener {
+                val i = Intent(itemView.context, TagDetailActivity::class.java);
+                i.putExtra("tag", item);
+                itemView.context.startActivity(i);
+            }
+
             binding.tagName.text = item.name;
         }
     }

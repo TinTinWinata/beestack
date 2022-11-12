@@ -16,6 +16,7 @@ import com.google.firebase.ktx.Firebase
 import edu.bluejack22_1.beestack.R
 import edu.bluejack22_1.beestack.activities.CreateTagActivity
 import edu.bluejack22_1.beestack.activities.ForgotPasswordActivity
+import edu.bluejack22_1.beestack.activities.TagSearchActivity
 import edu.bluejack22_1.beestack.databinding.FragmentLoginBinding
 import edu.bluejack22_1.beestack.databinding.FragmentTagBinding
 import edu.bluejack22_1.beestack.model.Tag
@@ -38,6 +39,7 @@ class TagFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentTagBinding.inflate(inflater, container, false);
+        setSearchListener();
         setCreateTagListener()
         fetchTag()
         return binding.root;
@@ -51,7 +53,50 @@ class TagFragment : Fragment() {
         }
     }
 
+    private fun fetchTagWithName(searched_tag: String){
+        tagList.clear();
+        if(searched_tag.isEmpty()){
+            fetchTag();
+            return;
+        }
+        val db = Firebase.firestore;
+        db.collection("tags")
+            .orderBy("name")
+            .startAt(searched_tag)
+            .endAt(searched_tag+"\uf8ff")
+            .get()
+            .addOnSuccessListener { documents->
+                for(doc in documents){
+                    Log.d("test", doc.id);
+                    val name = doc.data["name"].toString()
+                    val description = doc.data["description"].toString()
+                    tagList.add(Tag(doc.id, name, description))
+                    applyAdapter();
+                }
+            }
+            .addOnFailureListener{
+
+            }
+    }
+
+    private fun setSearchListener(){
+        binding.searchBtn.setOnClickListener {
+            if(binding.searchET!!.text!!.isNotEmpty()){
+                val searchedText = binding.searchET.text.toString();
+
+//                Create new intent when search
+//                val i = Intent(context, TagSearchActivity::class.java);
+//                i.putExtra("searched_text", searchedText);
+//                startActivity(i);
+
+//                Or just fetch in this intent ?
+                fetchTagWithName(searchedText);
+            }
+        }
+    }
+
     private fun fetchTag(){
+        tagList.clear();
         val db = Firebase.firestore;
         db.collection("tags")
             .addSnapshotListener { value, e ->
@@ -71,7 +116,6 @@ class TagFragment : Fragment() {
 
 
     private fun applyAdapter(){
-        Log.d("test", tagList.size.toString())
         tagAdapter = TagAdapter(tagList)
         binding.apply {
             tagRV.apply {

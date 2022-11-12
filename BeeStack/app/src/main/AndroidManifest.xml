@@ -10,11 +10,26 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BeeStack">
         <activity
+            android:name=".activities.TagSearchActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".activities.TagDetailActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".activities.SplashActivity"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -39,9 +54,7 @@
             android:name=".activities.MainActivity"
             android:exported="true"
             android:noHistory="true"
-            android:windowSoftInputMode="adjustPan">
-
-        </activity>
+            android:windowSoftInputMode="adjustPan" />
     </application>
 
 </manifest>

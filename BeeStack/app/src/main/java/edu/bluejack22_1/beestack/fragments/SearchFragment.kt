@@ -52,13 +52,6 @@ class SearchFragment : Fragment() {
     }
 
     private fun setSearchListener(){
-
-//        Search Text Listener Bug
-//        binding.searchET.addTextChangedListener {
-//            Log.d("text", "searching ... " + it.toString())
-//            fetchThread(it.toString())
-//        }
-
         binding.searchBtn.setOnClickListener {
             fetchThread(binding.searchET.text.toString())
         }
