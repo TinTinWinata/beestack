@@ -1,21 +1,28 @@
 package edu.bluejack22_1.beestack.activities
 
 import AnswerAdapter
+import android.app.ActionBar.LayoutParams
 import android.content.ContentValues
 import android.os.Bundle
-import android.text.Editable
 import android.util.Log
+import android.view.View
+import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.marginTop
+import androidx.core.view.setPadding
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import edu.bluejack22_1.beestack.R
 import edu.bluejack22_1.beestack.databinding.ActivityThreadDetailBinding
 import edu.bluejack22_1.beestack.model.Answer
 import edu.bluejack22_1.beestack.model.CurrentUser
 import edu.bluejack22_1.beestack.model.Thread
 import edu.bluejack22_1.beestack.model.User
+import edu.bluejack22_1.beestack.view.Home
+
 
 class ThreadDetailActivity : AppCompatActivity() {
 
@@ -31,11 +38,104 @@ class ThreadDetailActivity : AppCompatActivity() {
         binding = ActivityThreadDetailBinding.inflate(layoutInflater)
         val passingThread : Thread= intent.getSerializableExtra("thread") as Thread
 
+        if(!isOwner(passingThread)){
+            binding.ownerLayout.visibility = View.INVISIBLE;
+        }else{
+            setOwnerListener(passingThread);
+        }
+
+//        Search Answer Thread
         searchThread(passingThread)
-        setData(passingThread)
         setAnswerButtonListener(passingThread);
+        setUpVoteDownVoteListener(passingThread);
+
+//        Set Data
+        Firebase.firestore.collection("threads").document(passingThread.uid).addSnapshotListener {
+            doc, e->
+
+            if(e != null){
+                return@addSnapshotListener
+            }
+            if(doc != null)
+            {
+                val createdAt = doc.getString("created_at");
+                val downCount = doc.getString("down_count");
+                val description = doc.getString("description");
+                val title = doc.getString("title");
+                val topCount = doc.getString("top_count");
+                val thread = Thread(uid = doc.id, createdAt = createdAt!!, downCount =  downCount!!.toInt(), desc = description!!, title = title!!, topCount = topCount!!.toInt());
+               setData(thread)
+
+            }
+        }
 
         setContentView(binding.root)
+    }
+
+    private fun setOwnerListener(thread: Thread){
+        binding.updateBtn.setOnClickListener {
+            val dialog : AlertDialog.Builder = AlertDialog.Builder(this);
+
+            val parent = LinearLayout(this)
+
+            parent.layoutParams =
+                LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
+            parent.setPadding(size = 30)
+
+            parent.orientation = LinearLayout.VERTICAL
+
+            val titleET : EditText = EditText(this);
+            val descET : EditText = EditText(this);
+
+            titleET.hint = "New Title"
+            descET.hint = "New Description"
+
+            titleET.layoutParams =   LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
+
+            descET.layoutParams =   LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
+
+
+            parent.addView(titleET);
+            parent.addView(descET);
+
+            dialog.setView(parent);
+
+            dialog.setPositiveButton(android.R.string.yes) { dialog, which ->
+                thread.title = titleET.text.toString();
+                thread.description = descET.text.toString();
+                thread.update();
+            }
+
+            dialog.show();
+
+        }
+        binding.deleteBtn.setOnClickListener{
+            Firebase.firestore.collection("threads")
+                .document(thread.uid)
+                .delete().addOnSuccessListener {
+                    Toast.makeText(this, "Succesfully delete thread!",
+                        Toast.LENGTH_SHORT).show()
+                    finish();
+                    Home.navigate(this);
+                }
+        }
+    }
+
+    private fun isOwner(thread : Thread) : Boolean{
+        return CurrentUser.uid.equals(thread.user!!.uid);
+    }
+
+
+    private fun setUpVoteDownVoteListener(thread : Thread){
+        binding.bottomCountIV.setOnClickListener {
+            thread.downCount += 1;
+            thread.update();
+        }
+
+        binding.topCountIV.setOnClickListener {
+            thread.topCount += 1;
+            thread.update();
+        }
     }
 
     private fun searchThread(localThread: Thread){
@@ -52,7 +152,6 @@ class ThreadDetailActivity : AppCompatActivity() {
 
             for (doc in value!!) {
 //                Get Every doc available
-
                 val value = doc.data["answer"].toString()
                 val userId = doc.data["user_id"].toString()
                 val userRef = db.collection("users").document(userId)
@@ -84,10 +183,7 @@ class ThreadDetailActivity : AppCompatActivity() {
                 layoutManager = LinearLayoutManager(context)
                 adapter = answerAdapter
             }
-//            rvHome.apply {
-//                layoutManager = LinearLayoutManager(context)
-//                adapter = threadAdapter
-//            }
+
         }
     }
 
@@ -101,6 +197,7 @@ class ThreadDetailActivity : AppCompatActivity() {
             }
         }
     }
+
 
     private fun answerThread(thread:Thread, answer: String){
         val db = Firebase.firestore
@@ -126,8 +223,12 @@ class ThreadDetailActivity : AppCompatActivity() {
     }
 
     private fun setData(thread:Thread){
+        binding.downVoteTV.text= thread.downCount.toString();
+        binding.upVoteTV.text = thread.topCount.toString();
+
         binding.description.text = thread.description;
         binding.title.text = thread.title;
+        binding.createdAt.text =  thread.createdAt.toString();
     }
 
 }

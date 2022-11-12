@@ -40,6 +40,7 @@ class HomeFragment : Fragment() {
         return binding.root;
     }
     private fun fetchThread(){
+        threadList.clear();
         val db = Firebase.firestore;
         db.collection("threads")
             .orderBy("created_at", Query.Direction.DESCENDING)
@@ -54,7 +55,12 @@ class HomeFragment : Fragment() {
                     val title = doc.data["title"].toString()
                     val description = doc.data["description"].toString()
                     val user_id = doc.data["user_id"].toString()
+                    val createdAt = doc.data["created_at"].toString();
+                    val topCount = doc.data["top_count"].toString();
+                    val downCount = doc.data["down_count"].toString();
+
                     val uid = doc.id
+
 
 //                  Then Get User Data
                     val docRef = db.collection("users").document(user_id);
@@ -70,7 +76,7 @@ class HomeFragment : Fragment() {
                             val user:User =User(userDoc.id, username, email, location, photoProfile)
 
 //                           Add add getted data to the thread list (Vector)
-                            threadList.add(Thread(uid =uid, title = title, desc = description, user_id = user_id, user = user));
+                            threadList.add(Thread(uid =uid, title = title, desc = description, user_id = user_id, user = user, createdAt = createdAt, topCount = topCount.toInt(), downCount = downCount.toInt()));
                             applyAdapter();
                         }
                     }

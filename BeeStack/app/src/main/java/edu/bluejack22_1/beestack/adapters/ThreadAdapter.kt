@@ -40,11 +40,11 @@ class ThreadAdapter (val items : MutableList<Thread>)
                     Picasso.get().load(item.user!!.photoProfile).into(image);
                 }
                 upVoteTV.text = item.topCount.toString();
-                downVoteTV.text = item.topCount.toString();
+                downVoteTV.text = item.downCount.toString();
                 title.text= item.title
                 description.text= item.description
                 credential.text = item.user?.username
-
+                
 //                Get how many answer document in collections is
 
                 item.getAnswerCollection().addOnSuccessListener {

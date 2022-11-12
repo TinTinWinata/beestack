@@ -55,7 +55,7 @@ object CurrentUser {
         }
     }
 
-    fun getUserRef(): DocumentReference{
+    private fun getUserRef(): DocumentReference{
         return Firebase.firestore.collection("users").document(uid);
     }
 

@@ -8,19 +8,48 @@
     tools:context=".activities.ThreadDetailActivity">
 
 
-    <TextView
+
+    <LinearLayout
         android:padding="20dp"
-        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Title"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        />
+        >
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Title"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            />
+        <LinearLayout
+            android:id="@+id/ownerLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+            <Button
+                android:id="@+id/updateBtn"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Update"
+                />
+            <Button
+                android:id="@+id/deleteBtn"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Delete"
+            />
+        </LinearLayout>
+
+    </LinearLayout>
+
 
     <LinearLayout
         android:layout_marginLeft="20dp"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         >
@@ -37,6 +66,42 @@
             android:text="10 November"
             />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="right"
+            android:layout_marginRight="20dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/upVoteTV"
+                android:text="0"
+                android:textSize="11dp"/>
+
+            <ImageView
+                android:id="@+id/topCountIV"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@drawable/ic_baseline_keyboard_double_arrow_up_24"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:text="0"
+                android:id="@+id/downVoteTV"
+                android:textSize="11dp"/>
+
+            <ImageView
+                android:id="@+id/bottomCountIV"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@drawable/ic_baseline_keyboard_double_arrow_down_24"
+                />
+        </LinearLayout>
     </LinearLayout>
     <View
         android:layout_width="match_parent"
@@ -75,7 +140,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/answerRV"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent" />

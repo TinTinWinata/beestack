@@ -52,11 +52,12 @@ class MyThreadActivity : AppCompatActivity() {
             .addOnSuccessListener { value ->
                 for (doc in value!!) {
 //                  Get Thread Data
+                    val createdAt = doc.data["created_at"].toString();
                     val title = doc.data["title"].toString()
                     val description = doc.data["description"].toString()
                     val user_id = doc.data["user_id"].toString()
                     val uid = doc.id
-                    threadList.add(Thread(uid =uid, title = title, desc = description, user_id = user_id, user = CurrentUser.getUser()));
+                    threadList.add(Thread(uid =uid, title = title, desc = description, user_id = user_id, user = CurrentUser.getUser(), createdAt = createdAt));
                     applyAdapter();
                 }
             }

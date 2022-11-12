@@ -75,6 +75,10 @@ class TagDetailActivity : AppCompatActivity() {
                     val description = doc.data["description"].toString()
                     val user_id = doc.data["user_id"].toString()
                     val uid = doc.id
+                    val createdAt = doc.data["created_at"].toString();
+                    val topCount = doc.data["top_count"].toString();
+                    val downCount = doc.data["down_count"].toString();
+
 
 //                  Then Get User Data
                     val docRef = db.collection("users").document(user_id);
@@ -89,7 +93,7 @@ class TagDetailActivity : AppCompatActivity() {
                                 val user: User = User(doc.id, username, email, location, url);
 
 //                           Add add getted data to the thread list (Vector)
-                                threadList.add(Thread(uid =uid, title = title, desc = description, user_id = user_id, user = user));
+                                threadList.add(Thread(uid =uid, title = title, desc = description, user_id = user_id, user = user, createdAt = createdAt, topCount = topCount.toInt(), downCount = downCount.toInt()));
                                 applyAdapter()
                             }
                         }
