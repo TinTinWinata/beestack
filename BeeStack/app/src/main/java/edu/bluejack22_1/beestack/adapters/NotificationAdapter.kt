@@ -31,7 +31,7 @@ class NotificationAdapter (val act: FragmentActivity, val items : MutableList<No
                 tvTitle.text = item.from.username + " has sent you a invitation"
                 root.setOnClickListener {
 
-                    TeamInviteDialog(item.data.teamId).show(
+                    TeamInviteDialog(item).show(
                         act.supportFragmentManager, "TeamInviteDialog")
                 }
             }

@@ -3,6 +3,10 @@ import java.io.Serializable
 
 class Notification(val from: User, val type: String, val data: DataInvite, val to: User)  {
 
+    var uid : String? = null
+
+
+
     fun getHashMap(): HashMap<String, Any> {
         return hashMapOf(
             "from" to this.from,
@@ -10,6 +14,10 @@ class Notification(val from: User, val type: String, val data: DataInvite, val t
             "type" to this.type,
             "data" to this.data,
         )
+    }
+
+    fun setId(newUid: String){
+        this.uid = newUid
     }
 }
 
