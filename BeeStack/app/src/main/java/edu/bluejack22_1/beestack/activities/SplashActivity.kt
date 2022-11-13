@@ -21,7 +21,7 @@ class SplashActivity : AppCompatActivity() {
             }else{
                 navigateMain();
             }
-        }, 3000)
+        }, 500)
 
     }
 

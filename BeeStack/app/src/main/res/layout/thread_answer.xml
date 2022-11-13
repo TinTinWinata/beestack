@@ -16,7 +16,7 @@
         android:orientation="vertical"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="20dp"
         >
         <TextView
             android:id="@+id/description"
@@ -25,19 +25,61 @@
             android:text="Description"
             />
     </LinearLayout>
-    <TextView
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:id="@+id/nameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/linearLayout"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginRight="10dp"
-        android:id="@+id/name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Name"
-        android:textAlignment="viewEnd"
-        />
+        >
+
+        <TextView
+            android:layout_marginLeft="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/upVoteTV"
+            android:text="0"
+            android:layout_gravity="center"
+            android:textSize="11dp"/>
+
+        <ImageView
+            android:layout_gravity="center"
+            android:id="@+id/topCountIV"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@drawable/ic_baseline_keyboard_double_arrow_up_24"
+            />
+
+        <TextView
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:text="0"
+            android:id="@+id/downVoteTV"
+            android:textSize="11dp"/>
+
+        <ImageView
+            android:layout_gravity="center"
+            android:id="@+id/bottomCountIV"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@drawable/ic_baseline_keyboard_double_arrow_down_24"
+            />
+
+        <TextView
+            android:layout_marginRight="20dp"
+            android:id="@+id/name"
+            android:textAlignment="viewEnd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            />
+    </LinearLayout>
     <View
-        app:layout_constraintTop_toBottomOf="@id/name"
+        app:layout_constraintTop_toBottomOf="@id/nameLayout"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_width="match_parent"

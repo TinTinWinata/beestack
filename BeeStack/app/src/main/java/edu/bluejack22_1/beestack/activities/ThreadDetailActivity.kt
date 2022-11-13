@@ -17,10 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import edu.bluejack22_1.beestack.databinding.ActivityThreadDetailBinding
-import edu.bluejack22_1.beestack.model.Answer
-import edu.bluejack22_1.beestack.model.CurrentUser
-import edu.bluejack22_1.beestack.model.Thread
-import edu.bluejack22_1.beestack.model.User
+import edu.bluejack22_1.beestack.model.*
 import edu.bluejack22_1.beestack.view.Home
 
 
@@ -65,10 +62,8 @@ class ThreadDetailActivity : AppCompatActivity() {
                 val topCount = doc.getString("top_count");
                 val thread = Thread(uid = doc.id, createdAt = createdAt!!, downCount =  downCount!!.toInt(), desc = description!!, title = title!!, topCount = topCount!!.toInt());
                setData(thread)
-
             }
         }
-
         setContentView(binding.root)
     }
 
@@ -93,7 +88,6 @@ class ThreadDetailActivity : AppCompatActivity() {
             titleET.layoutParams =   LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
 
             descET.layoutParams =   LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
-
 
             parent.addView(titleET);
             parent.addView(descET);
@@ -145,6 +139,9 @@ class ThreadDetailActivity : AppCompatActivity() {
 //       Listen to answer thread
         document(localThread.uid).collection("answers")
         docRef.addSnapshotListener{ value, e->
+
+            answerList.clear();
+
             if (e != null) {
                 Log.w(ContentValues.TAG, "Listen failed.", e)
                 return@addSnapshotListener
@@ -154,6 +151,19 @@ class ThreadDetailActivity : AppCompatActivity() {
 //                Get Every doc available
                 val value = doc.data["answer"].toString()
                 val userId = doc.data["user_id"].toString()
+                val topCount = doc.data["top_count"].toString();
+                val downCount = doc.data["down_count"].toString();
+                val answerId = doc.id;
+
+                val temps = doc.data["comments"] as MutableList<HashMap<String, String>>;
+                val comments = mutableListOf<Comment>()
+                temps.forEach {
+                    it->
+                    comments.add(Comment(it.get("name").toString(), it.get("value").toString()))
+
+                }
+
+
                 val userRef = db.collection("users").document(userId)
                 userRef.get()
                     .addOnSuccessListener {  doc->
@@ -161,9 +171,11 @@ class ThreadDetailActivity : AppCompatActivity() {
                             val email:String = doc.data!!.get("email").toString();
                             val location:String = doc.data!!.get("location").toString();
                             val username = doc.data!!.get("username").toString();
-                            val url = doc.data!!.get("photo_profile_url").toString();
+                            val url = doc.data!!.get("photo_profile_url").toString()
+
                             val user = User(doc.id, username, email, location, url);
-                            val answer = Answer(user, value)
+                            val answer = Answer(user, value, uid= answerId, localThread,
+                                topCount = topCount.toInt(), downCount = downCount.toInt(),comments= comments)
                             answerList.add(answer);
                             applyAdapter()
                         }
@@ -200,11 +212,12 @@ class ThreadDetailActivity : AppCompatActivity() {
 
 
     private fun answerThread(thread:Thread, answer: String){
+
         val db = Firebase.firestore
         db.collection("threads")
             .document(thread.uid)
             .collection("answers")
-            .add(getHashMap(thread, answer))
+            .add(Answer(owner = CurrentUser.getUser(), value = answer).getHashMap())
             .addOnSuccessListener {
                 binding.answerET.setText("");
                 Toast.makeText(this, "Succesfully Answer", Toast.LENGTH_SHORT).show()
