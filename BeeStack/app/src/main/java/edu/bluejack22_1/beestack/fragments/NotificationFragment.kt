@@ -2,6 +2,7 @@ package edu.bluejack22_1.beestack.fragments
 
 import NotificationAdapter
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import edu.bluejack22_1.beestack.databinding.FragmentNotificationBinding
 import edu.bluejack22_1.beestack.model.CurrentUser
+import edu.bluejack22_1.beestack.model.DataInvite
 import edu.bluejack22_1.beestack.model.Notification
 import edu.bluejack22_1.beestack.model.User
 
@@ -47,20 +49,26 @@ class NotificationFragment : Fragment() {
             .addSnapshotListener { value, error ->
                 if (value != null) {
                     for (doc in value) {
-
+                        Log.d("TEST", "Masuk")
                         //  Get Notification Data
                         val from = doc.data["from"]
                         val to = doc.data["to"]
+                        val data= doc.data["data"] as HashMap<String, String>
                         val type = doc.data["type"].toString()
-                        val message = doc.data["message"].toString()
+                        val photoProfile = doc.data["message"].toString()
+
+
+                        val item = Notification(
+                            User.fromHashMapNoPhoto(from as HashMap<String, String>),
+                            type,
+                            DataInvite(data["message"]!!, data["teamId"]!!),
+                            User.fromHashMapNoPhoto(to as HashMap<String, String>)
+                        )
+
+                        item.setId(doc.id)
 
                         notificationList.add(
-                            Notification(
-                                User.fromHashMap(from as HashMap<String, String>),
-                                type,
-                                message,
-                                User.fromHashMap(to as HashMap<String, String>)
-                            )
+                            item
                         );
 
                     }
@@ -72,7 +80,7 @@ class NotificationFragment : Fragment() {
     }
 
     private fun applyAdapter(){
-        notifAdapter = NotificationAdapter(notificationList)
+        notifAdapter = NotificationAdapter(requireActivity(),notificationList)
         binding.apply {
             rvNotification.apply{
                 layoutManager = LinearLayoutManager(context)

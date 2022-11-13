@@ -7,6 +7,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import edu.bluejack22_1.beestack.databinding.TeamInviteItemBinding
 import edu.bluejack22_1.beestack.model.CurrentUser
+import edu.bluejack22_1.beestack.model.DataInvite
 import edu.bluejack22_1.beestack.model.Notification
 import edu.bluejack22_1.beestack.model.User
 
@@ -40,7 +41,10 @@ class TeamInviteAdapter(val ctx: FragmentActivity?, val items: MutableList<User>
                               CurrentUser.uid, CurrentUser.username, CurrentUser.email, CurrentUser.location, CurrentUser.photoProfileURL),
                         to = item,
                         type = "team-invite",
-                        message = CurrentUser.username.toString() + " has invited you to a team !"
+                        data = DataInvite(
+                            CurrentUser.username.toString() + " has invited you to a team !",
+                            CurrentUser.teamId
+                        )
                     ));
                 }
             }
