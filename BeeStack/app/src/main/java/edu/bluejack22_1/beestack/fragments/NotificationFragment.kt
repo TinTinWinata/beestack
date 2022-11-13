@@ -12,6 +12,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import edu.bluejack22_1.beestack.databinding.FragmentNotificationBinding
 import edu.bluejack22_1.beestack.model.CurrentUser
+import edu.bluejack22_1.beestack.model.DataInvite
 import edu.bluejack22_1.beestack.model.Notification
 import edu.bluejack22_1.beestack.model.User
 
@@ -52,15 +53,16 @@ class NotificationFragment : Fragment() {
                         //  Get Notification Data
                         val from = doc.data["from"]
                         val to = doc.data["to"]
+                        val data= doc.data["data"] as HashMap<String, String>
                         val type = doc.data["type"].toString()
-                        val message = doc.data["message"].toString()
                         val photoProfile = doc.data["message"].toString()
+
 
                         notificationList.add(
                             Notification(
                                 User.fromHashMapNoPhoto(from as HashMap<String, String>),
                                 type,
-                                message,
+                                DataInvite(data["message"]!!, data["teamId"]!!),
                                 User.fromHashMapNoPhoto(to as HashMap<String, String>)
                             )
                         );

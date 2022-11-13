@@ -1,8 +1,6 @@
-import android.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import edu.bluejack22_1.beestack.databinding.NotificationItemBinding
 import edu.bluejack22_1.beestack.model.Notification
@@ -33,7 +31,7 @@ class NotificationAdapter (val act: FragmentActivity, val items : MutableList<No
                 tvTitle.text = item.from.username + " has sent you a invitation"
                 root.setOnClickListener {
 
-                    TeamInviteDialog().show(
+                    TeamInviteDialog(item.data.teamId).show(
                         act.supportFragmentManager, "TeamInviteDialog")
                 }
             }
