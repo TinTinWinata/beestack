@@ -27,7 +27,7 @@ class AnswerAdapter (val items : MutableList<Answer>)
 
     override fun getItemCount() = items.size
 
-    //View Holder
+    // View Holder
     inner class ViewHolder(itemView : ThreadAnswerBinding) : RecyclerView.ViewHolder(itemView.root){
         fun bind(item : Answer){
 

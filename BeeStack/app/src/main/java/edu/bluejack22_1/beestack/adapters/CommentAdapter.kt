@@ -34,9 +34,7 @@ class CommentAdapter (val items : MutableList<Comment>)
     inner class ViewHolder(itemView : CommentLayoutBinding) : RecyclerView.ViewHolder(itemView.root){
         fun bind(item : Comment){
                 binding.commentValue.text = item.value;
-                binding.commentOwnerName.text = item.name;
+                binding.commentOwnerName.text = "by "+item.name;
         }
     }
-
-
 }

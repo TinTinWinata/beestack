@@ -33,6 +33,7 @@ class ThreadAnswerDetailActivity : AppCompatActivity() {
     }
     private fun fetchComment(answer :Answer){
         commentList.clear();
+
         answer.comments.forEach {
             comment->
                 commentList.add(comment)
@@ -44,7 +45,7 @@ class ThreadAnswerDetailActivity : AppCompatActivity() {
             downVoteTV.text = answer.downCount.toString();
             upVoteTV.text = answer.topCount.toString();
             description.text = answer.value;
-            name.text = "by " + answer.owner.username;
+            name.text = answer.owner.username;
         }
     }
 
@@ -62,6 +63,7 @@ class ThreadAnswerDetailActivity : AppCompatActivity() {
 
 
     private fun applyAdapter(answer :Answer){
+        Log.d("test", answer.comments.size.toString())
         commentAdapter = CommentAdapter(answer.comments)
         binding.apply {
             answerRV.apply {
