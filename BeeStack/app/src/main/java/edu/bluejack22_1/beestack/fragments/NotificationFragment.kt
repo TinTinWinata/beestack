@@ -57,7 +57,6 @@ class NotificationFragment : Fragment() {
                         val type = doc.data["type"].toString()
                         val photoProfile = doc.data["message"].toString()
 
-
                         val item = Notification(
                             User.fromHashMapNoPhoto(from as HashMap<String, String>),
                             type,

@@ -60,6 +60,8 @@ class HomeActivity : AppCompatActivity() {
         binding.toolbarName.text = CurrentUser.username
         binding.toolbarImage.setImageBitmap(CurrentUser.photoProfileBitmap)
 
+
+
         CurrentUser.photoProfileListListener.add {
             if(CurrentUser.photoProfileBitmap != null) {
                 binding.toolbarImage.setImageBitmap(CurrentUser.photoProfileBitmap)
@@ -119,7 +121,10 @@ class HomeActivity : AppCompatActivity() {
             navigateProfilePage()
         }
 
-        imageProfile.setImageBitmap(CurrentUser.photoProfileBitmap)
+        if(CurrentUser.photoProfileBitmap != null){
+            imageProfile.setImageBitmap(CurrentUser.photoProfileBitmap)
+        }
+
 
         CurrentUser.photoProfileListListener.add {
             if(CurrentUser.photoProfileBitmap != null) {

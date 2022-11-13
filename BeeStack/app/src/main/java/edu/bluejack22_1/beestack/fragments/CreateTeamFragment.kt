@@ -97,11 +97,12 @@ class CreateTeamFragment : Fragment() {
         }
     }
 
-
-
-
     fun createTeamOnClick(){
         binding.createTeamBtn.setOnClickListener {
+            if(this.uri == null){
+                Toast.makeText(context, "Please insert team image!", Toast.LENGTH_SHORT).show();
+                return@setOnClickListener
+            }
             uploadImage().addOnSuccessListener {
                 snapshot ->
                 snapshot.storage.downloadUrl.addOnCompleteListener {

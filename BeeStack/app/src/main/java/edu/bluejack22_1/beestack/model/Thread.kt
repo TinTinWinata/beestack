@@ -13,7 +13,7 @@ import org.threeten.bp.format.DateTimeFormatter
 import java.io.Serializable
 
 
-class Thread(user:User? = null, desc:String = "", title:String = "", uid:String = "", user_id:String = "", tag: Tag? = null, topCount: Int = 0, downCount:Int = 0, createdAt: String = ""): Serializable, GetHashMap{
+class Thread(user:User? = null, desc:String = "", title:String = "", uid:String = "", user_id:String = "", tag: Tag? = null, topCount: Int = 0, downCount:Int = 0, createdAt: String = "", answer:Int = 0 , view:Int = 0): Serializable, GetHashMap{
 
     var title:String = title;
     var createdAt:String = createdAt;
@@ -24,7 +24,8 @@ class Thread(user:User? = null, desc:String = "", title:String = "", uid:String 
     var tag:Tag?= tag;
     var topCount: Int = topCount;
     var downCount: Int = downCount;
-
+    var answer: Int = answer;
+    var view: Int = view;
 
     public fun getAnswerCollection(): Task<QuerySnapshot> {
         val db = Firebase.firestore;
@@ -42,9 +43,9 @@ class Thread(user:User? = null, desc:String = "", title:String = "", uid:String 
             "top_count" to this.topCount.toString(),
             "down_count" to this.downCount.toString(),
             "created_at" to this.createdAt.toString(),
+            "view" to this.view.toString()
         )
     }
-
 
     public fun getNewHashMap() : HashMap<String, String>{
 
@@ -58,7 +59,8 @@ class Thread(user:User? = null, desc:String = "", title:String = "", uid:String 
             "tag_id" to if(this.tag != null) this.tag!!.uid!! else "",
             "top_count" to this.topCount.toString(),
             "down_count" to this.downCount.toString(),
-            "created_at" to LocalDateTime.now().format(formatter)
+            "created_at" to LocalDateTime.now().format(formatter),
+            "view" to this.view.toString()
         )
     }
 

@@ -10,9 +10,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import ThreadAdapter
+import android.widget.ArrayAdapter
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import edu.bluejack22_1.beestack.R
 import edu.bluejack22_1.beestack.databinding.FragmentHomeBinding
 import edu.bluejack22_1.beestack.model.Thread
 import edu.bluejack22_1.beestack.model.User
@@ -20,8 +22,13 @@ import edu.bluejack22_1.beestack.model.User
 class HomeFragment : Fragment() {
 
     private var threadList : MutableList<Thread> = mutableListOf()
+    private var filterThreads:MutableList<Thread> = mutableListOf()
+
     private lateinit var binding: FragmentHomeBinding;
     private lateinit var threadAdapter: ThreadAdapter
+
+    private val filterList  = arrayOf("All", "Views", "Vote", "Answer")
+    private var selectedLocation:String = "";
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,15 +43,81 @@ class HomeFragment : Fragment() {
 
         fetchThread();
         binding = FragmentHomeBinding.inflate(layoutInflater)
-
+        setDropdown()
         return binding.root;
     }
+    private fun setDropdown(){
+        val adapter : ArrayAdapter<String> = ArrayAdapter<String>(requireContext(), R.layout.list_locations, filterList);
+        binding.filter.setAdapter(adapter)
+        binding.filter.setOnItemClickListener { adapterView, view, i, l ->
+            selectedLocation = adapterView.getItemAtPosition(i).toString()
+            when(selectedLocation){
+                "Views" -> filterView()
+                "Answer" -> filterAnswer()
+                "Vote" -> filterVote()
+                "All" -> filterAll()
+            }
+        }
+    }
+
+    private fun filterAll(){
+        filterThreads = threadList;
+        applyAdapter();
+    }
+
+    private fun filterAnswer(){
+//        Thread List Bubble Sort with Answer
+        for (pass in 0 until (threadList.size - 1)) {
+            // A single pass of bubble sort
+            for (currentPosition in 0 until (threadList.size - pass - 1)) {
+                // This is a single step
+                if (threadList[currentPosition].answer < threadList[currentPosition + 1].answer) {
+                    val tmp : Thread = threadList[currentPosition]
+                    threadList[currentPosition] = threadList[currentPosition + 1]
+                    threadList[currentPosition + 1] = tmp
+                }
+            }
+        }
+        filterThreads = threadList;
+        applyAdapter();
+    }
+
+    private fun filterVote(){
+        for (pass in 0 until (threadList.size - 1)) {
+            for (currentPosition in 0 until (threadList.size - pass - 1)) {
+                if (threadList[currentPosition].topCount < threadList[currentPosition + 1].topCount) {
+                    val tmp : Thread = threadList[currentPosition]
+                    threadList[currentPosition] = threadList[currentPosition + 1]
+                    threadList[currentPosition + 1] = tmp
+                }
+            }
+        }
+        filterThreads = threadList;
+        applyAdapter();
+    }
+
+    private fun filterView(){
+        for (pass in 0 until (threadList.size - 1)) {
+            for (currentPosition in 0 until (threadList.size - pass - 1)) {
+                if (threadList[currentPosition].topCount < threadList[currentPosition + 1].topCount) {
+                    val tmp : Thread = threadList[currentPosition]
+                    threadList[currentPosition] = threadList[currentPosition + 1]
+                    threadList[currentPosition + 1] = tmp
+                }
+            }
+        }
+        filterThreads = threadList;
+        applyAdapter();
+    }
+
     private fun fetchThread(){
-        threadList.clear();
+
         val db = Firebase.firestore;
         db.collection("threads")
             .orderBy("created_at", Query.Direction.DESCENDING)
             .addSnapshotListener { value, e ->
+                threadList.clear();
+
                 if (e != null) {
                     Log.w(ContentValues.TAG, "Listen failed.", e)
                     return@addSnapshotListener
@@ -58,7 +131,7 @@ class HomeFragment : Fragment() {
                     val createdAt = doc.data["created_at"].toString();
                     val topCount = doc.data["top_count"].toString();
                     val downCount = doc.data["down_count"].toString();
-
+                    val view = doc.data["view"].toString();
                     val uid = doc.id
 
 
@@ -67,7 +140,6 @@ class HomeFragment : Fragment() {
 
                     docRef.get()
                             .addOnSuccessListener { userDoc ->
-
                         if (userDoc != null) {
                             val username = userDoc.data!!["username"].toString()
                             val email = userDoc.data!!["email"].toString()
@@ -76,8 +148,12 @@ class HomeFragment : Fragment() {
                             val user:User =User(userDoc.id, username, email, location, photoProfile)
 
 //                           Add add getted data to the thread list (Vector)
-                            threadList.add(Thread(uid =uid, title = title, desc = description, user_id = user_id, user = user, createdAt = createdAt, topCount = topCount.toInt(), downCount = downCount.toInt()));
-                            applyAdapter();
+                            val thread: Thread = Thread(uid =uid, title = title, desc = description, user_id = user_id, user = user, createdAt = createdAt, topCount = topCount.toInt(), downCount = downCount.toInt(), view = view.toInt());
+                            thread.getAnswerCollection().addOnSuccessListener {
+                                thread.answer =  it.size()
+                                threadList.add(thread);
+                                filterAll();
+                            }
                         }
                     }
                 }
@@ -85,7 +161,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun applyAdapter(){
-        threadAdapter = ThreadAdapter(threadList)
+        threadAdapter = ThreadAdapter(filterThreads)
         binding.apply {
             rvHome.apply {
                 layoutManager = LinearLayoutManager(context)

@@ -25,7 +25,7 @@ class ThreadDetailActivity : AppCompatActivity() {
 
     private  lateinit var binding :ActivityThreadDetailBinding
 
-    private var thread:Thread? = null;
+    private var currentThread:Thread? = null;
     private var answerList: MutableList<Answer> = mutableListOf()
 
     private lateinit var answerAdapter:AnswerAdapter;
@@ -34,6 +34,7 @@ class ThreadDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityThreadDetailBinding.inflate(layoutInflater)
         val passingThread : Thread= intent.getSerializableExtra("thread") as Thread
+        currentThread = passingThread;
 
         if(!isOwner(passingThread)){
             binding.ownerLayout.visibility = View.INVISIBLE;
@@ -65,6 +66,18 @@ class ThreadDetailActivity : AppCompatActivity() {
             }
         }
         setContentView(binding.root)
+    }
+
+    override fun onStop() {
+        super.onStop()
+
+        Log.d("test", currentThread.toString())
+        if(currentThread != null)
+        {
+            currentThread!!.view += 1;
+            currentThread!!.update()
+        }
+
     }
 
     private fun setOwnerListener(thread: Thread){

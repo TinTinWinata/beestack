@@ -29,7 +29,6 @@ class ThreadAnswerDetailActivity : AppCompatActivity() {
         setAnswer(passingAnswer);
         setSendListener(passingAnswer);
         applyAdapter(passingAnswer)
-//        fetchComment(passingAnswer);
     }
     private fun fetchComment(answer :Answer){
         commentList.clear();
