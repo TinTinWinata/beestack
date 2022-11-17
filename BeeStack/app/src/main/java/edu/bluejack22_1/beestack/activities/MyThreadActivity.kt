@@ -5,6 +5,7 @@ import android.content.ContentValues
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -27,19 +28,34 @@ class MyThreadActivity : AppCompatActivity() {
         binding = ActivityMyThreadBinding.inflate(layoutInflater);
         super.onCreate(savedInstanceState)
 
+        setListener();
         fetchMyThread();
-
         setContentView(binding.root)
     }
 
-    private fun applyAdapter(){
+    private fun checkThread(){
+        Log.d("test", "Checking Thread ... " );
+        //        If there's no thread available set no threads layout
+        if(threadList.size == 0){
+            binding.noThreadLayout.visibility = View.VISIBLE;
+        }else{
+            binding.noThreadLayout.visibility = View.INVISIBLE;
+        }
+    }
 
+    private fun applyAdapter(){
         threadAdapter = ThreadAdapter(threadList)
         binding.apply {
             threadRV.apply {
                 layoutManager = LinearLayoutManager(context)
                 adapter = threadAdapter
             }
+        }
+    }
+
+    private fun setListener(){
+        binding.backBtn.setOnClickListener {
+            onBackPressed();
         }
     }
 
@@ -60,6 +76,8 @@ class MyThreadActivity : AppCompatActivity() {
                     threadList.add(Thread(uid =uid, title = title, desc = description, user_id = user_id, user = CurrentUser.getUser(), createdAt = createdAt));
                     applyAdapter();
                 }
+
+                checkThread();
             }
     }
 

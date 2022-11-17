@@ -23,7 +23,7 @@
         android:background="@drawable/blue_background"
         >
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             >
@@ -36,16 +36,16 @@
                 android:textStyle="bold"
                 android:textSize="30sp"
                 />
-            <androidx.appcompat.widget.AppCompatButton
+            <ImageView
+                android:layout_gravity="center"
                 android:id="@+id/createTagBtn"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="1dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:background="@drawable/orange_background"
                 android:text="Create New Tag"
+                android:src="@drawable/ic_baseline_white_add_24"
                 />
         </LinearLayout>
 

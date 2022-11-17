@@ -56,16 +56,13 @@ class NotificationFragment : Fragment() {
                         val data= doc.data["data"] as HashMap<String, String>
                         val type = doc.data["type"].toString()
                         val photoProfile = doc.data["message"].toString()
-
                         val item = Notification(
                             User.fromHashMapNoPhoto(from as HashMap<String, String>),
                             type,
                             DataInvite(data["message"]!!, data["teamId"]!!),
                             User.fromHashMapNoPhoto(to as HashMap<String, String>)
                         )
-
                         item.setId(doc.id)
-
                         notificationList.add(
                             item
                         );
