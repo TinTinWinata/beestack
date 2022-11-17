@@ -36,8 +36,9 @@ class ThreadAdapter (val items : MutableList<Thread>)
                 itemView.context.startActivity(i);
             }
             binding.apply {
-                if(item.user?.photoProfile!!.isNotEmpty()){
-                    Picasso.get().load(item.user!!.photoProfile).into(image);
+                val profileBg: String? = item.user?.photoProfile
+                if(!profileBg.isNullOrEmpty()){
+                    Picasso.get().load(profileBg).into(image);
                 }
                 upVoteTV.text = item.topCount.toString();
                 downVoteTV.text = item.downCount.toString();
@@ -45,7 +46,7 @@ class ThreadAdapter (val items : MutableList<Thread>)
                 description.text= item.description
                 credential.text = item.user?.username
                 
-//                Get how many answer document in collections is
+//              Get how many answer document in collections is
 
                 item.getAnswerCollection().addOnSuccessListener {
                     answerTV.text = it.size().toString()

@@ -15,6 +15,7 @@ import edu.bluejack22_1.beestack.databinding.FragmentHomeBinding
 import edu.bluejack22_1.beestack.model.CurrentUser
 import edu.bluejack22_1.beestack.model.Thread
 import edu.bluejack22_1.beestack.model.User
+import edu.bluejack22_1.beestack.view.Home
 
 class MyThreadActivity : AppCompatActivity() {
 
@@ -34,7 +35,6 @@ class MyThreadActivity : AppCompatActivity() {
     }
 
     private fun checkThread(){
-        Log.d("test", "Checking Thread ... " );
         //        If there's no thread available set no threads layout
         if(threadList.size == 0){
             binding.noThreadLayout.visibility = View.VISIBLE;
@@ -55,7 +55,7 @@ class MyThreadActivity : AppCompatActivity() {
 
     private fun setListener(){
         binding.backBtn.setOnClickListener {
-            onBackPressed();
+            Home.navigate(this);
         }
     }
 

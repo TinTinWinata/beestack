@@ -1,11 +1,21 @@
 package edu.bluejack22_1.beestack.model
-import java.io.Serializable
+import com.google.android.gms.tasks.Task
+import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
-class Notification(val from: User, val type: String, val data: DataInvite, val to: User)  {
+class Notification(val from: User, val type: String, val data: DataNotification, val to: User)  {
 
     var uid : String? = null
 
-
+    companion object{
+        fun addNotification(notif: Notification): Task<DocumentReference> {
+            var db: FirebaseFirestore = Firebase.firestore;
+            return db.collection("notifications")
+                .add(notif.getHashMap())
+        }
+    }
 
     fun getHashMap(): HashMap<String, Any> {
         return hashMapOf(
@@ -21,6 +31,4 @@ class Notification(val from: User, val type: String, val data: DataInvite, val t
     }
 }
 
-class DataInvite(val message: String, val teamId: String){
-
-}
+data class DataNotification(val message: String, val id: String);

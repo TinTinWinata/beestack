@@ -5,10 +5,8 @@
     android:layout_height="match_parent"
     tools:context=".fragments.NotificationFragment"
     android:padding="20dp">
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_notification"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-
 </FrameLayout>

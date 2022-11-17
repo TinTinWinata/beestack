@@ -36,13 +36,20 @@ class NotificationAdapter (val act: FragmentActivity, val items : MutableList<No
                     Picasso.get().load(item.from.photoProfile!!).into(photo);
                 }
 
-                tvTitle.text = item.from.username + " has sent you a invitation"
-                root.setOnClickListener {
+                tvTitle.text = item.data.message
 
-                    TeamInviteDialog(item).show(
-                        act.supportFragmentManager, "TeamInviteDialog")
+                if(item.type.equals("answer-thread")){
+                    root.setOnClickListener{
+
+                    }
+                }else if(item.type.equals("team-invite")){
+                    root.setOnClickListener {
+                        TeamInviteDialog(item).show(
+                            act.supportFragmentManager, "TeamInviteDialog")
+                    }
                 }
             }
         }
     }
+
 }

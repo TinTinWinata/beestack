@@ -11,10 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import edu.bluejack22_1.beestack.databinding.FragmentNotificationBinding
-import edu.bluejack22_1.beestack.model.CurrentUser
-import edu.bluejack22_1.beestack.model.DataInvite
-import edu.bluejack22_1.beestack.model.Notification
-import edu.bluejack22_1.beestack.model.User
+import edu.bluejack22_1.beestack.model.*
 
 class NotificationFragment : Fragment() {
 
@@ -42,8 +39,6 @@ class NotificationFragment : Fragment() {
 
     private fun fetchNotification() {
         val db = Firebase.firestore;
-
-
         db.collection("notifications")
             .whereEqualTo("to.uid", CurrentUser.uid)
             .addSnapshotListener { value, error ->
@@ -59,7 +54,7 @@ class NotificationFragment : Fragment() {
                         val item = Notification(
                             User.fromHashMap(from as HashMap<String, String>),
                             type,
-                            DataInvite(data["message"]!!, data["teamId"]!!),
+                            DataNotification(data["message"]!!, data["id"]!!),
                             User.fromHashMap(to as HashMap<String, String>)
                         )
                         item.setId(doc.id)

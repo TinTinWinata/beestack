@@ -11,7 +11,6 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.marginTop
 import androidx.core.view.setPadding
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.ktx.firestore
@@ -128,10 +127,9 @@ class ThreadDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun isOwner(thread : Thread) : Boolean{
+    private fun isOwner(thread : Thread) : Boolean {
         return CurrentUser.uid.equals(thread.user!!.uid);
     }
-
 
     private fun setUpVoteDownVoteListener(thread : Thread){
         binding.bottomCountIV.setOnClickListener {
@@ -142,6 +140,19 @@ class ThreadDetailActivity : AppCompatActivity() {
         binding.topCountIV.setOnClickListener {
             thread.topCount += 1;
             thread.update();
+        }
+    }
+
+    private fun sendNotification(thread: Thread){
+        if(thread.user != null){
+            Notification.addNotification(Notification(
+                from = CurrentUser.getUser(),
+                to = thread.user!!,
+                type = "answer-thread",
+                data = DataNotification(
+                    CurrentUser.username.toString() + " has answered your "+  thread.title+" thread!",
+                    thread.uid)
+            ))
         }
     }
 
@@ -185,7 +196,6 @@ class ThreadDetailActivity : AppCompatActivity() {
                             val location:String = doc.data!!.get("location").toString();
                             val username = doc.data!!.get("username").toString();
                             val url = doc.data!!.get("photo_profile_url").toString()
-
                             val user = User(doc.id, username, email, location, url);
                             val answer = Answer(user, value, uid= answerId, localThread,
                                 topCount = topCount.toInt(), downCount = downCount.toInt(),comments= comments)
@@ -234,6 +244,7 @@ class ThreadDetailActivity : AppCompatActivity() {
             .addOnSuccessListener {
                 binding.answerET.setText("");
                 Toast.makeText(this, "Succesfully Answer", Toast.LENGTH_SHORT).show()
+                sendNotification(thread);
             }
             .addOnFailureListener{
                 Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()

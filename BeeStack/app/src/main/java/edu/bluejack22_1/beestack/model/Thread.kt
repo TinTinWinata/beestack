@@ -48,7 +48,6 @@ class Thread(user:User? = null, desc:String = "", title:String = "", uid:String 
     }
 
     public fun getNewHashMap() : HashMap<String, String>{
-
 //        Get object map
         val formatter : DateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")
         return hashMapOf(

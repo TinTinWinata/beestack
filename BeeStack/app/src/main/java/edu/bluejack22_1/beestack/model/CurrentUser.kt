@@ -145,18 +145,18 @@ object CurrentUser {
         this.email = "";
         this.location = "";
         this.username = "";
+        this.photoProfileBitmap = null;
+        this.photoProfileURL = ""
+        this.uid= ""
+        this.email = "";
+        this.username = "";
+        this.location = "";
+        this.teamId = "";
     }
 
     fun logout(){
         val firebaseAuth = FirebaseAuth.getInstance()
         firebaseAuth.signOut()
         emptyAllAttr()
-        this.photoProfileBitmap = null;
-        this.photoProfileURL = ""
-     this.uid= ""
-        this.email = "";
-        this.username = "";
-        this.location = "";
-        this.teamId = "";
     }
 }

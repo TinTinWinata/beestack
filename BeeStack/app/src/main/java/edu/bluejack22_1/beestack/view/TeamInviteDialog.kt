@@ -45,7 +45,6 @@ class TeamInviteDialog(val item: Notification) : DialogFragment() {
     }
 
     fun removeNotification(){
-
         db.collection("notifications")
             .document(item.uid!!)
             .delete()
@@ -55,13 +54,11 @@ class TeamInviteDialog(val item: Notification) : DialogFragment() {
     }
 
     fun updateTeam(){
-        Log.d("TEST", activity.toString())
-
         db.collection("users")
-            .document(CurrentUser.uid).update("team_id",item.data.teamId).addOnSuccessListener {
+            .document(CurrentUser.uid).update("team_id",item.data.id).addOnSuccessListener {
                 (activity as HomeActivity).replaceFragment(TeamDetailFragment().apply {
                     arguments = Bundle().apply {
-                        putString("teamId", item.data.teamId)
+                        putString("teamId", item.data.id)
                     }
                 });
             }
