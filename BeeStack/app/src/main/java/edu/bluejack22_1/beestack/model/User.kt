@@ -10,7 +10,10 @@ import java.io.Serializable
 class User(var uid:String, var username: String, var email: String, var location:String, var photoProfile: String? = null): Serializable {
 
     companion object{
-        fun fromHashMapNoPhoto(hashMap: HashMap<String, String>): User {
+        fun fromHashMap(hashMap: HashMap<String, String>): User {
+            if(hashMap.containsKey("photoProfile")){
+                return User(hashMap["uid"]!!, hashMap["username"]!!, hashMap["email"]!!, hashMap["location"]!!, hashMap["photoProfile"]);
+            }
             return User(hashMap["uid"]!!, hashMap["username"]!!, hashMap["email"]!!, hashMap["location"]!!);
         }
     }

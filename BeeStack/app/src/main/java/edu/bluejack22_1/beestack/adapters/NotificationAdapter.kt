@@ -1,7 +1,9 @@
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import edu.bluejack22_1.beestack.databinding.NotificationItemBinding
 import edu.bluejack22_1.beestack.model.Notification
 import edu.bluejack22_1.beestack.view.TeamInviteDialog
@@ -27,7 +29,13 @@ class NotificationAdapter (val act: FragmentActivity, val items : MutableList<No
 
 
         fun bind(item: Notification){
+
             binding.apply {
+
+                if(item.from.photoProfile != "null"){
+                    Picasso.get().load(item.from.photoProfile!!).into(photo);
+                }
+
                 tvTitle.text = item.from.username + " has sent you a invitation"
                 root.setOnClickListener {
 
