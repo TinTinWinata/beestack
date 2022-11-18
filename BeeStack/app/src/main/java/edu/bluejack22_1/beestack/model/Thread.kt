@@ -27,10 +27,14 @@ class Thread(user:User? = null, desc:String = "", title:String = "", uid:String 
     var answer: Int = answer;
     var view: Int = view;
 
+
+
     public fun getAnswerCollection(): Task<QuerySnapshot> {
         val db = Firebase.firestore;
         return db.collection("threads/${this.uid}/answers").get();
     }
+
+
 
     override fun getHashMap() : HashMap<String, String>{
 //        Get object map

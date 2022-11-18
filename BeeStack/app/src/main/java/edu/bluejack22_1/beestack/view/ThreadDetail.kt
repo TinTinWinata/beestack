@@ -7,11 +7,14 @@ import edu.bluejack22_1.beestack.activities.HomeActivity
 import edu.bluejack22_1.beestack.activities.ThreadDetailActivity
 
 class ThreadDetail {
-    fun navigate(context: Context?, thread : edu.bluejack22_1.beestack.model.Thread) {
-        if(context != null){
-            val i = Intent(context, ThreadDetailActivity::class.java);
-            i.putExtra("thread", thread);
-            context.startActivity(i);
+
+    companion object{
+        fun navigate(context: Context?, thread : edu.bluejack22_1.beestack.model.Thread) {
+            if(context != null){
+                val i = Intent(context, ThreadDetailActivity::class.java);
+                i.putExtra("thread", thread);
+                context.startActivity(i);
+            }
         }
     }
 }

@@ -3,12 +3,10 @@ package edu.bluejack22_1.beestack.activities
 import ThreadAdapter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import edu.bluejack22_1.beestack.databinding.ActivityTagDetailBinding
-import edu.bluejack22_1.beestack.databinding.FragmentSearchBinding
 import edu.bluejack22_1.beestack.model.Tag
 import edu.bluejack22_1.beestack.model.Thread
 import edu.bluejack22_1.beestack.model.User

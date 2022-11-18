@@ -15,6 +15,10 @@ class Notification(val from: User, val type: String, val data: DataNotification,
             return db.collection("notifications")
                 .add(notif.getHashMap())
         }
+        fun delete(id: String): Task<Void> {
+            val db = Firebase.firestore;
+            return db.collection("notifications").document(id).delete();
+        }
     }
 
     fun getHashMap(): HashMap<String, Any> {

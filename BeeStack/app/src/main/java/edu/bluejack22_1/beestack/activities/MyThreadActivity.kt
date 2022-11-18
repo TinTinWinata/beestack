@@ -1,20 +1,15 @@
 package edu.bluejack22_1.beestack.activities
 
 import ThreadAdapter
-import android.content.ContentValues
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import edu.bluejack22_1.beestack.databinding.ActivityMyThreadBinding
-import edu.bluejack22_1.beestack.databinding.ActivityProfileBinding
-import edu.bluejack22_1.beestack.databinding.FragmentHomeBinding
 import edu.bluejack22_1.beestack.model.CurrentUser
 import edu.bluejack22_1.beestack.model.Thread
-import edu.bluejack22_1.beestack.model.User
 import edu.bluejack22_1.beestack.view.Home
 
 class MyThreadActivity : AppCompatActivity() {

@@ -69,8 +69,6 @@ class ThreadDetailActivity : AppCompatActivity() {
 
     override fun onStop() {
         super.onStop()
-
-        Log.d("test", currentThread.toString())
         if(currentThread != null)
         {
             currentThread!!.view += 1;
@@ -202,10 +200,7 @@ class ThreadDetailActivity : AppCompatActivity() {
                             answerList.add(answer);
                             applyAdapter()
                         }
-                    }.addOnFailureListener{
-
                     }
-
             }
 
         }

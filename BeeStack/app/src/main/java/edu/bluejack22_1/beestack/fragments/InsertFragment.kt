@@ -92,12 +92,12 @@ class InsertFragment : Fragment() {
 
     private fun showDialog(){
         val alert: AlertDialog.Builder = AlertDialog.Builder(context)
-        alert.setTitle("Bee Chase")
+        alert.setTitle("Bee Stack")
         alert.setMessage("The tag you've been add is not available. Do you want to create a new tag with this name ? ")
         alert.setPositiveButton("Create", DialogInterface.OnClickListener { dialogInterface, i ->
             navigateToCreateTag()
         })
-        alert.setNegativeButton("Create", DialogInterface.OnClickListener { dialogInterface, i ->
+        alert.setNegativeButton("Back", DialogInterface.OnClickListener { dialogInterface, i ->
 
         })
         alert.create().show()

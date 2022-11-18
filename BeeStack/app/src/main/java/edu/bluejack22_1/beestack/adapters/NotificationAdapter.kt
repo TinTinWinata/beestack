@@ -1,12 +1,19 @@
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
 import edu.bluejack22_1.beestack.databinding.NotificationItemBinding
 import edu.bluejack22_1.beestack.model.Notification
+import edu.bluejack22_1.beestack.model.Thread
+import edu.bluejack22_1.beestack.model.User
 import edu.bluejack22_1.beestack.view.TeamInviteDialog
+import edu.bluejack22_1.beestack.view.ThreadDetail
 
 class NotificationAdapter (val act: FragmentActivity, val items : MutableList<Notification>)
     : RecyclerView.Adapter<NotificationAdapter.ViewHolder>(){
@@ -40,7 +47,39 @@ class NotificationAdapter (val act: FragmentActivity, val items : MutableList<No
 
                 if(item.type.equals("answer-thread")){
                     root.setOnClickListener{
+                        val db : FirebaseFirestore = Firebase.firestore;
+                        db.collection("threads").document(item.data.id).get().addOnSuccessListener {
+                            doc ->
+//                  Get Thread Data
+                            val title = doc.getString("title").toString()
+                            val description = doc.getString("description").toString()
+                            val user_id = doc.getString("user_id").toString()
+                            val createdAt = doc.getString("created_at").toString();
+                            val topCount = doc.getString("top_count").toString();
+                            val downCount = doc.getString("down_count").toString();
+                            val view = doc.getString("view").toString();
+                            val uid = doc.id
+//                  Then Get User Data
+                            val docRef = db.collection("users").document(user_id);
+                            docRef.get()
+                                .addOnSuccessListener { userDoc ->
+                                    if (userDoc != null) {
+                                        val username = userDoc.data!!["username"].toString()
+                                        val email = userDoc.data!!["email"].toString()
+                                        val location = userDoc.data!!["location"].toString()
+                                        val photoProfile = userDoc.data!!["photo_profile_url"].toString();
+                                        val user: User =
+                                            User(userDoc.id, username, email, location, photoProfile)
 
+//                           Add add getted data to the thread list (Vector)
+                                        val thread: Thread = Thread(uid =uid, title = title, desc = description, user_id = user_id, user = user, createdAt = createdAt, topCount = topCount.toInt(), downCount = downCount.toInt(), view = view.toInt());
+                                        Notification.delete(item.uid.toString()).addOnSuccessListener {
+//                                            ThreadDetail.navigate(itemView.context, thread);
+                                            Toast.makeText(itemView.context, "Deleted " + item.uid.toString(), Toast.LENGTH_SHORT).show()
+                                        }
+                                    }
+                                }
+                        }
                     }
                 }else if(item.type.equals("team-invite")){
                     root.setOnClickListener {
