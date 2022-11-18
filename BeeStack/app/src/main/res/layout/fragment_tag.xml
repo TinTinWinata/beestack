@@ -31,7 +31,7 @@
                 android:textColor="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tags"
+                android:text="@string/tags"
                 android:layout_gravity="center"
                 android:textStyle="bold"
                 android:textSize="30sp"
@@ -44,7 +44,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:text="Create New Tag"
+                android:text="@string/create_new_tag"
                 android:src="@drawable/ic_baseline_white_add_24"
                 />
         </LinearLayout>
@@ -54,7 +54,7 @@
             android:textColor="@color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tag is a categorizing your thread with other, similar question. Create your own tag"
+            android:text="@string/tag_is_a_categorizing_your_thread_with_other_similar_question_create_your_own_tag"
             android:textStyle="normal"
             android:textSize="15sp"
             />
@@ -71,7 +71,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_width="200dp"
                 android:layout_height="match_parent"
-                android:hint="Search"
+                android:hint="@string/search"
                 android:layout_marginLeft="10dp"
                  app:layout_constraintTop_toTopOf="parent"
                 app:endIconMode="clear_text"
@@ -93,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="@drawable/orange_background"
-                android:text="Search Tag"
+                android:text="@string/search_tag"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:textColor="@color/white" />

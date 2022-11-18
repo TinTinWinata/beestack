@@ -49,7 +49,6 @@ class ThreadDetailActivity : AppCompatActivity() {
 //        Set Data
         Firebase.firestore.collection("threads").document(passingThread.uid).addSnapshotListener {
             doc, e->
-
             if(e != null){
                 return@addSnapshotListener
             }

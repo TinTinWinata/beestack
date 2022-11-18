@@ -14,9 +14,16 @@
         android:background="@color/white"
         android:elevation="4dp"
         >
-    <include
-        layout="@layout/toolbar_layout"
-        />
+        <TextView
+            android:id="@+id/pageName"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="30dp"
+            android:gravity="center"
+            android:text="Page"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            />
     </androidx.appcompat.widget.Toolbar>
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,7 +41,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tag Name"
+                android:text="@string/tag_name"
                 android:textStyle="bold"
                 android:layout_marginRight="20dp"
                 />
@@ -52,7 +59,7 @@
             android:layout_height="200dp"
             android:gravity="left|top"
             android:padding="10dp"
-            android:hint="Describe this tag"
+            android:hint="@string/describe_this_tag"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             />
@@ -62,7 +69,7 @@
             android:layout_height="wrap_content"
             android:background="@color/blue_200"
             android:textColor="@color/white"
-            android:text="Create Tag"
+            android:text="@string/create_tag"
             />
     </LinearLayout>
 

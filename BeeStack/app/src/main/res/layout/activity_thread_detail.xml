@@ -18,7 +18,7 @@
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Title"
+            android:text="@string/title"
             android:textSize="30sp"
             android:textStyle="bold"
             android:layout_gravity="center"
@@ -33,14 +33,14 @@
                 android:layout_marginLeft="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Update"
+                android:text="@string/update"
                 />
             <Button
                 android:id="@+id/deleteBtn"
                 android:layout_marginLeft="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Delete"
+                android:text="@string/delete"
             />
         </LinearLayout>
 
@@ -56,7 +56,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Created at"
+            android:text="@string/created_at"
             />
         <TextView
             android:id="@+id/createdAt"
@@ -115,7 +115,7 @@
         android:id="@+id/description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Title"
+        android:text="@string/title"
         android:textSize="15sp"
         android:textStyle="normal"
         />
@@ -170,7 +170,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Answer"
+                android:text="@string/answer"
                 />
         </LinearLayout>
 

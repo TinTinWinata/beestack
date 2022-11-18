@@ -26,7 +26,7 @@
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Invite other users"/>
+            android:text="@string/invite_other_users"/>
     </LinearLayout>
 
     <ScrollView

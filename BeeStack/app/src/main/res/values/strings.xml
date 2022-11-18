@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Bee Stack</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_forgot_password">ForgotPasswordActivity</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="title_activity_forgot_password" translatable="false">ForgotPasswordActivity</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
@@ -13,4 +13,65 @@
     <string name="login_failed">"Login failed"</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="last_password">Last Password</string>
+    <string name="new_password">New Password</string>
+    <string name="change_password">Change Password</string>
+    <string name="tag_name">Tag Name</string>
+    <string name="describe_this_tag">Describe this tag</string>
+    <string name="create_tag">Create Tag</string>
+    <string name="email">Email</string>
+    <string name="submit">Submit</string>
+    <string name="name">Name</string>
+    <string name="you_don_t_have_any_threads">You don\'t have any threads</string>
+    <string name="back">Back</string>
+    <string name="location">Location</string>
+    <string name="logout">Logout</string>
+    <string name="description">Description</string>
+    <string name="searchfind">Search ...</string>
+    <string name="search">Search</string>
+    <string name="add_comment">Add Comment...</string>
+    <string name="send">Send</string>
+    <string name="title">Title</string>
+    <string name="update">Update</string>
+    <string name="delete">Delete</string>
+    <string name="created_at">Created at</string>
+    <string name="answer">Answer</string>
+    <string name="value">Value</string>
+    <string name="create_team">Create Team</string>
+    <string name="team_name">Team Name</string>
+    <string name="tell_us_about_your_team_name">Tell us about your team name</string>
+    <string name="team_description">Team Description</string>
+    <string name="tell_us_about_your_team_description">Tell us about your team description</string>
+    <string name="team_motto">Team Motto</string>
+    <string name="tell_us_about_your_team_motto">Tell us about your team motto</string>
+    <string name="all">All</string>
+    <string name="todo">TODO</string>
+    <string name="input_thread_description">Input thread description ...</string>
+    <string name="tag_find" translatable="false">Tag..</string>
+    <string name="create_thread">Create Thread</string>
+    <string name="invite_other_users">Invite other users</string>
+    <string name="password">Password</string>
+    <string name="login" translatable="false">Login</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="login_with_google">Login With Google</string>
+    <string name="username">Username</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="register">Register</string>
+    <string name="tags">Tags</string>
+    <string name="create_new_tag">Create New Tag</string>
+    <string name="search_tag">Search Tag</string>
+    <string name="tag_is_a_categorizing_your_thread_with_other_similar_question_create_your_own_tag">Tag is a categorizing your thread with other, similar question. Create your own tag</string>
+    <string name="you_don_t_have_a_team">You don\'t have a team ...</string>
+    <string name="invite_member">Invite Member</string>
+    <string name="do_you_want_to_join_the_team">Do you want to join the team ?</string>
+    <string name="decline">Decline</string>
+    <string name="accept">Accept</string>
+    <string name="view_profile">View profile</string>
+    <string name="change_photo_profile">Change Photo Profile</string>
+    <string name="home">Home</string>
+    <string name="insert">Insert</string>
+    <string name="tag">Tag</string>
+    <string name="notifications">Notifications</string>
+    <string name="team">Team</string>
+    <string name="my_thread">My Thread</string>
 </resources>

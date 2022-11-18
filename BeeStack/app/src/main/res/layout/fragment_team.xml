@@ -20,7 +20,7 @@
             android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="You don't have a team ..."
+            android:text="@string/you_don_t_have_a_team"
             android:textStyle="bold"
             android:layout_margin="20dp"
             android:textSize="20sp"
@@ -32,13 +32,13 @@
             android:layout_margin="10dp"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:text="Create Team"
+            android:text="@string/create_team"
             android:backgroundTint="#D9D9D9"/>
 
         <Button
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:text="Back"
+            android:text="@string/back"
             android:backgroundTint="@color/white"
             android:textColor="#4F4F4F"
             android:elevation="200dp"/>

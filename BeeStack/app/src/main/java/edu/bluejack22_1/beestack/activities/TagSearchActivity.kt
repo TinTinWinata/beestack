@@ -24,7 +24,15 @@ class TagSearchActivity : AppCompatActivity() {
         binding = ActivityTagSearchBinding.inflate(layoutInflater);
         val searchedText =intent.getStringExtra("searched_text").toString();
         searchTag(searchedText);
+        setToolbar();
         setContentView(binding.root)
+    }
+
+    fun setToolbar(){
+        setSupportActionBar(binding.toolbar)
+        binding.pageName.setText("Create Tag");
+        supportActionBar?.setDisplayHomeAsUpEnabled(true);
+        supportActionBar?.setDisplayShowTitleEnabled(false);
     }
 
 

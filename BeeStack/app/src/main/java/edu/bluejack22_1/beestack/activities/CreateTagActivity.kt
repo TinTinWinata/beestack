@@ -55,12 +55,11 @@ class CreateTagActivity : AppCompatActivity() {
         }
     }
 
-    private fun navigateBackToHome(){
-    }
-
     fun setToolbar(){
         setSupportActionBar(binding.toolbar)
+        binding.pageName.setText("Create Tag");
         supportActionBar?.setDisplayHomeAsUpEnabled(true);
+        supportActionBar?.setDisplayShowTitleEnabled(false);
     }
 
     override fun onSupportNavigateUp(): Boolean {

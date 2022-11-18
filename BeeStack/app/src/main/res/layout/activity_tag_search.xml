@@ -7,9 +7,29 @@
     tools:context=".activities.TagSearchActivity"
     >
 
+    <androidx.appcompat.widget.Toolbar
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:elevation="4dp"
+        >
+        <TextView
+            android:id="@+id/pageName"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="30dp"
+            android:gravity="center"
+            android:text="Page"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            />
+    </androidx.appcompat.widget.Toolbar>
+
     <LinearLayout
         android:id="@+id/headerLayout"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -17,12 +37,12 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Search ..."
+        android:hint="@string/searchfind"
         />
         <Button
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="Search"
+            android:text="@string/search"
             />
     </LinearLayout>
 

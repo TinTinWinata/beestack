@@ -24,7 +24,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email"
+            android:hint="@string/email"
             app:endIconMode="clear_text"
             app:startIconDrawable="@drawable/ic_baseline_email_24"
             >
@@ -37,7 +37,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Username"
+            android:hint="@string/username"
             android:layout_marginTop="10dp"
             app:endIconMode="clear_text"
             app:startIconDrawable="@drawable/ic_baseline_person_24"
@@ -54,10 +54,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             app:endIconMode="password_toggle"
-            android:hint="Password"
+            android:hint="@string/password"
             >
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/password"
+                android:inputType="textPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 />
@@ -68,11 +69,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             app:endIconMode="password_toggle"
-            android:hint="Confirm Password"
+            android:hint="@string/confirm_password"
             >
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/confirmPassword"
                 android:layout_width="match_parent"
+                android:inputType="textPassword"
                 android:layout_height="wrap_content"
                 />
         </com.google.android.material.textfield.TextInputLayout>
@@ -98,7 +100,7 @@
             android:id="@+id/registerBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Register"
+            android:text="@string/register"
             android:backgroundTint="@color/orange_200"
             />
     </LinearLayout>

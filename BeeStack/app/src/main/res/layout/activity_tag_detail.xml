@@ -6,8 +6,28 @@
     android:layout_height="match_parent"
     tools:context=".activities.TagDetailActivity">
 
-    <LinearLayout
+    <androidx.appcompat.widget.Toolbar
         app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:elevation="4dp"
+        >
+        <TextView
+            android:id="@+id/pageName"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="30dp"
+            android:gravity="center"
+            android:text="Page"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            />
+    </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_width="match_parent"
@@ -15,7 +35,6 @@
         android:id="@+id/headerLayout"
         android:orientation="vertical"
         >
-
         <LinearLayout
             android:padding="13dp"
             android:layout_width="match_parent"
@@ -23,14 +42,14 @@
             >
             <TextView
                 android:textStyle="bold"
-                android:text="Name"
+                android:text="@string/name"
                 android:id="@+id/tagName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 />
             <TextView
                 android:layout_marginLeft="10dp"
-            android:text="Description"
+            android:text="@string/description"
             android:id="@+id/tagDesc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

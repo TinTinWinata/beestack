@@ -14,14 +14,14 @@
             android:id="@+id/commentValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Value"
+            android:text="@string/value"
             />
         <TextView
             android:layout_marginLeft="5dp"
             android:id="@+id/commentOwnerName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Value"
+            android:text="@string/value"
             />
     </LinearLayout>
     <View

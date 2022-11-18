@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="Home"
+    <item android:title="@string/home"
         android:id="@+id/home"
         android:icon="@drawable/ic_baseline_home_24"
         />
-    <item android:title="Search"
+    <item android:title="@string/search"
         android:id="@+id/search"
         android:icon="@drawable/ic_baseline_search_24"
         />
-    <item android:title="Insert"
+    <item android:title="@string/insert"
         android:id="@+id/insert"
         android:icon="@drawable/ic_baseline_add_circle_24"
         />
-    <item android:title="Tag"
+    <item android:title="@string/tag"
         android:id="@+id/tag"
         android:icon="@drawable/ic_baseline_alternate_email_24"
         />
-    <item android:title="Notifications"
+    <item android:title="@string/notifications"
         android:id="@+id/notification"
         android:icon="@drawable/ic_baseline_notifications_24"
         />

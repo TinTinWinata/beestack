@@ -5,12 +5,12 @@
         <item
             android:icon="@drawable/ic_baseline_settings_24"
             android:id="@+id/drawing_nav_my_thread"
-            android:title="My Thread"
+            android:title="@string/my_thread"
             />
         <item
             android:icon="@drawable/ic_baseline_group_24"
             android:id="@+id/drawing_nav_team"
-            android:title="Team"
+            android:title="@string/team"
             />
 
     </group>

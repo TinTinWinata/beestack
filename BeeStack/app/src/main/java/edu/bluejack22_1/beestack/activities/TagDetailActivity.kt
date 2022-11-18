@@ -27,9 +27,21 @@ class TagDetailActivity : AppCompatActivity() {
         val tag : Tag= intent.getSerializableExtra("tag") as Tag
         searchThread(tag.uid);
         setTagDetail(tag);
+        setToolbar();
         setContentView(binding.root)
     }
 
+    fun setToolbar(){
+        setSupportActionBar(binding.toolbar)
+        binding.pageName.setText("Tag Detail");
+        supportActionBar?.setDisplayHomeAsUpEnabled(true);
+        supportActionBar?.setDisplayShowTitleEnabled(false);
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return super.onSupportNavigateUp()
+    }
 
     private fun searchThread(uid :String?){
         if(uid != null){

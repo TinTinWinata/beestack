@@ -30,7 +30,7 @@
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:background="@null"
-                android:hint="Title"
+                android:hint="@string/title"
                 android:importantForAutofill="no"
                 android:inputType="text" />
 
@@ -40,7 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/ic_baseline_image_24"
-                android:contentDescription="TODO" />
+                android:contentDescription="@string/todo" />
 
         </LinearLayout>
 
@@ -59,7 +59,7 @@
                 android:layout_marginTop="10dp"
                 android:background="@null"
                 android:gravity="left|top"
-                android:hint="Input thread description ..."
+                android:hint="@string/input_thread_description"
                 android:importantForAutofill="no"
                 android:inputType="textMultiLine"
                 android:paddingVertical="12dp"
@@ -104,7 +104,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:hint="Tag.."
+                    android:hint="@string/tag_find"
                     android:textSize="12sp"
                     android:background="@android:color/transparent"
                     />
@@ -114,7 +114,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/blue_200"
-                android:text="Create Thread"
+                android:text="@string/create_thread"
                 />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
