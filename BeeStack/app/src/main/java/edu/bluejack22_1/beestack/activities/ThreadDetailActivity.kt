@@ -52,7 +52,7 @@ class ThreadDetailActivity : AppCompatActivity() {
             if(e != null){
                 return@addSnapshotListener
             }
-            if(doc != null)
+            if(doc != null && doc.exists())
             {
                 val createdAt = doc.getString("created_at");
                 val downCount = doc.getString("down_count");
@@ -73,7 +73,6 @@ class ThreadDetailActivity : AppCompatActivity() {
             currentThread!!.view += 1;
             currentThread!!.update()
         }
-
     }
 
     private fun setOwnerListener(thread: Thread){
@@ -116,6 +115,7 @@ class ThreadDetailActivity : AppCompatActivity() {
             Firebase.firestore.collection("threads")
                 .document(thread.uid)
                 .delete().addOnSuccessListener {
+                    currentThread = null;
                     Toast.makeText(this, "Succesfully delete thread!",
                         Toast.LENGTH_SHORT).show()
                     finish();
@@ -167,6 +167,7 @@ class ThreadDetailActivity : AppCompatActivity() {
                 Log.w(ContentValues.TAG, "Listen failed.", e)
                 return@addSnapshotListener
             }
+            Log.d("tintin", "snapshot to answer!");
 
             for (doc in value!!) {
 //                Get Every doc available

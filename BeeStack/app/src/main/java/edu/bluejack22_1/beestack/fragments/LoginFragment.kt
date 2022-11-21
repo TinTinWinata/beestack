@@ -72,7 +72,7 @@ class LoginFragment : Fragment() {
                         val intent = Intent(activity, HomeActivity::class.java);
                         startActivity(intent);
                     }else{
-                        Toast.makeText(context, it.exception.toString(), Toast.LENGTH_LONG).show()
+                        Toast.makeText(context, it.exception!!.message.toString(), Toast.LENGTH_LONG).show()
                     }
                 }
             }

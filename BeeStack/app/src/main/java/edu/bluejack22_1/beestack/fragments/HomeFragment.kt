@@ -115,13 +115,10 @@ class HomeFragment : Fragment() {
         val db = Firebase.firestore;
         db.collection("threads")
             .orderBy("created_at", Query.Direction.DESCENDING)
-            .addSnapshotListener { value, e ->
+            .get().addOnSuccessListener { value ->
                 threadList.clear();
 
-                if (e != null) {
-                    Log.w(ContentValues.TAG, "Listen failed.", e)
-                    return@addSnapshotListener
-                }
+
                 for (doc in value!!) {
 
 //                  Get Thread Data
