@@ -99,8 +99,9 @@ class TagDetailActivity : AppCompatActivity() {
                                 val email = doc.data!!["email"].toString()
                                 val location = doc.data!!["location"].toString()
                                 val url = doc.data!!["photo_profile_url"].toString();
+                                var tagName = doc.data!!["tag_name"].toString();
 
-                                val user: User = User(doc.id, username, email, location, url);
+                                val user: User = User(doc.id, username, email, location, url, tagName = tagName);
 
 //                           Add add getted data to the thread list (Vector)
                                 threadList.add(Thread(uid =uid, title = title, desc = description, user_id = user_id, user = user, createdAt = createdAt, topCount = topCount.toInt(), downCount = downCount.toInt()));

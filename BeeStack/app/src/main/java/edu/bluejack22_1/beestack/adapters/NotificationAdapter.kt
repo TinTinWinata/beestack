@@ -39,7 +39,7 @@ class NotificationAdapter (val act: FragmentActivity, val items : MutableList<No
 
             binding.apply {
 
-                if(item.from.photoProfile != "null"){
+                if(item.from.photoProfile != null && item.from.photoProfile!!.isNotEmpty()){
                     Picasso.get().load(item.from.photoProfile!!).into(photo);
                 }
 
@@ -68,8 +68,9 @@ class NotificationAdapter (val act: FragmentActivity, val items : MutableList<No
                                         val email = userDoc.data!!["email"].toString()
                                         val location = userDoc.data!!["location"].toString()
                                         val photoProfile = userDoc.data!!["photo_profile_url"].toString();
+                                        var tagName = doc.data!!["tag_name"].toString();
                                         val user: User =
-                                            User(userDoc.id, username, email, location, photoProfile)
+                                            User(userDoc.id, username, email, location, photoProfile, tagName= tagName)
 
 //                           Add add getted data to the thread list (Vector)
                                         val thread: Thread = Thread(uid =uid, title = title, desc = description, user_id = user_id, user = user, createdAt = createdAt, topCount = topCount.toInt(), downCount = downCount.toInt(), view = view.toInt());

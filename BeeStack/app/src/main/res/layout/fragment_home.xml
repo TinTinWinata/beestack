@@ -12,7 +12,7 @@
         android:layout_gravity="left"
         android:layout_margin="15dp"
         android:layout_height="wrap_content"
-        android:hint="@string/all"
+        android:hint="@string/created_at"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         >
         <AutoCompleteTextView

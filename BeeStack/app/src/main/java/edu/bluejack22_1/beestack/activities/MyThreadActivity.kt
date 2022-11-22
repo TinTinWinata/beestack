@@ -3,6 +3,7 @@ package edu.bluejack22_1.beestack.activities
 import ThreadAdapter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.ktx.firestore
@@ -32,6 +33,7 @@ class MyThreadActivity : AppCompatActivity() {
     private fun checkThread(){
         //        If there's no thread available set no threads layout
         if(threadList.size == 0){
+            binding.noThreadLayout.bringToFront();
             binding.noThreadLayout.visibility = View.VISIBLE;
         }else{
             binding.noThreadLayout.visibility = View.INVISIBLE;
@@ -51,6 +53,7 @@ class MyThreadActivity : AppCompatActivity() {
     private fun setListener(){
         binding.backBtn.setOnClickListener {
             Home.navigate(this);
+            finish();
         }
     }
 

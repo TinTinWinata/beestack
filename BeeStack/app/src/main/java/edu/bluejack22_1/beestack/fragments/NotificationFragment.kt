@@ -42,6 +42,7 @@ class NotificationFragment : Fragment() {
         db.collection("notifications")
             .whereEqualTo("to.uid", CurrentUser.uid)
             .addSnapshotListener { value, error ->
+                notificationList.clear();
                 if (value != null) {
                     for (doc in value) {
                         Log.d("TEST", "Masuk")

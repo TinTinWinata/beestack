@@ -113,5 +113,6 @@ class ProfileActivity : AppCompatActivity() {
         binding.name.text = CurrentUser.username;
         binding.location.text = CurrentUser.location;
         binding.email.text = CurrentUser.email;
+        binding.tagName.text = CurrentUser.tagName;
     }
 }

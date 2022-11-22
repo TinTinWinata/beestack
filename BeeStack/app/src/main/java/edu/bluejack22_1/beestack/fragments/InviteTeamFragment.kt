@@ -59,8 +59,9 @@ class InviteTeamFragment : Fragment() {
                     val url = doc.data["photo_profile_url"].toString();
 
                     val uid = doc.id
+                    var tagName = doc.data!!["tag_name"].toString();
 
-                    userList.add(User(uid=uid, username = username, email = email, location = location, photoProfile = url));
+                    userList.add(User(uid=uid, username = username, email = email, location = location, photoProfile = url, tagName = tagName));
                     applyAdapter();
                 }
             }

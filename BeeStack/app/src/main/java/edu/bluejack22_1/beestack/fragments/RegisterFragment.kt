@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import edu.bluejack22_1.beestack.R
+import edu.bluejack22_1.beestack.activities.AfterRegisterActivity
 import edu.bluejack22_1.beestack.activities.HomeActivity
 import edu.bluejack22_1.beestack.databinding.FragmentRegisterBinding
 import edu.bluejack22_1.beestack.model.CurrentUser
@@ -65,23 +66,21 @@ class RegisterFragment : Fragment() {
             }
 //          Validated
             else{
-                Log.d("test", selectedLocation.toString())
-
                 firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener{
                     if(it.isSuccessful){
                         Toast.makeText(context, "Succesfully register!", Toast.LENGTH_LONG).show();
-                        CurrentUser.username = username;
+                        CurrentUser.tagName = username;
                         CurrentUser.location = selectedLocation
 
                         //                        Login to user class
                         CurrentUser.login(firebaseAuth.currentUser!!.uid)
 
 //                                             v Call Parent Activity (because we call it in fragment)
-                        val intent = Intent(activity, HomeActivity::class.java);
+                        val intent = Intent(activity, AfterRegisterActivity::class.java);
                         startActivity(intent);
 
                     }else{
-                        Toast.makeText(context, it.exception.toString(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, it.exception!!.message.toString(), Toast.LENGTH_LONG).show();
                     }
                 }
             }

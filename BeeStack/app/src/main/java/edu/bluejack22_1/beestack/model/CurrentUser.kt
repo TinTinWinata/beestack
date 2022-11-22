@@ -17,6 +17,7 @@ object CurrentUser {
 
     var uid:String= ""
     var email:String = "";
+    var tagName:String = "";
     var username:String = "";
     var location:String = "";
     var teamId:String = "";
@@ -74,6 +75,7 @@ object CurrentUser {
                 this.location = snapshot.data!!.get("location").toString()
                 this.teamId = snapshot.data!!.get("team_id").toString();
                 this.photoProfileURL = snapshot.data!!.get("photo_profile_url").toString();
+                this.tagName = snapshot.data!!.get("tag_name").toString();
 
 //              Set bitmap for photo profile always when login
                 this.setBitmap()
@@ -90,12 +92,13 @@ object CurrentUser {
             "uid" to this.uid,
             "email" to this.email,
             "username" to this.username,
+            "tag_name" to this.tagName,
             "location" to this.location,
             "team_id" to this.teamId,
             "photo_profile_url" to this.photoProfileURL        )
     }
     public fun getUser(): User{
-        return User(uid= this.uid, username = this.username, email = this.email, location = this.location, photoProfile = this.photoProfileURL)
+        return User(uid= this.uid, username = this.username, email = this.email, location = this.location, photoProfile = this.photoProfileURL, this.tagName)
     }
 
     public fun update() : Task<Void>{

@@ -194,7 +194,8 @@ class ThreadDetailActivity : AppCompatActivity() {
                             val location:String = doc.data!!.get("location").toString();
                             val username = doc.data!!.get("username").toString();
                             val url = doc.data!!.get("photo_profile_url").toString()
-                            val user = User(doc.id, username, email, location, url);
+                            var tagName = doc.data!!["tag_name"].toString();
+                            val user = User(doc.id, username, email, location, url, tagName = tagName);
                             val answer = Answer(user, value, uid= answerId, localThread,
                                 topCount = topCount.toInt(), downCount = downCount.toInt(),comments= comments)
                             answerList.add(answer);

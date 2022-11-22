@@ -10,6 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BeeStack">
         <activity
+            android:name=".activities.AfterRegisterActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".activities.ThreadAnswerDetailActivity"
             android:exported="false">
             <meta-data

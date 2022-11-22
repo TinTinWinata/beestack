@@ -37,8 +37,7 @@ class TeamInviteAdapter(val ctx: FragmentActivity?, val items: MutableList<User>
                 tvUsername.text = item.username
                 inviteBtn.setOnClickListener {
                     addNotification(Notification(
-                        from = User(
-                              CurrentUser.uid, CurrentUser.username, CurrentUser.email, CurrentUser.location, CurrentUser.photoProfileURL),
+                        from = CurrentUser.getUser(),
                         to = item,
                         type = "team-invite",
                         data = DataNotification(

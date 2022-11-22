@@ -91,6 +91,8 @@ class TagFragment : Fragment() {
 
 //                Or just fetch in this intent ?
                 fetchTagWithName(searchedText);
+            }else{
+                fetchTag();
             }
         }
     }
@@ -109,8 +111,8 @@ class TagFragment : Fragment() {
                     val name = doc.data["name"].toString()
                     val description = doc.data["description"].toString()
                     tagList.add(Tag(doc.id, name, description))
-                    applyAdapter()
                 }
+                applyAdapter()
             }
     }
 

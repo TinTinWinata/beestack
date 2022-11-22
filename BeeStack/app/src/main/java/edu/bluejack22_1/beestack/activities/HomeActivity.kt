@@ -57,7 +57,7 @@ class HomeActivity : AppCompatActivity() {
 
 
 //      Change Toolbar name based on user name
-        binding.toolbarName.text = CurrentUser.username
+        binding.toolbarName.text = "@"+CurrentUser.tagName
         binding.toolbarImage.setImageBitmap(CurrentUser.photoProfileBitmap)
 
 

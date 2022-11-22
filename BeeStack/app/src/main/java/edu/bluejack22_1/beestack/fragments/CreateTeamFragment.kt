@@ -103,17 +103,21 @@ class CreateTeamFragment : Fragment() {
                 Toast.makeText(context, "Please insert team image!", Toast.LENGTH_SHORT).show();
                 return@setOnClickListener
             }
-            uploadImage().addOnSuccessListener {
-                snapshot ->
-                snapshot.storage.downloadUrl.addOnCompleteListener {
-                    it.addOnSuccessListener {
-                        val imageUrl = it.toString();
-                        val name = binding.etName.text.toString();
-                        val description = binding.etDesc.text.toString();
-                        val motto = binding.etMotto.text.toString();
 
-                        if(name != "" && description != "" && motto != "" && imageUrl != "")
-                        {
+            val name = binding.etName.text.toString();
+            val description = binding.etDesc.text.toString();
+            val motto = binding.etMotto.text.toString();
+
+            if(name.isEmpty() || description.isEmpty() || motto.isEmpty())
+            {
+                Toast.makeText(context, "Please validates all the inputes", Toast.LENGTH_SHORT).show();
+            }else{
+                uploadImage().addOnSuccessListener {
+                    snapshot ->
+                    snapshot.storage.downloadUrl.addOnCompleteListener {
+                        it.addOnSuccessListener {
+                            val imageUrl = it.toString();
+
                             db.collection("teams")
                                 .add(Team(name = name, description = description, motto = motto, photoUrl=imageUrl).getHashMap())
                                 .addOnSuccessListener { doc ->
@@ -128,12 +132,11 @@ class CreateTeamFragment : Fragment() {
                                             });
                                         }
                                 }
-                        }else{
-                            Toast.makeText(context, "Please validate all inputs!", Toast.LENGTH_SHORT).show();
+
                         }
                     }
-                }
-            };
+                };
+            }
         }
     }
 

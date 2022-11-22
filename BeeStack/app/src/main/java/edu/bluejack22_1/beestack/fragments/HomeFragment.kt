@@ -27,7 +27,7 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding;
     private lateinit var threadAdapter: ThreadAdapter
 
-    private val filterList  = arrayOf("All", "Views", "Vote", "Answer")
+    private val filterList  = arrayOf("Created At", "Views", "Vote", "Answer")
     private var selectedLocation:String = "";
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,12 +55,25 @@ class HomeFragment : Fragment() {
                 "Views" -> filterView()
                 "Answer" -> filterAnswer()
                 "Vote" -> filterVote()
-                "All" -> filterAll()
+                "Created At" -> filterAll()
             }
         }
     }
 
     private fun filterAll(){
+        //        Thread List Bubble Sort with Answer
+        for (pass in 0 until (threadList.size - 1)) {
+            // A single pass of bubble sort
+            for (currentPosition in 0 until (threadList.size - pass - 1)) {
+                // This is a single step
+                if (threadList[currentPosition].createdAt < threadList[currentPosition + 1].createdAt) {
+                    val tmp : Thread = threadList[currentPosition]
+                    threadList[currentPosition] = threadList[currentPosition + 1]
+                    threadList[currentPosition + 1] = tmp
+                }
+            }
+        }
+
         filterThreads = threadList;
         applyAdapter();
     }
@@ -114,10 +127,13 @@ class HomeFragment : Fragment() {
 
         val db = Firebase.firestore;
         db.collection("threads")
-            .orderBy("created_at", Query.Direction.DESCENDING)
-            .get().addOnSuccessListener { value ->
-                threadList.clear();
+            .addSnapshotListener { value, error ->
 
+                if(error != null){
+                    return@addSnapshotListener
+                }
+
+                threadList.clear();
 
                 for (doc in value!!) {
 
@@ -142,7 +158,8 @@ class HomeFragment : Fragment() {
                             val email = userDoc.data!!["email"].toString()
                             val location = userDoc.data!!["location"].toString()
                             val photoProfile = userDoc.data!!["photo_profile_url"].toString();
-                            val user:User =User(userDoc.id, username, email, location, photoProfile)
+                            var tagName = doc.data!!["tag_name"].toString();
+                            val user:User =User(userDoc.id, username, email, location, photoProfile, tagName = tagName)
 
 //                           Add add getted data to the thread list (Vector)
                             val thread: Thread = Thread(uid =uid, title = title, desc = description, user_id = user_id, user = user, createdAt = createdAt, topCount = topCount.toInt(), downCount = downCount.toInt(), view = view.toInt());

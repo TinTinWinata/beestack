@@ -71,7 +71,8 @@ class TeamDetailFragment() : Fragment() {
                         val location = doc.getString("location").toString();
                         val email = doc.getString("email").toString();
                         val url = doc.getString("photo_profile_url").toString();
-                        userList.add(User(uid = doc.id, username=username, location = location, email = email, photoProfile = url));
+                        var tagName = doc.data!!["tag_name"].toString();
+                        userList.add(User(uid = doc.id, username=username, location = location, email = email, photoProfile = url, tagName = tagName));
                         applyAdapter()
                     }
             }
