@@ -130,15 +130,28 @@ class ThreadDetailActivity : AppCompatActivity() {
 
     private fun setUpVoteDownVoteListener(thread : Thread){
         binding.bottomCountIV.setOnClickListener {
-            thread.downCount += 1;
-            thread.update();
+            if(!CurrentUser.downVote.contains(thread.uid)){
+            CurrentUser.downVote.add(thread.uid);
+                CurrentUser.update().addOnSuccessListener {
+                    thread.downCount += 1;
+                    thread.update();
+                }
+            }
         }
 
         binding.topCountIV.setOnClickListener {
-            thread.topCount += 1;
-            thread.update();
+//            Validate if user already vote this thread
+            if(!CurrentUser.topVote.contains(thread.uid)){
+                CurrentUser.topVote.add(thread.uid);
+    //            Update on current user (to validate if user can't 2x times update)
+                CurrentUser.update().addOnSuccessListener {
+                    thread.topCount += 1;
+                    thread.update();
+                }
+            }
         }
     }
+
 
     private fun sendNotification(thread: Thread){
         if(thread.user != null){

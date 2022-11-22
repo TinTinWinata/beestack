@@ -8,6 +8,7 @@ import edu.bluejack22_1.beestack.activities.ThreadAnswerDetailActivity
 import edu.bluejack22_1.beestack.activities.ThreadDetailActivity
 import edu.bluejack22_1.beestack.databinding.ThreadAnswerBinding
 import edu.bluejack22_1.beestack.model.Answer
+import edu.bluejack22_1.beestack.model.CurrentUser
 
 class AnswerAdapter (val items : MutableList<Answer>)
     : RecyclerView.Adapter<AnswerAdapter.ViewHolder>(){
@@ -44,13 +45,23 @@ class AnswerAdapter (val items : MutableList<Answer>)
             binding.downVoteTV.text = item.downCount.toString();
 
             binding.bottomCountIV.setOnClickListener {
-                item.downCount += 1;
-                item.update();
+                if(!CurrentUser.downVote.contains(item.uid)){
+                    CurrentUser.downVote.add(item.uid)
+                    CurrentUser.update().addOnSuccessListener {
+                        item.downCount += 1;
+                        item.update();
+                    }
+                }
             }
 
             binding.topCountIV.setOnClickListener {
-                item.topCount += 1;
-                item.update();
+                if(!CurrentUser.topVote.contains(item.uid)){
+                    CurrentUser.topVote.add(item.uid)
+                    CurrentUser.update().addOnSuccessListener {
+                        item.topCount += 1;
+                        item.update();
+                    }
+                }
             }
 
 

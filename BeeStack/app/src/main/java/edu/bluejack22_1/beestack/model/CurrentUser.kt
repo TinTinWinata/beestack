@@ -22,8 +22,9 @@ object CurrentUser {
     var location:String = "";
     var teamId:String = "";
     var photoProfileURL: String = "";
-
     var photoProfileListListener = ArrayList<() -> Unit>()
+    var topVote : ArrayList<String> = ArrayList<String>()
+    var downVote: ArrayList<String> = ArrayList<String>()
 
     var photoProfileBitmap:Bitmap? by Delegates.observable(null){
         property, oldValue, newValue ->
@@ -76,6 +77,8 @@ object CurrentUser {
                 this.teamId = snapshot.data!!.get("team_id").toString();
                 this.photoProfileURL = snapshot.data!!.get("photo_profile_url").toString();
                 this.tagName = snapshot.data!!.get("tag_name").toString();
+                this.topVote = snapshot.data!!.get("top_vote") as ArrayList<String>;
+                this.downVote = snapshot.data!!.get("down_vote") as ArrayList<String>;
 
 //              Set bitmap for photo profile always when login
                 this.setBitmap()
@@ -86,7 +89,7 @@ object CurrentUser {
         }
     }
 
-    private fun getHashMap() : HashMap<String, String>{
+    private fun getHashMap() : HashMap<String, Any>{
 //        Get object map
         return hashMapOf(
             "uid" to this.uid,
@@ -95,7 +98,10 @@ object CurrentUser {
             "tag_name" to this.tagName,
             "location" to this.location,
             "team_id" to this.teamId,
-            "photo_profile_url" to this.photoProfileURL        )
+            "photo_profile_url" to this.photoProfileURL,
+            "top_vote" to this.topVote,
+              "down_vote" to this.downVote
+        )
     }
     public fun getUser(): User{
         return User(uid= this.uid, username = this.username, email = this.email, location = this.location, photoProfile = this.photoProfileURL, this.tagName)
