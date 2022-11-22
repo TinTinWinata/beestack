@@ -127,13 +127,12 @@ class HomeFragment : Fragment() {
 
         val db = Firebase.firestore;
         db.collection("threads")
-            .addSnapshotListener { value, error ->
-
-                if(error != null){
-                    return@addSnapshotListener
-                }
-
+            .addSnapshotListener { value, e ->
                 threadList.clear();
+
+                if(e != null){
+                    return@addSnapshotListener;
+                }
 
                 for (doc in value!!) {
 

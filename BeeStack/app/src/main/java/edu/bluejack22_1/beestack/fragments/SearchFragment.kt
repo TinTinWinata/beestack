@@ -9,8 +9,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import ThreadAdapter
+import android.widget.ArrayAdapter
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import edu.bluejack22_1.beestack.R
 import edu.bluejack22_1.beestack.databinding.FragmentSearchBinding
 import edu.bluejack22_1.beestack.model.Thread
 import edu.bluejack22_1.beestack.model.User
@@ -18,9 +20,13 @@ import edu.bluejack22_1.beestack.model.User
 class SearchFragment : Fragment() {
 
     private var threadList : MutableList<Thread> = mutableListOf()
+    private var filterThreads:MutableList<Thread> = mutableListOf()
 
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
+
+    private val filterList  = arrayOf("Created At", "Views", "Vote", "Answer")
+    private var selectedLocation:String = "";
 
     private lateinit var threadAdapter: ThreadAdapter
 
@@ -38,8 +44,84 @@ class SearchFragment : Fragment() {
 
         fetchDefaultThread();
         setSearchListener()
+        setDropdown()
 
         return binding.root;
+    }
+
+    private fun filterAll(){
+        //        Thread List Bubble Sort with Created At
+        for (pass in 0 until (threadList.size - 1)) {
+            // A single pass of bubble sort
+            for (currentPosition in 0 until (threadList.size - pass - 1)) {
+                // This is a single step
+                if (threadList[currentPosition].createdAt < threadList[currentPosition + 1].createdAt) {
+                    val tmp : Thread = threadList[currentPosition]
+                    threadList[currentPosition] = threadList[currentPosition + 1]
+                    threadList[currentPosition + 1] = tmp
+                }
+            }
+        }
+
+        applyAdapter();
+    }
+
+
+    private fun filterAnswer(){
+//        Thread List Bubble Sort with Answer
+        for (pass in 0 until (threadList.size - 1)) {
+            // A single pass of bubble sort
+            for (currentPosition in 0 until (threadList.size - pass - 1)) {
+                // This is a single step
+                if (threadList[currentPosition].answer < threadList[currentPosition + 1].answer) {
+                    val tmp : Thread = threadList[currentPosition]
+                    threadList[currentPosition] = threadList[currentPosition + 1]
+                    threadList[currentPosition + 1] = tmp
+                }
+            }
+        }
+        applyAdapter();
+    }
+
+
+    private fun filterVote(){
+        for (pass in 0 until (threadList.size - 1)) {
+            for (currentPosition in 0 until (threadList.size - pass - 1)) {
+                if (threadList[currentPosition].topCount < threadList[currentPosition + 1].topCount) {
+                    val tmp : Thread = threadList[currentPosition]
+                    threadList[currentPosition] = threadList[currentPosition + 1]
+                    threadList[currentPosition + 1] = tmp
+                }
+            }
+        }
+        applyAdapter();
+    }
+
+    private fun filterView(){
+        for (pass in 0 until (threadList.size - 1)) {
+            for (currentPosition in 0 until (threadList.size - pass - 1)) {
+                if (threadList[currentPosition].topCount < threadList[currentPosition + 1].topCount) {
+                    val tmp : Thread = threadList[currentPosition]
+                    threadList[currentPosition] = threadList[currentPosition + 1]
+                    threadList[currentPosition + 1] = tmp
+                }
+            }
+        }
+        applyAdapter();
+    }
+
+    private fun setDropdown(){
+        val adapter : ArrayAdapter<String> = ArrayAdapter<String>(requireContext(), R.layout.list_locations, filterList);
+        binding.filter.setAdapter(adapter)
+        binding.filter.setOnItemClickListener { adapterView, view, i, l ->
+            selectedLocation = adapterView.getItemAtPosition(i).toString()
+            when(selectedLocation){
+                "Views" -> filterView()
+                "Answer" -> filterAnswer()
+                "Vote" -> filterVote()
+                "Created At" -> filterAll()
+            }
+        }
     }
 
 
@@ -66,7 +148,6 @@ class SearchFragment : Fragment() {
                 return;
             }
             val db = Firebase.firestore;
-            Log.d("test", "Fetching ...")
             db.collection("threads")
                 .orderBy("title")
                 .startAt(str)
@@ -74,7 +155,8 @@ class SearchFragment : Fragment() {
                 .get()
                 .addOnSuccessListener{ value ->
                     if(value.isEmpty){
-                        applyAdapter()
+                        threadList.clear();
+                        applyAdapter();
                         Log.d("test", "Done with no value")
                     }else{
                         Log.d("test", "Done with value")
@@ -106,7 +188,7 @@ class SearchFragment : Fragment() {
 
 //                           Add add getted data to the thread list (Vector)
                                 threadList.add(Thread(uid =uid, title = title, desc = description, user_id = user_id, user = user, createdAt = createdAt, topCount = topCount.toInt(), downCount = downCount.toInt()));
-                                applyAdapter()
+                                filterAll();
                             }
                         }
                     }
@@ -130,7 +212,7 @@ class SearchFragment : Fragment() {
                 }
 
                 for (doc in value!!) {
-
+                    Log.d("test", value!!.size().toString());
 //                  Get Thread Data
                     val title = doc.data["title"].toString()
                     val description = doc.data["description"].toString()
@@ -152,8 +234,9 @@ class SearchFragment : Fragment() {
                             val user:User =User(doc.id, username, email, location, url, tagName = tagName);
 
 //                           Add add getted data to the thread list (Vector)
+                            Log.d("test", "Thread : " + title);
                             threadList.add(Thread(uid =uid, title = title, desc = description, user_id = user_id, user = user, createdAt = createdAt, topCount = topCount.toInt(), downCount = downCount.toInt()));
-                            applyAdapter();
+                            filterAll();
                         }
                     }
                 }

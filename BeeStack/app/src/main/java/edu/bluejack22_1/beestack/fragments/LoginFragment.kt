@@ -3,6 +3,7 @@ package edu.bluejack22_1.beestack.fragments
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -105,6 +106,9 @@ class LoginFragment : Fragment() {
             if(result.resultCode == Activity.RESULT_OK){
                 val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
                 handleResults(task)
+            }else{
+                Log.d("test", result.toString());
+                Toast.makeText(context, result.toString(), Toast.LENGTH_SHORT).show();
             }
     }
 
@@ -115,6 +119,7 @@ class LoginFragment : Fragment() {
                 updateUi(account);
             }
         }else{
+//            Log.d("test", task.exception)
             Toast.makeText(context, task.exception.toString(), Toast.LENGTH_LONG).show();
         }
     }
