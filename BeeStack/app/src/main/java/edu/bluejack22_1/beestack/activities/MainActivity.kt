@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.messaging.FirebaseMessaging
 import edu.bluejack22_1.beestack.R
 import edu.bluejack22_1.beestack.adapters.ViewPagerAdapter
 import edu.bluejack22_1.beestack.model.CurrentUser
@@ -15,7 +17,11 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var firebaseAuth: FirebaseAuth;
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
+
+
+
 
 //      Hide Action Bar if exists in this Activity
 //        supportActionBar!!.hide();
@@ -26,8 +32,6 @@ class MainActivity : AppCompatActivity() {
 
         if(firebaseAuth.currentUser != null){
             CurrentUser.login(firebaseAuth.currentUser!!.uid)
-
-            Log.d("main-activity", "waiting for 5 seconds");
 
             val intent = Intent(this, HomeActivity::class.java);
             startActivity(intent);
