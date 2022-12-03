@@ -1,8 +1,12 @@
 package edu.bluejack22_1.beestack.model
 
+import android.app.Activity
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.Log
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentReference
@@ -10,6 +14,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import edu.bluejack22_1.beestack.R
 import java.io.File
 import kotlin.properties.Delegates
 
@@ -163,9 +168,19 @@ object CurrentUser {
         this.teamId = "";
     }
 
-    fun logout(){
+    fun getGSO(activity : Activity) : GoogleSignInOptions {
+        return GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(activity.getString(
+            R.string.default_web_client_id))
+            .requestEmail()
+            .build();
+    }
+
+    fun logout(activity : Activity){
         val firebaseAuth = FirebaseAuth.getInstance()
         firebaseAuth.signOut()
+
+        val googleSignInClient: GoogleSignInClient = GoogleSignIn.getClient(activity, getGSO(activity));
+        googleSignInClient.signOut();
         emptyAllAttr()
     }
 }

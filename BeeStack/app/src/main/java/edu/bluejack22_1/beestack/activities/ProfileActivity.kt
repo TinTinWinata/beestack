@@ -34,7 +34,7 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun logoutListener(){
         binding.logoutBtn.setOnClickListener{
-            CurrentUser.logout()
+            CurrentUser.logout(activity = this);
             val i = Intent(this, MainActivity::class.java)
             startActivity(i)
         }
