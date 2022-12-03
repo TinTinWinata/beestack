@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import edu.bluejack22_1.beestack.databinding.FragmentInviteTeamBinding
+import edu.bluejack22_1.beestack.model.CurrentUser
 import edu.bluejack22_1.beestack.model.User
 
 class InviteTeamFragment : Fragment() {
@@ -59,7 +60,12 @@ class InviteTeamFragment : Fragment() {
                     val url = doc.data["photo_profile_url"].toString();
 
                     val uid = doc.id
-                    var tagName = doc.data!!["tag_name"].toString();
+                    val tagName = doc.data["tag_name"].toString();
+                    val teamId = doc.data["team_id"].toString();
+
+                    if(teamId != "" || teamId == CurrentUser.teamId)
+                        continue
+
 
                     userList.add(User(uid=uid, username = username, email = email, location = location, photoProfile = url, tagName = tagName));
                     applyAdapter();
