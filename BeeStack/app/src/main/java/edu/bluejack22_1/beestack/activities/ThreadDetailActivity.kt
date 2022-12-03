@@ -15,6 +15,7 @@ import androidx.core.view.setPadding
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.squareup.picasso.Picasso
 import edu.bluejack22_1.beestack.R
 import edu.bluejack22_1.beestack.databinding.ActivityThreadDetailBinding
 import edu.bluejack22_1.beestack.model.*
@@ -60,8 +61,11 @@ class ThreadDetailActivity : AppCompatActivity() {
                 val description = doc.getString("description");
                 val title = doc.getString("title");
                 val topCount = doc.getString("top_count");
-                val thread = Thread(uid = doc.id, createdAt = createdAt!!, downCount =  downCount!!.toInt(), desc = description!!, title = title!!, topCount = topCount!!.toInt());
-               setData(thread)
+                val photoProfileUrl = doc.getString("photo_profile_url");
+                val view: Int = doc.getLong("view")!!.toInt();
+                val thread = Thread(view= view, uid = doc.id, createdAt = createdAt!!, downCount =  downCount!!.toInt(), desc = description!!, title = title!!, topCount = topCount!!.toInt(), photoProfileUrl = photoProfileUrl!!);
+                currentThread = thread;
+                setData(thread)
             }
         }
         setContentView(binding.root)
@@ -71,8 +75,7 @@ class ThreadDetailActivity : AppCompatActivity() {
         super.onStop()
         if(currentThread != null)
         {
-            currentThread!!.view += 1;
-            currentThread!!.update()
+            currentThread!!.incrementView();
         }
     }
 
@@ -275,6 +278,10 @@ class ThreadDetailActivity : AppCompatActivity() {
         binding.description.text = thread.description;
         binding.title.text = thread.title;
         binding.createdAt.text =  thread.createdAt.toString();
+
+        if(thread.photoProfileUrl.isNotEmpty()){
+            Picasso.get().load(thread.photoProfileUrl).into(binding.threadImg);
+        }
     }
 
 }

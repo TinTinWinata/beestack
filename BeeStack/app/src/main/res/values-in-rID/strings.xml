@@ -98,4 +98,6 @@
     <string name="succesfully_create_thread">Berhasil membuat thread</string>
     <string name="password_not_same">" Kata sandi Anda dan konfirmasi kata sandi tidak sama"</string>
     <string name="succesfully_register">Berhasil mendaftar</string>
+    <string name="view">Melihat</string>
+    <string name="vote">Pemilihan Top</string>
 </resources>

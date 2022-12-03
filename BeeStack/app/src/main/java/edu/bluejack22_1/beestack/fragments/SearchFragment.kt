@@ -25,7 +25,7 @@ class SearchFragment : Fragment() {
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
 
-    private val filterList  = arrayOf("Created At", "Views", "Vote", "Answer")
+    private lateinit var filterList : Array<String>;
     private var selectedLocation:String = "";
 
     private lateinit var threadAdapter: ThreadAdapter
@@ -41,6 +41,7 @@ class SearchFragment : Fragment() {
 
         _binding = FragmentSearchBinding.inflate(inflater, container, false);
 
+        filterList = arrayOf(getString(R.string.created_at), getString(R.string.view), getString(R.string.vote), getString(R.string.answer))
 
         fetchDefaultThread();
         setSearchListener()
@@ -68,12 +69,15 @@ class SearchFragment : Fragment() {
 
 
     private fun filterAnswer(){
+        Log.d("test", "filtering answer ...");
 //        Thread List Bubble Sort with Answer
         for (pass in 0 until (threadList.size - 1)) {
             // A single pass of bubble sort
             for (currentPosition in 0 until (threadList.size - pass - 1)) {
                 // This is a single step
+                Log.d("test", "looking " + threadList[currentPosition].title + threadList[currentPosition].answer + " with " + threadList[currentPosition + 1].title)
                 if (threadList[currentPosition].answer < threadList[currentPosition + 1].answer) {
+                    Log.d("test", "swapping " + threadList[currentPosition].title + " with " + threadList[currentPosition + 1].title)
                     val tmp : Thread = threadList[currentPosition]
                     threadList[currentPosition] = threadList[currentPosition + 1]
                     threadList[currentPosition + 1] = tmp
@@ -116,10 +120,10 @@ class SearchFragment : Fragment() {
         binding.filter.setOnItemClickListener { adapterView, view, i, l ->
             selectedLocation = adapterView.getItemAtPosition(i).toString()
             when(selectedLocation){
-                "Views" -> filterView()
-                "Answer" -> filterAnswer()
-                "Vote" -> filterVote()
-                "Created At" -> filterAll()
+                getString(R.string.view)-> filterView()
+                getString(R.string.answer) -> filterAnswer()
+                getString(R.string.vote) -> filterVote()
+                getString(R.string.created_at) -> filterAll()
             }
         }
     }
@@ -172,6 +176,7 @@ class SearchFragment : Fragment() {
                         val createdAt = doc.data["created_at"].toString();
                         val topCount = doc.data["top_count"].toString();
                         val downCount = doc.data["down_count"].toString();
+                        val view = (doc.data["view"] as Long).toInt();
 
 
 //                  Then Get User Data
@@ -187,8 +192,12 @@ class SearchFragment : Fragment() {
                                 val user:User =User(uid = doc.id, username = username, email = email, location = location, photoProfile = url, tagName = tagName)
 
 //                           Add add getted data to the thread list (Vector)
-                                threadList.add(Thread(uid =uid, title = title, desc = description, user_id = user_id, user = user, createdAt = createdAt, topCount = topCount.toInt(), downCount = downCount.toInt()));
-                                filterAll();
+                                val thread: Thread =Thread(view=view, uid =uid, title = title, desc = description, user_id = user_id, user = user, createdAt = createdAt, topCount = topCount.toInt(), downCount = downCount.toInt());
+                                thread.getAnswerCollection().addOnSuccessListener {
+                                    thread.answer =  it.size()
+                                    threadList.add(thread);
+                                    filterAll();
+                                }
                             }
                         }
                     }
@@ -221,6 +230,7 @@ class SearchFragment : Fragment() {
                     val createdAt = doc.data["created_at"].toString();
                     val topCount = doc.data["top_count"].toString();
                     val downCount = doc.data["down_count"].toString();
+                    val view = (doc.data["view"] as Long).toInt();
 
 //                  Then Get User Data
                     val docRef = db.collection("users").document(user_id);
@@ -234,9 +244,14 @@ class SearchFragment : Fragment() {
                             val user:User =User(doc.id, username, email, location, url, tagName = tagName);
 
 //                           Add add getted data to the thread list (Vector)
-                            Log.d("test", "Thread : " + title);
-                            threadList.add(Thread(uid =uid, title = title, desc = description, user_id = user_id, user = user, createdAt = createdAt, topCount = topCount.toInt(), downCount = downCount.toInt()));
-                            filterAll();
+
+                            val thread: Thread =Thread(view=view, uid =uid, title = title, desc = description, user_id = user_id, user = user, createdAt = createdAt, topCount = topCount.toInt(), downCount = downCount.toInt());
+                            thread.getAnswerCollection().addOnSuccessListener {
+                                thread.answer =  it.size()
+                                threadList.add(thread);
+                                filterAll();
+                            }
+
                         }
                     }
                 }

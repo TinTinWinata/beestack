@@ -23,6 +23,7 @@ import edu.bluejack22_1.beestack.R
 import edu.bluejack22_1.beestack.activities.CreateTagActivity
 import edu.bluejack22_1.beestack.activities.HomeActivity
 import edu.bluejack22_1.beestack.databinding.FragmentInsertBinding
+import edu.bluejack22_1.beestack.model.CurrentUser
 import edu.bluejack22_1.beestack.model.Tag
 import edu.bluejack22_1.beestack.model.Thread
 
@@ -116,12 +117,15 @@ class InsertFragment : Fragment() {
 //        Init local time
         AndroidThreeTen.init(context)
 
+
+        val newThread : Thread = Thread(title =title, desc = description, user_id = user_id, tag = tag);
         db.collection("threads")
-            .add(Thread(title =title, desc = description, user_id = user_id, tag = tag)
-                .getNewHashMap())
+            .add(
+                newThread.getNewHashMap())
             .addOnSuccessListener { doc ->
                 if (imageUri != null){
-                    uploadImage(imageUri!!, doc.id);
+                    newThread.uid = doc.id;
+                    uploadImage(imageUri!!, newThread);
                 }else{
                     navigateHome()
                 }
@@ -137,15 +141,19 @@ class InsertFragment : Fragment() {
         }
     }
 
-    private fun uploadImage(image:Uri, id:String){
+    private fun uploadImage(image:Uri, thread: Thread){
         val progressDialog = ProgressDialog(context)
         progressDialog.setMessage("Uploading Image ... ");
         progressDialog.setCancelable(false)
         progressDialog.show()
 
-        val ref:String = "threads/${id}"
+        val ref:String = "threads/${thread.uid}"
         val storageRef = FirebaseStorage.getInstance().getReference(ref);
         storageRef.putFile(image).addOnSuccessListener {
+            it.storage.downloadUrl.addOnSuccessListener {
+                thread.updatePhotoProfile(it.toString());
+            }
+
             if(progressDialog.isShowing) progressDialog.dismiss()
             Toast.makeText(context, getString(R.string.succesfully_create_thread), Toast.LENGTH_SHORT).show()
             navigateHome()

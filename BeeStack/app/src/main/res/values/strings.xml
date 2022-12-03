@@ -101,4 +101,6 @@
     <string name="succesfully_create_thread">Succesfully Created Thread</string>
     <string name="password_not_same">Your password and confirm password is not same</string>
     <string name="succesfully_register">Succesfully register</string>
+    <string name="view">View</string>
+    <string name="vote">Top Vote</string>
 </resources>

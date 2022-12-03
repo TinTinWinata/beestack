@@ -1,5 +1,6 @@
 package edu.bluejack22_1.beestack.model
 
+import android.util.Log
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.QuerySnapshot
@@ -13,7 +14,7 @@ import org.threeten.bp.format.DateTimeFormatter
 import java.io.Serializable
 
 
-class Thread(user:User? = null, desc:String = "", title:String = "", uid:String = "", user_id:String = "", tag: Tag? = null, topCount: Int = 0, downCount:Int = 0, createdAt: String = "", answer:Int = 0 , view:Int = 0): Serializable, GetHashMap{
+class Thread(user:User? = null, desc:String = "", title:String = "", uid:String = "", user_id:String = "", tag: Tag? = null, topCount: Int = 0, downCount:Int = 0, createdAt: String = "", answer:Int = 0 , view:Int = 0, photoProfileUrl: String = ""): Serializable{
 
     var title:String = title;
     var createdAt:String = createdAt;
@@ -26,17 +27,14 @@ class Thread(user:User? = null, desc:String = "", title:String = "", uid:String 
     var downCount: Int = downCount;
     var answer: Int = answer;
     var view: Int = view;
-
-
+    var photoProfileUrl: String = photoProfileUrl;
 
     public fun getAnswerCollection(): Task<QuerySnapshot> {
         val db = Firebase.firestore;
         return db.collection("threads/${this.uid}/answers").get();
     }
 
-
-
-    override fun getHashMap() : HashMap<String, String>{
+     public fun getHashMap() : HashMap<String, Any>{
 //        Get object map
         return hashMapOf(
             "title" to this.title,
@@ -47,11 +45,12 @@ class Thread(user:User? = null, desc:String = "", title:String = "", uid:String 
             "top_count" to this.topCount.toString(),
             "down_count" to this.downCount.toString(),
             "created_at" to this.createdAt.toString(),
-            "view" to this.view.toString()
+            "view" to this.view,
+            "photo_profile_url" to this.photoProfileUrl
         )
     }
 
-    public fun getNewHashMap() : HashMap<String, String>{
+    public fun getNewHashMap() : HashMap<String, Any>{
 //        Get object map
         val formatter : DateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")
         return hashMapOf(
@@ -63,7 +62,8 @@ class Thread(user:User? = null, desc:String = "", title:String = "", uid:String 
             "top_count" to this.topCount.toString(),
             "down_count" to this.downCount.toString(),
             "created_at" to LocalDateTime.now().format(formatter),
-            "view" to this.view.toString()
+            "view" to this.view,
+            "photo_profile_url" to this.photoProfileUrl
         )
     }
 
@@ -76,6 +76,17 @@ class Thread(user:User? = null, desc:String = "", title:String = "", uid:String 
         return this.getRef().set(this.getHashMap());
     }
 
+    public fun updatePhotoProfile(url: String){
+        val map: Map<String, String> = mapOf<String, String>("photo_profile_url" to url);
+        this.getRef().update(map)
+    }
+
+    public fun incrementView(){
+        val view : Int = this.view + 1;
+        Log.d("test", "updated to : " + view);
+        val map: Map<String, Int> = mapOf<String, Int>("view" to view);
+        this.getRef().update(map);
+    }
 
 
 
