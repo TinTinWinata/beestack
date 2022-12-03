@@ -100,7 +100,7 @@ class SearchFragment : Fragment() {
     private fun filterView(){
         for (pass in 0 until (threadList.size - 1)) {
             for (currentPosition in 0 until (threadList.size - pass - 1)) {
-                if (threadList[currentPosition].topCount < threadList[currentPosition + 1].topCount) {
+                if (threadList[currentPosition].view < threadList[currentPosition + 1].view) {
                     val tmp : Thread = threadList[currentPosition]
                     threadList[currentPosition] = threadList[currentPosition + 1]
                     threadList[currentPosition + 1] = tmp
