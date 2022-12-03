@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import edu.bluejack22_1.beestack.R
 import edu.bluejack22_1.beestack.databinding.ActivityThreadAnswerDetailBinding
 import edu.bluejack22_1.beestack.databinding.FragmentHomeBinding
 import edu.bluejack22_1.beestack.model.Answer
@@ -54,7 +55,7 @@ class ThreadAnswerDetailActivity : AppCompatActivity() {
             if(comment.isNotEmpty()){
                 answer.comments.add(Comment(name = CurrentUser.username, value= comment))
                 answer.update();
-                Toast.makeText(this, "Succesfully create comment!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.succesfully_create_comment), Toast.LENGTH_SHORT).show();
                 onBackPressed();
             }
         }

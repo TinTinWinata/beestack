@@ -10,6 +10,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import com.google.firebase.storage.FirebaseStorage
+import edu.bluejack22_1.beestack.R
 import edu.bluejack22_1.beestack.databinding.ActivityProfileBinding
 import edu.bluejack22_1.beestack.model.CurrentUser
 import edu.bluejack22_1.beestack.view.ChangePassword
@@ -92,7 +93,7 @@ class ProfileActivity : AppCompatActivity() {
             CurrentUser.setBitmap()
 
             if(progressDialog.isShowing) progressDialog.dismiss()
-            Toast.makeText(this, "Succesfully Change Photoprofile", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.succesfully_change_photo), Toast.LENGTH_SHORT).show()
         }.addOnFailureListener{
             if(progressDialog.isShowing) progressDialog.dismiss()
             Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show();

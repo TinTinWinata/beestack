@@ -19,6 +19,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.jakewharton.threetenabp.AndroidThreeTen
+import edu.bluejack22_1.beestack.R
 import edu.bluejack22_1.beestack.activities.CreateTagActivity
 import edu.bluejack22_1.beestack.activities.HomeActivity
 import edu.bluejack22_1.beestack.databinding.FragmentInsertBinding
@@ -58,7 +59,7 @@ class InsertFragment : Fragment() {
             val user_id = FirebaseAuth.getInstance().currentUser?.uid.toString();
 
             if(title.isEmpty() || description.isEmpty() || tag.isEmpty()){
-                Toast.makeText(context, "All input must be filled", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, getString(R.string.you_need_all_validation), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener;
             }
 //            Find Tag
@@ -93,11 +94,11 @@ class InsertFragment : Fragment() {
     private fun showDialog(){
         val alert: AlertDialog.Builder = AlertDialog.Builder(context)
         alert.setTitle("Bee Stack")
-        alert.setMessage("The tag you've been add is not available. Do you want to create a new tag with this name ? ")
-        alert.setPositiveButton("Create", DialogInterface.OnClickListener { dialogInterface, i ->
+        alert.setMessage(getString(R.string.tag_not_available))
+        alert.setPositiveButton(getString(R.string.create_new_tag), DialogInterface.OnClickListener { dialogInterface, i ->
             navigateToCreateTag()
         })
-        alert.setNegativeButton("Back", DialogInterface.OnClickListener { dialogInterface, i ->
+        alert.setNegativeButton(getString(R.string.back), DialogInterface.OnClickListener { dialogInterface, i ->
 
         })
         alert.create().show()
@@ -146,7 +147,7 @@ class InsertFragment : Fragment() {
         val storageRef = FirebaseStorage.getInstance().getReference(ref);
         storageRef.putFile(image).addOnSuccessListener {
             if(progressDialog.isShowing) progressDialog.dismiss()
-            Toast.makeText(context, "Succesfully Created Thread", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, getString(R.string.succesfully_create_thread), Toast.LENGTH_SHORT).show()
             navigateHome()
         }
     }

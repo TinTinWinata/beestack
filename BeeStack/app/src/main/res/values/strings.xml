@@ -51,7 +51,7 @@
     <string name="create_thread">Create Thread</string>
     <string name="invite_other_users">Invite other users</string>
     <string name="password">Password</string>
-    <string name="login" translatable="false">Login</string>
+    <string name="login">Login</string>
     <string name="forgot_password">Forgot Password</string>
     <string name="login_with_google">Login With Google</string>
     <string name="username">Username</string>
@@ -74,4 +74,31 @@
     <string name="notifications">Notifications</string>
     <string name="team">Team</string>
     <string name="my_thread">My Thread</string>
+    <string name="backForgetPassword">Back</string>
+    <string name="tell_me_who_you_are">Tell me who you are ?</string>
+    <string name="page">Page</string>
+    <string name="leave_team">Leave Team</string>
+    <string name="participants">Participants</string>
+    <string name="name_cannot_be_empty">Name cannot be empty</string>
+    <string name="succesfully_change_password">Succesfully Change Password!</string>
+    <string name="last_password_must_same">Last password must be same with current password!</string>
+    <string name="succesfully_create_tag">Succesfully Create Tag</string>
+    <string name="you_need_all_validation">You need validates all empty space</string>
+    <string name="emaill_cannot_be_empty">Email cannot be empty</string>
+    <string name="email_sended">Email Sended</string>
+    <string name="succesfully_change_photo">Succesfully Change Photoprofile</string>
+    <string name="succesfully_create_comment">Succesfully create comment!</string>
+    <string name="succesfully_delete_thread">Succesfully delete thread!</string>
+    <string name="succesfully_answer">Succesfully Answer</string>
+    <string name="deleted">Deleted</string>
+    <string name="succesfully_login">Succesfully Login!</string>
+    <string name="yes">Yes</string>
+    <string name="new_title">New Title</string>
+    <string name="new_desc">New Description</string>
+    <string name="has_answered">has answered your</string>
+    <string name="please_insert_team_image">Please insert team image!</string>
+    <string name="tag_not_available">"The tag you've been add is not available. Do you want to create a new tag with this name ? "</string>
+    <string name="succesfully_create_thread">Succesfully Created Thread</string>
+    <string name="password_not_same">Your password and confirm password is not same</string>
+    <string name="succesfully_register">Succesfully register</string>
 </resources>

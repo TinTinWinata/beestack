@@ -43,21 +43,21 @@ class CreateTagActivity : AppCompatActivity() {
                         .addOnSuccessListener {
                             binding.nameET.setText("")
                             binding.descriptionET.setText("")
-                            Toast.makeText(this, "Succesfully Create Tag", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, getString(R.string.succesfully_create_tag), Toast.LENGTH_SHORT).show()
                             onBackPressed()
                         }
                         .addOnFailureListener{
                             Toast.makeText(this, it.message.toString(), Toast.LENGTH_SHORT).show()
                         }
             }else{
-                Toast.makeText(this, "You need validates all empty space", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.you_need_all_validation), Toast.LENGTH_SHORT).show()
             }
         }
     }
 
     fun setToolbar(){
         setSupportActionBar(binding.toolbar)
-        binding.pageName.setText("Create Tag");
+        binding.pageName.setText(R.string.create_tag);
         supportActionBar?.setDisplayHomeAsUpEnabled(true);
         supportActionBar?.setDisplayShowTitleEnabled(false);
     }

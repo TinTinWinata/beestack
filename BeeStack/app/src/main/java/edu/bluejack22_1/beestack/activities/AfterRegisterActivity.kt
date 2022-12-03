@@ -3,6 +3,7 @@ package edu.bluejack22_1.beestack.activities
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import edu.bluejack22_1.beestack.R
 import edu.bluejack22_1.beestack.databinding.ActivityAfterRegisterBinding
 import edu.bluejack22_1.beestack.model.CurrentUser
 import edu.bluejack22_1.beestack.view.Home
@@ -26,7 +27,7 @@ class AfterRegisterActivity : AppCompatActivity() {
                     Home.navigate(this);
                 }
             }else{
-                Toast.makeText(this, "Name can't be empty", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.name_cannot_be_empty), Toast.LENGTH_SHORT).show();
             }
         }
     }

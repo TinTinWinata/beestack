@@ -15,6 +15,7 @@ import androidx.core.view.setPadding
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import edu.bluejack22_1.beestack.R
 import edu.bluejack22_1.beestack.databinding.ActivityThreadDetailBinding
 import edu.bluejack22_1.beestack.model.*
 import edu.bluejack22_1.beestack.view.Home
@@ -90,8 +91,8 @@ class ThreadDetailActivity : AppCompatActivity() {
             val titleET : EditText = EditText(this);
             val descET : EditText = EditText(this);
 
-            titleET.hint = "New Title"
-            descET.hint = "New Description"
+            titleET.hint = getString(R.string.new_title);
+            descET.hint = getString(R.string.new_desc);
 
             titleET.layoutParams =   LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
 
@@ -102,7 +103,7 @@ class ThreadDetailActivity : AppCompatActivity() {
 
             dialog.setView(parent);
 
-            dialog.setPositiveButton(android.R.string.yes) { dialog, which ->
+            dialog.setPositiveButton(getString(R.string.yes)) { dialog, which ->
                 thread.title = titleET.text.toString();
                 thread.description = descET.text.toString();
                 thread.update();
@@ -116,7 +117,7 @@ class ThreadDetailActivity : AppCompatActivity() {
                 .document(thread.uid)
                 .delete().addOnSuccessListener {
                     currentThread = null;
-                    Toast.makeText(this, "Succesfully delete thread!",
+                    Toast.makeText(this, getString(R.string.succesfully_delete_thread),
                         Toast.LENGTH_SHORT).show()
                     finish();
                     Home.navigate(this);
@@ -160,7 +161,7 @@ class ThreadDetailActivity : AppCompatActivity() {
                 to = thread.user!!,
                 type = "answer-thread",
                 data = DataNotification(
-                    CurrentUser.username.toString() + " has answered your "+  thread.title+" thread!",
+                    CurrentUser.username.toString() + " "+ getString(R.string.has_answered) + " "+  thread.title+" thread!",
                     thread.uid)
             ))
         }
@@ -180,7 +181,6 @@ class ThreadDetailActivity : AppCompatActivity() {
                 Log.w(ContentValues.TAG, "Listen failed.", e)
                 return@addSnapshotListener
             }
-            Log.d("tintin", "snapshot to answer!");
 
             for (doc in value!!) {
 //                Get Every doc available
@@ -252,7 +252,7 @@ class ThreadDetailActivity : AppCompatActivity() {
             .add(Answer(owner = CurrentUser.getUser(), value = answer).getHashMap())
             .addOnSuccessListener {
                 binding.answerET.setText("");
-                Toast.makeText(this, "Succesfully Answer", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.succesfully_answer), Toast.LENGTH_SHORT).show()
                 sendNotification(thread);
             }
             .addOnFailureListener{

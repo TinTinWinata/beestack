@@ -20,7 +20,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="30dp"
             android:gravity="center"
-            android:text="Page"
+            android:text="@string/page"
             android:textStyle="bold"
             android:textSize="16sp"
             />

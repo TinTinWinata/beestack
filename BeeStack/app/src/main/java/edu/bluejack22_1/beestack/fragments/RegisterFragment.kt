@@ -60,15 +60,15 @@ class RegisterFragment : Fragment() {
 
 //          Validating Email, Password, Confirm Password
             if(email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty() || selectedLocation.isEmpty() || username.isEmpty()){
-                Toast.makeText(context, "Please input all fields", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, getString(R.string.you_need_all_validation), Toast.LENGTH_LONG).show();
             }else if(password != confirmPassword) {
-                Toast.makeText(context, "Your password and confirm password is not same", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, getString(R.string.password_not_same), Toast.LENGTH_LONG).show();
             }
 //          Validated
             else{
                 firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener{
                     if(it.isSuccessful){
-                        Toast.makeText(context, "Succesfully register!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, getString(R.string.succesfully_register), Toast.LENGTH_LONG).show();
                         CurrentUser.tagName = username;
                         CurrentUser.location = selectedLocation
 

@@ -18,6 +18,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.StorageTask
 import com.google.firebase.storage.UploadTask
+import edu.bluejack22_1.beestack.R
 import edu.bluejack22_1.beestack.activities.HomeActivity
 import edu.bluejack22_1.beestack.databinding.FragmentCreateTeamBinding
 import edu.bluejack22_1.beestack.model.CurrentUser
@@ -100,7 +101,7 @@ class CreateTeamFragment : Fragment() {
     fun createTeamOnClick(){
         binding.createTeamBtn.setOnClickListener {
             if(this.uri == null){
-                Toast.makeText(context, "Please insert team image!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, getString(R.string.please_insert_team_image), Toast.LENGTH_SHORT).show();
                 return@setOnClickListener
             }
 
@@ -110,7 +111,7 @@ class CreateTeamFragment : Fragment() {
 
             if(name.isEmpty() || description.isEmpty() || motto.isEmpty())
             {
-                Toast.makeText(context, "Please validates all the inputes", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, getString(R.string.you_need_all_validation),    Toast.LENGTH_SHORT).show();
             }else{
                 uploadImage().addOnSuccessListener {
                     snapshot ->

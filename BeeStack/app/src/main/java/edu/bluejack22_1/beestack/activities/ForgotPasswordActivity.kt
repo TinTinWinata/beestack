@@ -28,12 +28,10 @@ class ForgotPasswordActivity : AppCompatActivity() {
     }
 
     private fun backListener(){
-//        Removed Back Button
-
-//        binding.backBtn.setOnClickListener{
-//            val mainIntent = Intent(this, MainActivity::class.java);
-//            startActivity(mainIntent)
-//        }
+        binding.backBtn.setOnClickListener{
+            val mainIntent = Intent(this, MainActivity::class.java);
+            startActivity(mainIntent)
+        }
     }
 
     private fun sendForgetListener(){
@@ -44,12 +42,12 @@ class ForgotPasswordActivity : AppCompatActivity() {
             val email = binding.forgotEmailET.text.toString();
 
             if(email.isEmpty()){
-                Toast.makeText(this, "Email cannot be empty", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, getString(R.string.emaill_cannot_be_empty), Toast.LENGTH_LONG).show()
             }else{
             firebaseAuth.sendPasswordResetEmail(email)
                 .addOnCompleteListener{
                     if(it.isSuccessful){
-                        Toast.makeText(this, "Email Sended", Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, getString(R.string.email_sended), Toast.LENGTH_LONG).show();
                         val i = Intent(this, MainActivity::class.java)
                         startActivity(i)
                     }else{

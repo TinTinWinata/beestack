@@ -61,12 +61,12 @@ class LoginFragment : Fragment() {
 
 //          Validating Email, Password, Confirm Password
             if(email == "" || password == "") {
-                Toast.makeText(context, "Please input all fields", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, getString(R.string.you_need_all_validation), Toast.LENGTH_LONG).show();
             }
             else{
                 firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener{
                     if(it.isSuccessful){
-                        Toast.makeText(context, "Succesfully Login!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, getString(R.string.succesfully_login), Toast.LENGTH_LONG).show();
 //                                             v Call Parent Activity (because we call it in fragment)
 //                        Login to user class
                         CurrentUser.login(firebaseAuth.currentUser!!.uid)

@@ -8,6 +8,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
+import edu.bluejack22_1.beestack.R
 import edu.bluejack22_1.beestack.databinding.NotificationItemBinding
 import edu.bluejack22_1.beestack.model.Notification
 import edu.bluejack22_1.beestack.model.Thread
@@ -76,7 +77,8 @@ class NotificationAdapter (val act: FragmentActivity, val items : MutableList<No
                                         val thread: Thread = Thread(uid =uid, title = title, desc = description, user_id = user_id, user = user, createdAt = createdAt, topCount = topCount.toInt(), downCount = downCount.toInt(), view = view.toInt());
                                         Notification.delete(item.uid.toString()).addOnSuccessListener {
 //                                            ThreadDetail.navigate(itemView.context, thread);
-                                            Toast.makeText(itemView.context, "Deleted " + item.uid.toString(), Toast.LENGTH_SHORT).show()
+//                                            val text: String= R.string.deleted
+                                            Toast.makeText(itemView.context,  item.uid.toString(), Toast.LENGTH_SHORT).show()
                                         }
                                     }
                                 }
