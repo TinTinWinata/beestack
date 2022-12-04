@@ -58,7 +58,7 @@ class NotificationAdapter (val act: FragmentActivity, val items : MutableList<No
                             val createdAt = doc.getString("created_at").toString();
                             val topCount = doc.getString("top_count").toString();
                             val downCount = doc.getString("down_count").toString();
-                            val view = doc.getString("view").toString();
+                            val view = doc.getLong("view")!!.toInt();
                             val uid = doc.id
 //                  Then Get User Data
                             val docRef = db.collection("users").document(user_id);
@@ -76,9 +76,9 @@ class NotificationAdapter (val act: FragmentActivity, val items : MutableList<No
 //                           Add add getted data to the thread list (Vector)
                                         val thread: Thread = Thread(uid =uid, title = title, desc = description, user_id = user_id, user = user, createdAt = createdAt, topCount = topCount.toInt(), downCount = downCount.toInt(), view = view.toInt());
                                         Notification.delete(item.uid.toString()).addOnSuccessListener {
-//                                            ThreadDetail.navigate(itemView.context, thread);
+                                            ThreadDetail.navigate(itemView.context, thread);
 //                                            val text: String= R.string.deleted
-                                            Toast.makeText(itemView.context,  item.uid.toString(), Toast.LENGTH_SHORT).show()
+//                                            Toast.makeText(itemView.context, item.uid.toString(), Toast.LENGTH_SHORT).show()
                                         }
                                     }
                                 }

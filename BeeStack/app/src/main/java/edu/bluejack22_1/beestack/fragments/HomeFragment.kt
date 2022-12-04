@@ -129,6 +129,7 @@ class HomeFragment : Fragment() {
         db.collection("threads")
             .addSnapshotListener { value, e ->
                 threadList.clear();
+                Log.d("test", "listening ...")
 
                 if(e != null){
                     return@addSnapshotListener;
@@ -163,6 +164,7 @@ class HomeFragment : Fragment() {
 //                           Add add getted data to the thread list (Vector)
                             val thread: Thread = Thread(uid =uid, title = title, desc = description, user_id = user_id, user = user, createdAt = createdAt, topCount = topCount.toInt(), downCount = downCount.toInt(), view = view.toInt());
                             thread.getAnswerCollection().addOnSuccessListener {
+                                Log.d("test", "added thread!")
                                 thread.answer =  it.size()
                                 threadList.add(thread);
                                 filterAll();
