@@ -46,11 +46,8 @@ class InviteTeamFragment : Fragment() {
     private fun fetchUsers() {
         val db = Firebase.firestore;
         db.collection("users")
-            .addSnapshotListener { value, e ->
-                if (e != null) {
-                    Log.w(ContentValues.TAG, "Listen failed.", e)
-                    return@addSnapshotListener
-                }
+            .get().addOnSuccessListener { value ->
+
                 for (doc in value!!) {
 
 //                  Get User Data

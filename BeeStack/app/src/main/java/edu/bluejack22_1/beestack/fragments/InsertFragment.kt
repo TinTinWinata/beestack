@@ -119,9 +119,11 @@ class InsertFragment : Fragment() {
 
 
         val newThread : Thread = Thread(title =title, desc = description, user_id = user_id, tag = tag);
+
+
+
         db.collection("threads")
-            .add(
-                newThread.getNewHashMap())
+            .add(newThread.getNewHashMap())
             .addOnSuccessListener { doc ->
                 if (imageUri != null){
                     newThread.uid = doc.id;

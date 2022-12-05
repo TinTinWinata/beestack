@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 
 import ThreadAdapter
 import android.widget.ArrayAdapter
+import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -29,9 +30,25 @@ class HomeFragment : Fragment() {
 
     private val filterList  = arrayOf("Created At", "Views", "Vote", "Answer")
     private var selectedLocation:String = "";
+//    private lateinit var unsubscribe : ListenerRegistration;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+    }
+
+    override fun onPause() {
+        super.onPause()
+    }
+
+    override fun onStop() {
+//        if(unsubscribe != null){
+//            unsubscribe.remove()
+//        }
+        super.onStop()
+    }
+
+    override fun onResume() {
+        super.onResume()
     }
 
     override fun onCreateView(
@@ -127,13 +144,9 @@ class HomeFragment : Fragment() {
 
         val db = Firebase.firestore;
         db.collection("threads")
-            .addSnapshotListener { value, e ->
+            .get().addOnSuccessListener { value ->
                 threadList.clear();
-                Log.d("test", "listening ...")
-
-                if(e != null){
-                    return@addSnapshotListener;
-                }
+                Log.d("test", "listening ... " + threadList.size)
 
                 for (doc in value!!) {
 
@@ -164,11 +177,13 @@ class HomeFragment : Fragment() {
 //                           Add add getted data to the thread list (Vector)
                             val thread: Thread = Thread(uid =uid, title = title, desc = description, user_id = user_id, user = user, createdAt = createdAt, topCount = topCount.toInt(), downCount = downCount.toInt(), view = view.toInt());
                             thread.getAnswerCollection().addOnSuccessListener {
-                                Log.d("test", "added thread!")
+                                Log.d("test", "added thread! " + thread.title)
                                 thread.answer =  it.size()
                                 threadList.add(thread);
                                 filterAll();
+                                Log.d("test", "size : " + threadList.size)
                             }
+
                         }
                     }
                 }

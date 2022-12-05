@@ -42,7 +42,6 @@ class SearchFragment : Fragment() {
         _binding = FragmentSearchBinding.inflate(inflater, container, false);
 
         filterList = arrayOf(getString(R.string.created_at), getString(R.string.view), getString(R.string.vote), getString(R.string.answer))
-
         fetchDefaultThread();
         setSearchListener()
         setDropdown()
@@ -209,11 +208,13 @@ class SearchFragment : Fragment() {
     }
 
     private fun fetchDefaultThread(){
+        Log.d("test", "fetching thread . . . ");
         playProgressBar()
 
         val db = Firebase.firestore;
         db.collection("threads")
-            .get().addOnSuccessListener { value ->
+            .get()
+            .addOnSuccessListener { value ->
 
                 if(value.isEmpty)
                 {
@@ -255,7 +256,9 @@ class SearchFragment : Fragment() {
                         }
                     }
                 }
-
+            }.addOnFailureListener {
+                e->
+                Log.d("test", e.message.toString())
             }
     }
 

@@ -85,6 +85,10 @@ object CurrentUser {
                 this.topVote = snapshot.data!!.get("top_vote") as ArrayList<String>;
                 this.downVote = snapshot.data!!.get("down_vote") as ArrayList<String>;
 
+                if(this.tagName.isEmpty()){
+                    this.tagName = this.username;
+                }
+
 //              Set bitmap for photo profile always when login
                 this.setBitmap()
             }else if(snapshot != null && !snapshot.exists()){
