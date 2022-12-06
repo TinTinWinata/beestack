@@ -79,7 +79,7 @@ class TeamDetailFragment() : Fragment() {
     }
 
     private fun setParticipant(){
-        binding.tvParticipants.setText(participant.toString() + " participant");
+        binding.tvParticipants.setText(participant.toString());
     }
 
     private fun applyAdapter(){
