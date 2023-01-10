@@ -16,6 +16,7 @@ class User(var uid:String, var username: String, var email: String, var location
             }
             return User(hashMap["uid"]!!, hashMap["username"]!!, hashMap["email"]!!, hashMap["location"]!!, tagName = hashMap["tagName"]!!);
         }
+        
     }
 
 
